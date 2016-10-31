@@ -1,6 +1,8 @@
 # MOCHA
 
-Overview Student Information System software allows university students easier access to their grades, lecture attendance, exam dates, class schedules etc. The software will include admin access that will have full privileges of modifying the system. Easy and simple, but eye-catching GUI will allow students and admins the ease of access.
+Overview 
+
+Student Information System software allows university students easier access to their grades, lecture attendance, exam dates, class schedules etc. The software will include admin access that will have full privileges of modifying the system. Easy and simple, but eye-catching GUI will allow students and admins the ease of access.
 
 Objectives
 
