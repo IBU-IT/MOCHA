@@ -10,7 +10,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-
+import javax.swing.JButton;
 public class StudentInformationSystem {
 
 	private JFrame frame;
@@ -70,9 +70,10 @@ public class StudentInformationSystem {
 
 	private void initialize() {
 		frame = new JFrame();
+		
 		frame.getContentPane().setBackground(Color.WHITE);
 		
-		JLabel lblWelcome = new JLabel("Welcome to Student Information System (SIS)");
+		JLabel lblWelcome = new JLabel("Welcome to Student Inforation System (SIS)");
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblWelcome, BorderLayout.NORTH);
 		frame.setSize(750, 550);
