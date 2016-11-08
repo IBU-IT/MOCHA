@@ -20,6 +20,7 @@ public class StudentInformationSystem {
 		private String name;
 		private String surname;
 		private int age;
+		private String departme;
 		private int year;
 		private int grades[];
 		
