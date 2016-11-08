@@ -72,7 +72,7 @@ public class StudentInformationSystem {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		
-		JLabel lblWelcome = new JLabel("Welcome");
+		JLabel lblWelcome = new JLabel("Welcome to Student Information System (SIS)");
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblWelcome, BorderLayout.NORTH);
 		frame.setSize(750, 550);
