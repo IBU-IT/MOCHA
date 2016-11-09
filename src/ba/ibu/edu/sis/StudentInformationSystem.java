@@ -19,6 +19,7 @@ public class StudentInformationSystem {
 		private String id;
 		private String name;
 		private String surname;
+		private String department;
 		private int age;
 		private int year;
 		private int grades[];
