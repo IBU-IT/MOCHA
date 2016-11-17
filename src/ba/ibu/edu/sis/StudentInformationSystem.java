@@ -1,7 +1,7 @@
 package ba.ibu.edu.sis;
 
 import java.awt.EventQueue;
-
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import java.awt.Color;
 import com.jgoodies.forms.layout.FormLayout;
@@ -10,8 +10,12 @@ import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import ba.ibu.edu.sis.Course;
+import java.io.*;
+import java.util.Scanner;
+
 public class StudentInformationSystem {
+	
 
 	private JFrame frame;
 
@@ -19,7 +23,6 @@ public class StudentInformationSystem {
 		private String id;
 		private String name;
 		private String surname;
-		private String department;
 		private int age;
 		private int year;
 		private int grades[];
@@ -53,6 +56,13 @@ public class StudentInformationSystem {
 	}
 
 	public static void main(String[] args) {
+		String strDirectoy ="course";
+		Course c=new Course();
+		boolean success = (new File(strDirectoy)).mkdir();
+		if(success) 
+		{
+			System.out.println("Directory: " + strDirectoy + " created");
+		}   
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -71,11 +81,9 @@ public class StudentInformationSystem {
 
 	private void initialize() {
 		frame = new JFrame();
-		
 		frame.getContentPane().setBackground(Color.WHITE);
 		
-		JLabel lblWelcome = new JLabel("Welcome to Student Inforation System (SIS) \n");
-		JLabel lblWelcome2 = new JLabel("Your Account Setings: is bellow");
+		JLabel lblWelcome = new JLabel("Welcome to Student Information System (SIS)");
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblWelcome, BorderLayout.NORTH);
 		frame.setSize(750, 550);
