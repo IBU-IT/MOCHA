@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-
+import javafx.scene.control.RadioButton;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -14,21 +14,39 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class SIS {
-
+	
 	private JFrame frame;
 	private JFrame login;
 	private JFrame adminPage;
+
+	
 	
 	static class Admin {
+		private List<Student> Students = new ArrayList<Student>();
+
 		private String password ="password";
 		public String getPassword() {
 			return password;
 		}
+		
+		private Student findStudent(String id) {
+			
+			for (Student c : Students) {
+				if (c.getId().equals(id)) {
+					return c;
+				}
+			}
+			return null;
+		}
+
 
 	}
 	
@@ -67,6 +85,7 @@ public class SIS {
 		private int year;
 		private int dateOfBirth;
 		private int grades[];
+		
 		public String getId() {
 			return id;
 		}
@@ -100,10 +119,17 @@ public class SIS {
 	}
 
 	public static void main(String[] args) {
+
+
+		Admin admin = new Admin();
+		Student magarac = new Student();
+		magarac.setName("magarac");
+		magarac.setId("1");
+		admin.Students.add(magarac);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SIS window = new SIS();
+					SIS window = new SIS(admin);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -113,17 +139,14 @@ public class SIS {
 	
 	}
 
-	public SIS() {
-		initialize();
+	public SIS(Admin a) {
+		initialize(a);
 	}
-	public SIS(int i){
-		init();
+	public SIS(int i,Admin a){
+		init(a);
 	}
-	private void init(){
+	private void init(Admin a){
 
-
-		Admin admin = new Admin();
-		
 		
 		login = new JFrame();
 		login.setVisible(true);
@@ -146,7 +169,7 @@ public class SIS {
 		btnLogIn.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if(pwdEnterYourPassword.getText().equals(admin.getPassword())){
+				if(pwdEnterYourPassword.getText().equals(a.getPassword())){
 					login.dispose();
 					adminPage = new JFrame();
 					adminPage.setVisible(true);
@@ -154,57 +177,57 @@ public class SIS {
 					adminPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					adminPage.getContentPane().setLayout(null);
 					JLabel lblStudentName = new JLabel("Student Name");
-					lblStudentName.setBounds(23, 46, 106, 25);
+					lblStudentName.setBounds(23, 30, 106, 25);
 					adminPage.getContentPane().add(lblStudentName);
 					
 					JLabel lblStudentSurname = new JLabel("Student Surname");
-					lblStudentSurname.setBounds(23, 117, 106, 25);
+					lblStudentSurname.setBounds(23, 85, 106, 25);
 					adminPage.getContentPane().add(lblStudentSurname);
 					
 					JLabel lblStudentId = new JLabel("Student ID");
-					lblStudentId.setBounds(23, 188, 106, 25);
+					lblStudentId.setBounds(23, 140, 106, 25);
 					adminPage.getContentPane().add(lblStudentId);
 					
-					JLabel lblStudentAge = new JLabel("Student Age");
-					lblStudentAge.setBounds(23, 259, 106, 25);
+					JLabel lblStudentAge = new JLabel("Student Date of Birth");
+					lblStudentAge.setBounds(23, 195, 106, 25);
 					adminPage.getContentPane().add(lblStudentAge);
 					
 					JLabel lblStudentYear = new JLabel("Student Year");
-					lblStudentYear.setBounds(23, 330, 106, 25);
+					lblStudentYear.setBounds(23, 250, 106, 25);
 					adminPage.getContentPane().add(lblStudentYear);
 					
 					JLabel lblStudentNationality = new JLabel("Student Nationality");
-					lblStudentNationality.setBounds(23, 401, 106, 25);
+					lblStudentNationality.setBounds(23, 360, 106, 25);
 					adminPage.getContentPane().add(lblStudentNationality);
 					
 					JTextField textField = new JTextField();
-					textField.setBounds(139, 46, 117, 25);
+					textField.setBounds(139, 30, 117, 25);
 					adminPage.getContentPane().add(textField);
 					textField.setColumns(10);
 					
 					JTextField textField_1 = new JTextField();
 					textField_1.setColumns(10);
-					textField_1.setBounds(139, 117, 117, 25);
+					textField_1.setBounds(139, 85, 117, 25);
 					adminPage.getContentPane().add(textField_1);
 					
 					JTextField textField_2 = new JTextField();
 					textField_2.setColumns(10);
-					textField_2.setBounds(139, 188, 117, 25);
+					textField_2.setBounds(139, 140, 117, 25);
 					adminPage.getContentPane().add(textField_2);
 					
 					JTextField textField_3 = new JTextField();
 					textField_3.setColumns(10);
-					textField_3.setBounds(139, 259, 117, 25);
+					textField_3.setBounds(139, 195, 117, 25);
 					adminPage.getContentPane().add(textField_3);
 					
 					JTextField textField_4 = new JTextField();
 					textField_4.setColumns(10);
-					textField_4.setBounds(139, 330, 117, 25);
+					textField_4.setBounds(139, 356, 117, 25);
 					adminPage.getContentPane().add(textField_4);
 					
 					JTextField textField_5 = new JTextField();
 					textField_5.setColumns(10);
-					textField_5.setBounds(139, 401, 117, 25);
+					textField_5.setBounds(139, 411, 117, 25);
 					adminPage.getContentPane().add(textField_5);
 					
 					JButton btnNewButton = new JButton("Add Student");
@@ -212,10 +235,13 @@ public class SIS {
 						public void actionPerformed(ActionEvent e) {
 							String iName,iSurname,iID,iGender,iEmail,iNationality;
 							int iDate,iYear;
-							iName=textField.getText();
 							Student kreten = new Student();
-							kreten.setName(iName);
-							JOptionPane.showMessageDialog(null, kreten.getName());
+							kreten.setName(textField.getText());
+							kreten.setSurname(textField_1.getText());
+							kreten.setId(textField_2.getText());
+							kreten.setDateOfBirth(Integer.parseInt(textField_3.getText()));
+							kreten.setYear(Integer.parseInt(textField_4.getText()));
+							a.Students.add(kreten);
 						}
 					});
 					btnNewButton.setBounds(319, 330, 140, 40);
@@ -226,7 +252,7 @@ public class SIS {
 					adminPage.getContentPane().add(btnDeleteStudent);
 					
 					JButton btnNewButton_1 = new JButton("Update Student Information");
-					btnNewButton_1.setBounds(376, 385, 177, 56);
+					btnNewButton_1.setBounds(370, 381, 207, 65);
 					adminPage.getContentPane().add(btnNewButton_1);
 					
 					JTextField textField_6 = new JTextField();
@@ -241,6 +267,27 @@ public class SIS {
 					JButton btnNewButton_2 = new JButton("Go");
 					btnNewButton_2.setBounds(622, 17, 52, 40);
 					adminPage.getContentPane().add(btnNewButton_2);
+					
+					JLabel lblStudentEmail = new JLabel("Student Email");
+					lblStudentEmail.setBounds(23, 415, 106, 25);
+					adminPage.getContentPane().add(lblStudentEmail);
+					
+					JLabel lblGender = new JLabel("Gender");
+					lblGender.setBounds(23, 305, 106, 25);
+					adminPage.getContentPane().add(lblGender);
+					
+					JRadioButton rdbtnNewRadioButton = new JRadioButton("Male");
+					rdbtnNewRadioButton.setBounds(139, 303, 66, 23);
+					adminPage.getContentPane().add(rdbtnNewRadioButton);
+					
+					JRadioButton rdbtnFemale = new JRadioButton("Female");
+					rdbtnFemale.setBounds(207, 303, 66, 23);
+					adminPage.getContentPane().add(rdbtnFemale);
+					
+					JTextField textField_7 = new JTextField();
+					textField_7.setColumns(10);
+					textField_7.setBounds(139, 250, 117, 25);
+					adminPage.getContentPane().add(textField_7);
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "ne moze");
@@ -254,8 +301,8 @@ public class SIS {
 		
 	}
 	
-
-	private void initialize() {
+	
+	private void initialize(Admin a) {
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 511);
@@ -301,8 +348,15 @@ public class SIS {
 				loginStudent.getContentPane().add(label_2);
 				
 				JButton button = new JButton("Log In");
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Student s = a.findStudent(textField.getText());
+						JOptionPane.showMessageDialog(null, s.getName());
+					}
+				});
 				button.setBounds(296, 281, 89, 23);
 				loginStudent.getContentPane().add(button);
+				
 			}
 		});
 		button.setBounds(32, 274, 185, 99);
@@ -357,7 +411,7 @@ public class SIS {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				SIS prozor = new SIS(1);
+				SIS prozor = new SIS(1,a);
 			}
 		});
 		button_1.setBounds(466, 274, 185, 99);
