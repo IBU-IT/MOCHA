@@ -51,9 +51,6 @@ public class StudentInformationSystem {
 		
 	}
 
-	static class Admin {
-
-	}
 
 	public static void main(String[] args) {
 		String strDirectoy ="course";
