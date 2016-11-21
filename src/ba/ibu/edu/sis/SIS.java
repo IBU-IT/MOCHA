@@ -161,6 +161,10 @@ public class SIS {
 
 		Admin admin = new Admin();
 		Student magarac = new Student();
+		Professor dino = new Professor();
+		dino.setName("Dino Keèo");
+		dino.setID("120");
+		
 		magarac.setName("magarac");
 		magarac.setId("1");
 		admin.Students.add(magarac);
