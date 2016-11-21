@@ -31,6 +31,7 @@ public class SIS {
 	
 	static class Admin {
 		private List<Student> Students = new ArrayList<Student>();
+		private List<Professor> Professor = new ArrayList<Professor>();
 
 		private String password ="password";
 		public String getPassword() {
@@ -42,6 +43,16 @@ public class SIS {
 			for (Student c : Students) {
 				if (c.getId().equals(id)) {
 					return c;
+				}
+			}
+			return null;
+		}
+		
+		private Professor findProfessor(String id) {
+			
+			for (Professor p : Professor) {
+				if (p.getId().equals(id)) {
+					return p;
 				}
 			}
 			return null;
@@ -119,16 +130,16 @@ public class SIS {
 	}
 	
 	static class Professor {
-		private String ID;
+		private String Id;
 		private String name;
 		private String surname;
 		private String email;
 		private String phone;
-		public String getID() {
-			return ID;
+		public String getId() {
+			return Id;
 		}
-		public void setID(String iD) {
-			ID = iD;
+		public void setId(String Id) {
+			this.Id = Id;
 		}
 		public String getName() {
 			return name;
@@ -163,7 +174,8 @@ public class SIS {
 		Student magarac = new Student();
 		Professor dino = new Professor();
 		dino.setName("Dino Keèo");
-		dino.setID("120");
+		dino.setId("120");
+		admin.Professor.add(dino);
 		
 		magarac.setName("magarac");
 		magarac.setId("1");
@@ -423,10 +435,6 @@ public class SIS {
 				passwordField.setBounds(287, 227, 110, 27);
 				loginProf.getContentPane().add(passwordField);
 				
-				JButton btnNewButton = new JButton("Log In");
-				btnNewButton.setBounds(297, 266, 89, 23);
-				loginProf.getContentPane().add(btnNewButton);
-				
 				JLabel lblWelcome = new JLabel("Welcome!");
 				lblWelcome.setFont(new Font("Sylfaen", Font.PLAIN, 18));
 				lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
@@ -442,6 +450,16 @@ public class SIS {
 				lblPw.setHorizontalAlignment(SwingConstants.RIGHT);
 				lblPw.setBounds(231, 233, 46, 14);
 				loginProf.getContentPane().add(lblPw);
+				
+				JButton button = new JButton("Log In");
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Professor p = a.findProfessor(textField.getText());
+						JOptionPane.showMessageDialog(null, p.getName());
+					}
+				});
+				button.setBounds(296, 281, 89, 23);
+				loginProf.getContentPane().add(button);
 				
 			}
 		});
