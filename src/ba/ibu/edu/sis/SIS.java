@@ -435,11 +435,17 @@ public class SIS {
 				passwordField.setBounds(287, 227, 110, 27);
 				loginProf.getContentPane().add(passwordField);
 				
-				JLabel lblWelcome = new JLabel("Welcome!");
+				JLabel lblWelcome = new JLabel("Welcome to proffesor panel. Please, enter your ID and password bellow!");
 				lblWelcome.setFont(new Font("Sylfaen", Font.PLAIN, 18));
 				lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-				lblWelcome.setBounds(272, 122, 140, 56);
+				lblWelcome.setBounds(65, 122, 540, 56);
 				loginProf.getContentPane().add(lblWelcome);
+				
+				JLabel lblWelcomeL = new JLabel("Hi professor.");
+				lblWelcomeL.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+				lblWelcomeL.setHorizontalAlignment(SwingConstants.CENTER);
+				lblWelcomeL.setBounds(65, 122, 540, 56);
+				
 				
 				JLabel lblId = new JLabel("ID");
 				lblId.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -451,11 +457,17 @@ public class SIS {
 				lblPw.setBounds(231, 233, 46, 14);
 				loginProf.getContentPane().add(lblPw);
 				
-				JButton button = new JButton("Log In");
+				JButton button = new JButton("LogIn");
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Professor p = a.findProfessor(textField.getText());
-						JOptionPane.showMessageDialog(null, p.getName());
+						frame.dispose();
+						JFrame loginProf  = new JFrame();
+						loginProf.setVisible(true);
+						loginProf.setBounds(100, 100, 700, 511);
+						loginProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						loginProf.getContentPane().setLayout(null);
+						loginProf.getContentPane().add(lblWelcomeL);
 					}
 				});
 				button.setBounds(296, 281, 89, 23);
