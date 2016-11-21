@@ -451,7 +451,7 @@ public class SIS {
 				lblPw.setBounds(231, 233, 46, 14);
 				loginProf.getContentPane().add(lblPw);
 				
-				JButton button = new JButton("Log In");
+				JButton button = new JButton("LogIn");
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Professor p = a.findProfessor(textField.getText());
