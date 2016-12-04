@@ -8,7 +8,7 @@ Objectives
 
 • Research other student information systems and design the software 
 
-• Implement the code and merge with a database (v2)
+• Implement the code
 
 • Test the software and fix errors
 
