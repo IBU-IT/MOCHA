@@ -1,7 +1,8 @@
 package ba.ibu.edu.sis;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
+import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -20,6 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 
 public class SIS {
 	
@@ -357,17 +359,25 @@ public class SIS {
 	
 	
 	private void initialize(Admin a) {
-		
+		Color panel_color = new Color(0,0,0); 
 		frame = new JFrame();
+		frame.getContentPane().setForeground(new Color(255, 255, 255));
 		frame.setBounds(100, 100, 700, 511);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 frame.getContentPane().setBackground(new Color(102, 204, 255));
 		
 		JLabel lblWelcomeToStudent = new JLabel("\r\n\r\n\r\nWelcome to Student Information System!");
-		lblWelcomeToStudent.setBounds(81, 72, 521, 31);
+		lblWelcomeToStudent.setForeground(new Color(255, 250, 250));
+		lblWelcomeToStudent.setBackground(new Color(255, 255, 255));
+		lblWelcomeToStudent.setBounds(60, 81, 542, 31);
 		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblWelcomeToStudent.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JButton button = new JButton("Log in as Student");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		button.setForeground(new Color(0, 102, 204));
+		button.setBackground(new Color(255, 255, 255));
+		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame loginStudent = new JFrame();
@@ -413,11 +423,14 @@ public class SIS {
 				
 			}
 		});
-		button.setBounds(32, 274, 185, 99);
+		button.setBounds(32, 223, 185, 99);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(lblWelcomeToStudent);
 		
 		JButton btnLogInAs = new JButton("Log in as Professor");
+		btnLogInAs.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnLogInAs.setBackground(new Color(255, 255, 255));
+		btnLogInAs.setForeground(new Color(0, 102, 204));
 		btnLogInAs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -475,18 +488,21 @@ public class SIS {
 				
 			}
 		});
-		btnLogInAs.setBounds(249, 274, 185, 99);
+		btnLogInAs.setBounds(249, 224, 185, 99);
 		frame.getContentPane().add(btnLogInAs);
 		frame.getContentPane().add(button);
 		
 		JButton button_1 = new JButton("Log in as Admin");
+		button_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		button_1.setForeground(new Color(0, 102, 204));
+		button_1.setBackground(new Color(255, 255, 255));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				SIS prozor = new SIS(1,a);
 			}
 		});
-		button_1.setBounds(466, 274, 185, 99);
+		button_1.setBounds(466, 224, 185, 99);
 		frame.getContentPane().add(button_1);
 	
 		
