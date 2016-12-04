@@ -441,7 +441,7 @@ public class SIS {
 				lblWelcome.setBounds(65, 122, 540, 56);
 				loginProf.getContentPane().add(lblWelcome);
 				
-				JLabel lblWelcomeL = new JLabel("Hi professor.");
+				JLabel lblWelcomeL = new JLabel("Hi professor. Take some operations..");
 				lblWelcomeL.setFont(new Font("Sylfaen", Font.PLAIN, 18));
 				lblWelcomeL.setHorizontalAlignment(SwingConstants.CENTER);
 				lblWelcomeL.setBounds(65, 122, 540, 56);
