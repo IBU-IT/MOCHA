@@ -28,6 +28,7 @@ public class SIS {
 	private JFrame frame;
 	private JFrame login;
 	private JFrame adminPage;
+	private final JLabel label_3 = new JLabel("");
 
 	
 	
@@ -369,7 +370,7 @@ public class SIS {
 		JLabel lblWelcomeToStudent = new JLabel("\r\n\r\n\r\nWelcome to Student Information System!");
 		lblWelcomeToStudent.setForeground(new Color(255, 250, 250));
 		lblWelcomeToStudent.setBackground(new Color(255, 255, 255));
-		lblWelcomeToStudent.setBounds(60, 81, 542, 31);
+		lblWelcomeToStudent.setBounds(60, 95, 542, 31);
 		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblWelcomeToStudent.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -504,6 +505,9 @@ public class SIS {
 		});
 		button_1.setBounds(466, 224, 185, 99);
 		frame.getContentPane().add(button_1);
+		label_3.setIcon(new ImageIcon("C:\\Users\\Armin\\git\\MOCHA\\burch.jpg"));
+		label_3.setBounds(0, 0, 684, 472);
+		frame.getContentPane().add(label_3);
 	
 		
 	}
