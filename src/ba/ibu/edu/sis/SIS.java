@@ -340,18 +340,37 @@ public class SIS {
 					btnNewButton.setBounds(319, 330, 140, 40);
 					adminPage.getContentPane().add(btnNewButton);
 
-					JButton btnDeleteStudent = new JButton("Delete Student");
-					btnDeleteStudent.setBounds(486, 330, 140, 40);
-					adminPage.getContentPane().add(btnDeleteStudent);
-
-					JButton btnNewButton_1 = new JButton("Update Student Information");
-					btnNewButton_1.setBounds(370, 381, 207, 65);
-					adminPage.getContentPane().add(btnNewButton_1);
 
 					JTextField textField_6 = new JTextField();
 					textField_6.setBounds(486, 17, 129, 40);
 					adminPage.getContentPane().add(textField_6);
 					textField_6.setColumns(10);
+					
+					JButton btnDeleteStudent = new JButton("Delete Student");
+					btnDeleteStudent.setBounds(486, 330, 140, 40);
+					adminPage.getContentPane().add(btnDeleteStudent);
+
+					JButton btnNewButton_1 = new JButton("Update Student Information");
+					btnNewButton_1.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							Student kreten = a.findStudent(textField_6.getText());
+							kreten.setName(textField.getText());
+							kreten.setSurname(textField_1.getText());
+							kreten.setId(textField_2.getText());
+							kreten.setDateOfBirth(Integer.parseInt(textField_3.getText()));
+							kreten.setNationality(textField_4.getText());
+							kreten.setYear(Integer.parseInt(textField_7.getText()));
+							kreten.setEmail(textField_5.getText());
+							if (rdbtnMale.isSelected()) {
+								kreten.setGender("Male");
+							} else {
+								kreten.setGender("Female");
+							}
+						}
+					});
+					btnNewButton_1.setBounds(370, 381, 207, 65);
+					adminPage.getContentPane().add(btnNewButton_1);
+
 
 					JLabel lblNewLabel = new JLabel("Search by Student ID");
 					lblNewLabel.setBounds(354, 22, 129, 31);
@@ -406,7 +425,7 @@ public class SIS {
 		button.setBounds(32, 274, 185, 99);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				frame.dispose();
 				JFrame loginStudent = new JFrame();
 				loginStudent.setVisible(true);
 				loginStudent.setBounds(100, 100, 700, 511);
