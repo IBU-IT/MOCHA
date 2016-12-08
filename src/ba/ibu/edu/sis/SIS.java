@@ -18,6 +18,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.SystemColor;
 
 public class SIS {
 
@@ -415,13 +416,13 @@ public class SIS {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel lblWelcomeToStudent = new JLabel("\r\n\r\n\r\nWelcome to Student Information System!");
-		lblWelcomeToStudent.setBounds(27, 109, 630, 31);
-		lblWelcomeToStudent.setForeground(Color.BLACK);
+		lblWelcomeToStudent.setBounds(32, 184, 630, 31);
+		lblWelcomeToStudent.setForeground(new Color(255, 255, 255));
 		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 29));
 		lblWelcomeToStudent.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JButton button = new JButton("Log in as Student");
-		button.setBackground(Color.GRAY);
+		button.setBackground(SystemColor.inactiveCaptionBorder);
 		button.setBounds(32, 274, 185, 99);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -475,8 +476,8 @@ public class SIS {
 		frame.getContentPane().add(lblWelcomeToStudent);
 
 		JButton btnLogInAs = new JButton("Login as Professor");
-		btnLogInAs.setBackground(Color.GRAY);
-		btnLogInAs.setBounds(249, 274, 185, 99);
+		btnLogInAs.setBackground(SystemColor.inactiveCaptionBorder);
+		btnLogInAs.setBounds(250, 274, 185, 99);
 		btnLogInAs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -537,7 +538,7 @@ public class SIS {
 		frame.getContentPane().add(button);
 
 		JButton button_1 = new JButton("Log in as Admin");
-		button_1.setBackground(Color.GRAY);
+		button_1.setBackground(SystemColor.inactiveCaptionBorder);
 		button_1.setBounds(466, 274, 185, 99);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -546,10 +547,21 @@ public class SIS {
 			}
 		});
 		frame.getContentPane().add(button_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Powered by MOCHA");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setBounds(276, 440, 128, 21);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("logo_sis.png"));
+		lblNewLabel_1.setBounds(274, 11, 268, 173);
+		frame.getContentPane().add(lblNewLabel_1);
 
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 684, 473);
-		label.setIcon(new ImageIcon("burch.jpg"));
+		label.setIcon(new ImageIcon("burch2.jpg"));
 		frame.getContentPane().add(label);
 
 	}
