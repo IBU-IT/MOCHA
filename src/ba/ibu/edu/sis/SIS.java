@@ -1,15 +1,10 @@
 package ba.ibu.edu.sis;
 
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
-import javafx.scene.control.RadioButton;
 import java.awt.Font;
-
 import javax.swing.JButton;
 
 import javax.swing.JOptionPane;
@@ -22,40 +17,30 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
+import java.awt.Color;
 
-public class SIS {
+public class SIS{
 	
 	private JFrame frame;
 	private JFrame login;
 	private JFrame adminPage;
-	private final JLabel label_3 = new JLabel("");
+	
+
 
 	
-	
 	static class Admin {
-		private List<Student> Students = new ArrayList<Student>();
-		private List<Professor> Professor = new ArrayList<Professor>();
+		public List<Student> Students = new ArrayList<Student>();
 
 		private String password ="password";
 		public String getPassword() {
 			return password;
 		}
 		
-		private Student findStudent(String id) {
+		Student findStudent(String id) {
 			
 			for (Student c : Students) {
 				if (c.getId().equals(id)) {
 					return c;
-				}
-			}
-			return null;
-		}
-		
-		private Professor findProfessor(String id) {
-			
-			for (Professor p : Professor) {
-				if (p.getId().equals(id)) {
-					return p;
 				}
 			}
 			return null;
@@ -131,55 +116,11 @@ public class SIS {
 			this.grades = grades;
 		}
 	}
-	
-	static class Professor {
-		private String Id;
-		private String name;
-		private String surname;
-		private String email;
-		private String phone;
-		public String getId() {
-			return Id;
-		}
-		public void setId(String Id) {
-			this.Id = Id;
-		}
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		public String getSurname() {
-			return surname;
-		}
-		public void setSurname(String surname) {
-			this.surname = surname;
-		}
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
-		}
-		public String getPhone() {
-			return phone;
-		}
-		public void setPhone(String phone) {
-			this.phone = phone;
-		}
-		
-	}
+
 	public static void main(String[] args) {
-
-
+	
 		Admin admin = new Admin();
 		Student magarac = new Student();
-		Professor dino = new Professor();
-		dino.setName("Dino Keèo");
-		dino.setId("120");
-		admin.Professor.add(dino);
-		
 		magarac.setName("magarac");
 		magarac.setId("1");
 		admin.Students.add(magarac);
@@ -287,17 +228,37 @@ public class SIS {
 					textField_5.setBounds(139, 411, 117, 25);
 					adminPage.getContentPane().add(textField_5);
 					
+					
+					JTextField textField_7 = new JTextField();
+					textField_7.setColumns(10);
+					textField_7.setBounds(139, 250, 117, 25);
+					adminPage.getContentPane().add(textField_7);
+					
+					JRadioButton rdbtnMale = new JRadioButton("Male");
+					rdbtnMale.setBounds(139, 303, 66, 23);
+					adminPage.getContentPane().add(rdbtnMale);
+					
+					JRadioButton rdbtnFemale = new JRadioButton("Female");
+					rdbtnFemale.setBounds(207, 303, 66, 23);
+					adminPage.getContentPane().add(rdbtnFemale);
+					
 					JButton btnNewButton = new JButton("Add Student");
 					btnNewButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							String iName,iSurname,iID,iGender,iEmail,iNationality;
-							int iDate,iYear;
 							Student kreten = new Student();
 							kreten.setName(textField.getText());
 							kreten.setSurname(textField_1.getText());
 							kreten.setId(textField_2.getText());
 							kreten.setDateOfBirth(Integer.parseInt(textField_3.getText()));
-							kreten.setYear(Integer.parseInt(textField_4.getText()));
+							kreten.setNationality(textField_4.getText());
+							kreten.setYear(Integer.parseInt(textField_7.getText()));
+							kreten.setEmail(textField_5.getText());
+							if(rdbtnMale.isSelected()){
+								kreten.setGender("Male");
+							}
+							else{
+								kreten.setGender("Female");
+							}
 							a.Students.add(kreten);
 						}
 					});
@@ -322,6 +283,12 @@ public class SIS {
 					adminPage.getContentPane().add(lblNewLabel);
 					
 					JButton btnNewButton_2 = new JButton("Go");
+					btnNewButton_2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							Student wanted = a.findStudent(textField_6.getText());
+							JOptionPane.showMessageDialog(null, wanted.getName()+"\n"+wanted.getSurname()+"\n"+wanted.getId()+"\n"+wanted.getDateOfBirth()+"\n"+wanted.getEmail()+"\n"+wanted.getGender()+"\n"+wanted.getNationality());
+						}
+					});
 					btnNewButton_2.setBounds(622, 17, 52, 40);
 					adminPage.getContentPane().add(btnNewButton_2);
 					
@@ -333,18 +300,8 @@ public class SIS {
 					lblGender.setBounds(23, 305, 106, 25);
 					adminPage.getContentPane().add(lblGender);
 					
-					JRadioButton rdbtnNewRadioButton = new JRadioButton("Male");
-					rdbtnNewRadioButton.setBounds(139, 303, 66, 23);
-					adminPage.getContentPane().add(rdbtnNewRadioButton);
-					
-					JRadioButton rdbtnFemale = new JRadioButton("Female");
-					rdbtnFemale.setBounds(207, 303, 66, 23);
-					adminPage.getContentPane().add(rdbtnFemale);
-					
-					JTextField textField_7 = new JTextField();
-					textField_7.setColumns(10);
-					textField_7.setBounds(139, 250, 117, 25);
-					adminPage.getContentPane().add(textField_7);
+				
+
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "ne moze");
@@ -360,27 +317,25 @@ public class SIS {
 	
 	
 	private void initialize(Admin a) {
-		Color panel_color = new Color(0,0,0); 
+		
+		
+			
 		frame = new JFrame();
-		frame.getContentPane().setForeground(new Color(255, 255, 255));
 		frame.setBounds(100, 100, 700, 511);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 frame.getContentPane().setBackground(new Color(102, 204, 255));
 		
 		JLabel lblWelcomeToStudent = new JLabel("\r\n\r\n\r\nWelcome to Student Information System!");
-		lblWelcomeToStudent.setForeground(new Color(255, 250, 250));
-		lblWelcomeToStudent.setBackground(new Color(255, 255, 255));
-		lblWelcomeToStudent.setBounds(60, 95, 542, 31);
-		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblWelcomeToStudent.setBounds(27, 109, 630, 31);
+		lblWelcomeToStudent.setForeground(Color.BLACK);
+		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 29));
 		lblWelcomeToStudent.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JButton button = new JButton("Log in as Student");
-		button.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button.setForeground(new Color(0, 102, 204));
-		button.setBackground(new Color(255, 255, 255));
-		
+		button.setBackground(Color.GRAY);
+		button.setBounds(32, 274, 185, 99);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				JFrame loginStudent = new JFrame();
 				loginStudent.setVisible(true);
 				loginStudent.setBounds(100, 100, 700, 511);
@@ -422,16 +377,16 @@ public class SIS {
 				button.setBounds(296, 281, 89, 23);
 				loginStudent.getContentPane().add(button);
 				
+				//studentlogin2 m= new studentlogin2(a);
+			
 			}
 		});
-		button.setBounds(32, 223, 185, 99);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(lblWelcomeToStudent);
 		
 		JButton btnLogInAs = new JButton("Log in as Professor");
-		btnLogInAs.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnLogInAs.setBackground(new Color(255, 255, 255));
-		btnLogInAs.setForeground(new Color(0, 102, 204));
+		btnLogInAs.setBackground(Color.GRAY);
+		btnLogInAs.setBounds(249, 274, 185, 99);
 		btnLogInAs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -449,17 +404,15 @@ public class SIS {
 				passwordField.setBounds(287, 227, 110, 27);
 				loginProf.getContentPane().add(passwordField);
 				
-				JLabel lblWelcome = new JLabel("Welcome to proffesor panel. Please, enter your ID and password bellow!");
+				JButton btnNewButton = new JButton("Log In");
+				btnNewButton.setBounds(297, 266, 89, 23);
+				loginProf.getContentPane().add(btnNewButton);
+				
+				JLabel lblWelcome = new JLabel("Welcome!");
 				lblWelcome.setFont(new Font("Sylfaen", Font.PLAIN, 18));
 				lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-				lblWelcome.setBounds(65, 122, 540, 56);
+				lblWelcome.setBounds(272, 122, 140, 56);
 				loginProf.getContentPane().add(lblWelcome);
-				
-				JLabel lblWelcomeL = new JLabel("Hi professor. Take some operations..");
-				lblWelcomeL.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-				lblWelcomeL.setHorizontalAlignment(SwingConstants.CENTER);
-				lblWelcomeL.setBounds(65, 122, 540, 56);
-				
 				
 				JLabel lblId = new JLabel("ID");
 				lblId.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -471,44 +424,29 @@ public class SIS {
 				lblPw.setBounds(231, 233, 46, 14);
 				loginProf.getContentPane().add(lblPw);
 				
-				JButton button = new JButton("LogIn");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Professor p = a.findProfessor(textField.getText());
-						frame.dispose();
-						JFrame loginProf  = new JFrame();
-						loginProf.setVisible(true);
-						loginProf.setBounds(100, 100, 700, 511);
-						loginProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-						loginProf.getContentPane().setLayout(null);
-						loginProf.getContentPane().add(lblWelcomeL);
-					}
-				});
-				button.setBounds(296, 281, 89, 23);
-				loginProf.getContentPane().add(button);
-				
 			}
 		});
-		btnLogInAs.setBounds(249, 224, 185, 99);
 		frame.getContentPane().add(btnLogInAs);
 		frame.getContentPane().add(button);
 		
 		JButton button_1 = new JButton("Log in as Admin");
-		button_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button_1.setForeground(new Color(0, 102, 204));
-		button_1.setBackground(new Color(255, 255, 255));
+		button_1.setBackground(Color.GRAY);
+		button_1.setBounds(466, 274, 185, 99);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				SIS prozor = new SIS(1,a);
 			}
 		});
-		button_1.setBounds(466, 224, 185, 99);
 		frame.getContentPane().add(button_1);
-		label_3.setIcon(new ImageIcon("C:\\Users\\Armin\\git\\MOCHA\\burch.jpg"));
-		label_3.setBounds(0, 0, 684, 472);
-		frame.getContentPane().add(label_3);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(0, 0, 684, 473);
+		label.setIcon(new ImageIcon("burch.jpg"));
+		frame.getContentPane().add(label);
 	
 		
 	}
+
+
 }
