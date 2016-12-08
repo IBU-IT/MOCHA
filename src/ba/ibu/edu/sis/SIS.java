@@ -418,7 +418,7 @@ public class SIS {
 		JLabel lblWelcomeToStudent = new JLabel("\r\n\r\n\r\nWelcome to Student Information System!");
 		lblWelcomeToStudent.setBounds(32, 184, 630, 31);
 		lblWelcomeToStudent.setForeground(new Color(255, 255, 255));
-		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 29));
+		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblWelcomeToStudent.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JButton button = new JButton("Log in as Student");
