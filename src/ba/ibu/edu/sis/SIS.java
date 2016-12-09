@@ -134,19 +134,19 @@ public class SIS {
 			this.gender = gender;
 		}
 
-		public int getDateOfBirth() {
+		public String getDateOfBirth() {
 			return dateOfBirth;
 		}
 
-		public void setDateOfBirth(int dateOfBirth) {
+		public void setDateOfBirth(String dateOfBirth) {
 			this.dateOfBirth = dateOfBirth;
 		}
 
 		private String name;
 		private String gender;
 		private String surname;
-		private int year;
-		private int dateOfBirth;
+		private String year;
+		private String dateOfBirth;
 		private int grades[];
 
 		public String getId() {
@@ -173,11 +173,11 @@ public class SIS {
 			this.surname = surname;
 		}
 
-		public int getYear() {
+		public String getYear() {
 			return year;
 		}
 
-		public void setYear(int year) {
+		public void setYear(String year) {
 			this.year = year;
 		}
 
@@ -326,9 +326,9 @@ public class SIS {
 							kreten.setName(textField.getText());
 							kreten.setSurname(textField_1.getText());
 							kreten.setId(textField_2.getText());
-							kreten.setDateOfBirth(Integer.parseInt(textField_3.getText()));
+							kreten.setDateOfBirth(textField_3.getText());
 							kreten.setNationality(textField_4.getText());
-							kreten.setYear(Integer.parseInt(textField_7.getText()));
+							kreten.setYear(textField_7.getText());
 							kreten.setEmail(textField_5.getText());
 							if (rdbtnMale.isSelected()) {
 								kreten.setGender("Male");
@@ -336,18 +336,33 @@ public class SIS {
 								kreten.setGender("Female");
 							}
 							a.Students.add(kreten);
+							textField.setText(null);
+							textField_1.setText(null);
+							textField_2.setText(null);
+							textField_3.setText(null);
+							textField_4.setText(null);
+							textField_7.setText(null);
+							textField_5.setText(null);
+							rdbtnMale.setSelected(false);
+							rdbtnFemale.setSelected(false);
+							JOptionPane.showMessageDialog(null, "Student successfully added!");
 						}
 					});
 					btnNewButton.setBounds(319, 330, 140, 40);
 					adminPage.getContentPane().add(btnNewButton);
 
-
 					JTextField textField_6 = new JTextField();
 					textField_6.setBounds(486, 17, 129, 40);
 					adminPage.getContentPane().add(textField_6);
 					textField_6.setColumns(10);
-					
+
 					JButton btnDeleteStudent = new JButton("Delete Student");
+					btnDeleteStudent.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							Student todelete = a.findStudent(textField_6.getText());
+							a.Students.remove(todelete);
+						}
+					});
 					btnDeleteStudent.setBounds(486, 330, 140, 40);
 					adminPage.getContentPane().add(btnDeleteStudent);
 
@@ -358,9 +373,9 @@ public class SIS {
 							kreten.setName(textField.getText());
 							kreten.setSurname(textField_1.getText());
 							kreten.setId(textField_2.getText());
-							kreten.setDateOfBirth(Integer.parseInt(textField_3.getText()));
+							kreten.setDateOfBirth(textField_3.getText());
 							kreten.setNationality(textField_4.getText());
-							kreten.setYear(Integer.parseInt(textField_7.getText()));
+							kreten.setYear(textField_7.getText());
 							kreten.setEmail(textField_5.getText());
 							if (rdbtnMale.isSelected()) {
 								kreten.setGender("Male");
@@ -372,7 +387,6 @@ public class SIS {
 					btnNewButton_1.setBounds(370, 381, 207, 65);
 					adminPage.getContentPane().add(btnNewButton_1);
 
-
 					JLabel lblNewLabel = new JLabel("Search by Student ID");
 					lblNewLabel.setBounds(354, 22, 129, 31);
 					adminPage.getContentPane().add(lblNewLabel);
@@ -381,10 +395,20 @@ public class SIS {
 					btnNewButton_2.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							Student wanted = a.findStudent(textField_6.getText());
-							JOptionPane.showMessageDialog(null,
-									wanted.getName() + "\n" + wanted.getSurname() + "\n" + wanted.getId() + "\n"
-											+ wanted.getDateOfBirth() + "\n" + wanted.getEmail() + "\n"
-											+ wanted.getGender() + "\n" + wanted.getNationality());
+							textField.setText(wanted.getName());
+							textField_1.setText(wanted.getSurname());
+							textField_2.setText(wanted.getId());
+							textField_3.setText(wanted.getDateOfBirth());
+							textField_4.setText(wanted.getNationality());
+							textField_7.setText(wanted.getYear());
+							textField_5.setText(wanted.getEmail());
+							if(wanted.getGender()=="Male"){
+								rdbtnMale.setSelected(true);
+							}
+							else{
+								rdbtnFemale.setSelected(true);
+							}
+							textField_6.setText(null);
 						}
 					});
 					btnNewButton_2.setBounds(622, 17, 52, 40);
@@ -516,7 +540,8 @@ public class SIS {
 				button.setBounds(296, 281, 89, 23);
 				loginProf.getContentPane().add(button);
 
-				JLabel lblWelcome = new JLabel("Welcome to proffesor panel. Please, enter your ID and password bellow!");
+				JLabel lblWelcome = new JLabel(
+						"Welcome to proffesor panel. Please, enter your ID and password bellow!");
 				lblWelcome.setFont(new Font("Sylfaen", Font.PLAIN, 18));
 				lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 				lblWelcome.setBounds(85, 122, 560, 56);
@@ -547,13 +572,13 @@ public class SIS {
 			}
 		});
 		frame.getContentPane().add(button_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Powered by MOCHA");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setBounds(276, 440, 128, 21);
 		frame.getContentPane().add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("logo_sis.png"));
 		lblNewLabel_1.setBounds(274, 11, 268, 173);
