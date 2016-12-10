@@ -1,6 +1,7 @@
 package ba.ibu.edu.sis;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -25,6 +26,13 @@ public class SIS {
 	private JFrame frame;
 	private JFrame login;
 	private JFrame adminPage;
+
+	private void setPozadina(JFrame frejm) {
+		JLabel pozadina = new JLabel("");
+		pozadina.setBounds(0, 0, 684, 473);
+		pozadina.setIcon(new ImageIcon("burch2.jpg"));
+		frejm.getContentPane().add(pozadina);
+	}
 
 	static class Admin {
 		public List<Student> Students = new ArrayList<Student>();
@@ -236,6 +244,8 @@ public class SIS {
 		login.getContentPane().add(pwdEnterYourPassword);
 
 		JLabel lblNewLabel = new JLabel("Enter password for Admin");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("TAHOMA", Font.BOLD, 13));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setToolTipText("");
 		lblNewLabel.setBounds(229, 208, 226, 14);
@@ -253,27 +263,39 @@ public class SIS {
 					adminPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					adminPage.getContentPane().setLayout(null);
 					JLabel lblStudentName = new JLabel("Student Name");
+					lblStudentName.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentName.setForeground(Color.WHITE);
 					lblStudentName.setBounds(23, 30, 106, 25);
 					adminPage.getContentPane().add(lblStudentName);
 
 					JLabel lblStudentSurname = new JLabel("Student Surname");
 					lblStudentSurname.setBounds(23, 85, 106, 25);
+					lblStudentSurname.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentSurname.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentSurname);
 
 					JLabel lblStudentId = new JLabel("Student ID");
 					lblStudentId.setBounds(23, 140, 106, 25);
+					lblStudentId.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentId.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentId);
 
 					JLabel lblStudentAge = new JLabel("Student Date of Birth");
 					lblStudentAge.setBounds(23, 195, 106, 25);
+					lblStudentAge.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentAge.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentAge);
 
 					JLabel lblStudentYear = new JLabel("Student Year");
 					lblStudentYear.setBounds(23, 250, 106, 25);
+					lblStudentYear.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentYear.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentYear);
 
 					JLabel lblStudentNationality = new JLabel("Student Nationality");
 					lblStudentNationality.setBounds(23, 360, 106, 25);
+					lblStudentNationality.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentNationality.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentNationality);
 
 					JTextField textField = new JTextField();
@@ -402,10 +424,9 @@ public class SIS {
 							textField_4.setText(wanted.getNationality());
 							textField_7.setText(wanted.getYear());
 							textField_5.setText(wanted.getEmail());
-							if(wanted.getGender()=="Male"){
+							if (wanted.getGender() == "Male") {
 								rdbtnMale.setSelected(true);
-							}
-							else{
+							} else {
 								rdbtnFemale.setSelected(true);
 							}
 							textField_6.setText(null);
@@ -421,6 +442,7 @@ public class SIS {
 					JLabel lblGender = new JLabel("Gender");
 					lblGender.setBounds(23, 305, 106, 25);
 					adminPage.getContentPane().add(lblGender);
+					setPozadina(adminPage);
 
 				} else {
 					JOptionPane.showMessageDialog(null, "ne moze");
@@ -430,6 +452,7 @@ public class SIS {
 		});
 		btnLogIn.setBounds(300, 264, 89, 23);
 		login.getContentPane().add(btnLogIn);
+		setPozadina(login);
 
 	}
 
@@ -583,11 +606,7 @@ public class SIS {
 		lblNewLabel_1.setIcon(new ImageIcon("logo_sis.png"));
 		lblNewLabel_1.setBounds(274, 11, 268, 173);
 		frame.getContentPane().add(lblNewLabel_1);
-
-		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 684, 473);
-		label.setIcon(new ImageIcon("burch2.jpg"));
-		frame.getContentPane().add(label);
+		setPozadina(frame);
 
 	}
 
