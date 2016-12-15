@@ -334,10 +334,14 @@ public class SIS {
 					adminPage.getContentPane().add(textField_7);
 
 					JRadioButton rdbtnMale = new JRadioButton("Male");
+					rdbtnMale.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					rdbtnMale.setForeground(Color.WHITE);
 					rdbtnMale.setBounds(139, 303, 66, 23);
 					adminPage.getContentPane().add(rdbtnMale);
 
 					JRadioButton rdbtnFemale = new JRadioButton("Female");
+					rdbtnFemale.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					rdbtnFemale.setForeground(Color.WHITE);
 					rdbtnFemale.setBounds(207, 303, 66, 23);
 					adminPage.getContentPane().add(rdbtnFemale);
 
@@ -381,8 +385,18 @@ public class SIS {
 					JButton btnDeleteStudent = new JButton("Delete Student");
 					btnDeleteStudent.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
-							Student todelete = a.findStudent(textField_6.getText());
+							Student todelete = a.findStudent(textField_2.getText());
 							a.Students.remove(todelete);
+							textField.setText(null);
+							textField_1.setText(null);
+							textField_2.setText(null);
+							textField_3.setText(null);
+							textField_4.setText(null);
+							textField_7.setText(null);
+							textField_5.setText(null);
+							rdbtnMale.setSelected(false);
+							rdbtnFemale.setSelected(false);
+							JOptionPane.showMessageDialog(null, "Student deleted.");
 						}
 					});
 					btnDeleteStudent.setBounds(486, 330, 140, 40);
@@ -391,7 +405,7 @@ public class SIS {
 					JButton btnNewButton_1 = new JButton("Update Student Information");
 					btnNewButton_1.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
-							Student kreten = a.findStudent(textField_6.getText());
+							Student kreten = a.findStudent(textField_2.getText());
 							kreten.setName(textField.getText());
 							kreten.setSurname(textField_1.getText());
 							kreten.setId(textField_2.getText());
@@ -404,12 +418,24 @@ public class SIS {
 							} else {
 								kreten.setGender("Female");
 							}
+							textField.setText(null);
+							textField_1.setText(null);
+							textField_2.setText(null);
+							textField_3.setText(null);
+							textField_4.setText(null);
+							textField_7.setText(null);
+							textField_5.setText(null);
+							rdbtnMale.setSelected(false);
+							rdbtnFemale.setSelected(false);
+							JOptionPane.showMessageDialog(null, "Information updated.");
 						}
 					});
 					btnNewButton_1.setBounds(370, 381, 207, 65);
 					adminPage.getContentPane().add(btnNewButton_1);
 
 					JLabel lblNewLabel = new JLabel("Search by Student ID");
+					lblNewLabel.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblNewLabel.setForeground(Color.WHITE);
 					lblNewLabel.setBounds(354, 22, 129, 31);
 					adminPage.getContentPane().add(lblNewLabel);
 
@@ -417,6 +443,11 @@ public class SIS {
 					btnNewButton_2.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							Student wanted = a.findStudent(textField_6.getText());
+							if(a.findStudent(textField_6.getText())==null){
+								JOptionPane.showMessageDialog(null, "Student not found.");
+								textField_6.setText(null);
+							}
+							else {
 							textField.setText(wanted.getName());
 							textField_1.setText(wanted.getSurname());
 							textField_2.setText(wanted.getId());
@@ -430,16 +461,21 @@ public class SIS {
 								rdbtnFemale.setSelected(true);
 							}
 							textField_6.setText(null);
+							}
 						}
 					});
 					btnNewButton_2.setBounds(622, 17, 52, 40);
 					adminPage.getContentPane().add(btnNewButton_2);
 
 					JLabel lblStudentEmail = new JLabel("Student Email");
+					lblStudentEmail.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentEmail.setForeground(Color.WHITE);
 					lblStudentEmail.setBounds(23, 415, 106, 25);
 					adminPage.getContentPane().add(lblStudentEmail);
 
 					JLabel lblGender = new JLabel("Gender");
+					lblGender.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblGender.setForeground(Color.WHITE);
 					lblGender.setBounds(23, 305, 106, 25);
 					adminPage.getContentPane().add(lblGender);
 					setPozadina(adminPage);
