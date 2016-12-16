@@ -212,7 +212,7 @@ public class SIS {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SIS window = new SIS(admin);
+					SIS window = new SIS(admin, dino);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -222,12 +222,16 @@ public class SIS {
 
 	}
 
-	public SIS(Admin a) {
-		initialize(a);
+	public SIS(Admin a, Professor pr) {
+		initialize(a, pr);
 	}
 
 	public SIS(int i, Admin a) {
 		init(a);
+	}
+
+	public SIS(int i, Professor pr) {
+		init(pr);
 	}
 
 	private void init(Admin a) {
@@ -263,38 +267,38 @@ public class SIS {
 					adminPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					adminPage.getContentPane().setLayout(null);
 					JLabel lblStudentName = new JLabel("Student Name");
-					lblStudentName.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentName.setForeground(Color.WHITE);
 					lblStudentName.setBounds(23, 30, 106, 25);
 					adminPage.getContentPane().add(lblStudentName);
 
 					JLabel lblStudentSurname = new JLabel("Student Surname");
 					lblStudentSurname.setBounds(23, 85, 106, 25);
-					lblStudentSurname.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentSurname.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentSurname);
 
 					JLabel lblStudentId = new JLabel("Student ID");
 					lblStudentId.setBounds(23, 140, 106, 25);
-					lblStudentId.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentId.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentId.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentId);
 
 					JLabel lblStudentAge = new JLabel("Student Date of Birth");
 					lblStudentAge.setBounds(23, 195, 106, 25);
-					lblStudentAge.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentAge.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentAge);
 
 					JLabel lblStudentYear = new JLabel("Student Year");
 					lblStudentYear.setBounds(23, 250, 106, 25);
-					lblStudentYear.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentYear.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentYear.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentYear);
 
 					JLabel lblStudentNationality = new JLabel("Student Nationality");
 					lblStudentNationality.setBounds(23, 360, 106, 25);
-					lblStudentNationality.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentNationality.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentNationality);
 
@@ -334,13 +338,13 @@ public class SIS {
 					adminPage.getContentPane().add(textField_7);
 
 					JRadioButton rdbtnMale = new JRadioButton("Male");
-					rdbtnMale.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					rdbtnMale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					rdbtnMale.setForeground(Color.WHITE);
 					rdbtnMale.setBounds(139, 303, 66, 23);
 					adminPage.getContentPane().add(rdbtnMale);
 
 					JRadioButton rdbtnFemale = new JRadioButton("Female");
-					rdbtnFemale.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					rdbtnFemale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					rdbtnFemale.setForeground(Color.WHITE);
 					rdbtnFemale.setBounds(207, 303, 66, 23);
 					adminPage.getContentPane().add(rdbtnFemale);
@@ -434,7 +438,7 @@ public class SIS {
 					adminPage.getContentPane().add(btnNewButton_1);
 
 					JLabel lblNewLabel = new JLabel("Search by Student ID");
-					lblNewLabel.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblNewLabel.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblNewLabel.setForeground(Color.WHITE);
 					lblNewLabel.setBounds(354, 22, 129, 31);
 					adminPage.getContentPane().add(lblNewLabel);
@@ -443,24 +447,23 @@ public class SIS {
 					btnNewButton_2.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							Student wanted = a.findStudent(textField_6.getText());
-							if(a.findStudent(textField_6.getText())==null){
+							if (a.findStudent(textField_6.getText()) == null) {
 								JOptionPane.showMessageDialog(null, "Student not found.");
 								textField_6.setText(null);
-							}
-							else {
-							textField.setText(wanted.getName());
-							textField_1.setText(wanted.getSurname());
-							textField_2.setText(wanted.getId());
-							textField_3.setText(wanted.getDateOfBirth());
-							textField_4.setText(wanted.getNationality());
-							textField_7.setText(wanted.getYear());
-							textField_5.setText(wanted.getEmail());
-							if (wanted.getGender() == "Male") {
-								rdbtnMale.setSelected(true);
 							} else {
-								rdbtnFemale.setSelected(true);
-							}
-							textField_6.setText(null);
+								textField.setText(wanted.getName());
+								textField_1.setText(wanted.getSurname());
+								textField_2.setText(wanted.getId());
+								textField_3.setText(wanted.getDateOfBirth());
+								textField_4.setText(wanted.getNationality());
+								textField_7.setText(wanted.getYear());
+								textField_5.setText(wanted.getEmail());
+								if (wanted.getGender() == "Male") {
+									rdbtnMale.setSelected(true);
+								} else {
+									rdbtnFemale.setSelected(true);
+								}
+								textField_6.setText(null);
 							}
 						}
 					});
@@ -468,13 +471,13 @@ public class SIS {
 					adminPage.getContentPane().add(btnNewButton_2);
 
 					JLabel lblStudentEmail = new JLabel("Student Email");
-					lblStudentEmail.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentEmail.setForeground(Color.WHITE);
 					lblStudentEmail.setBounds(23, 415, 106, 25);
 					adminPage.getContentPane().add(lblStudentEmail);
 
 					JLabel lblGender = new JLabel("Gender");
-					lblGender.setFont(new Font("TAHOMA",Font.PLAIN, 14));
+					lblGender.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblGender.setForeground(Color.WHITE);
 					lblGender.setBounds(23, 305, 106, 25);
 					adminPage.getContentPane().add(lblGender);
@@ -492,7 +495,65 @@ public class SIS {
 
 	}
 
-	private void initialize(Admin a) {
+	private void init(Professor pr) {
+		Admin a = new Admin();
+		JFrame loginProf = new JFrame();
+		loginProf.setVisible(true);
+		loginProf.setBounds(100, 100, 700, 511);
+		loginProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginProf.getContentPane().setLayout(null);
+		JTextField textField = new JTextField();
+		textField.setBounds(287, 189, 110, 27);
+		loginProf.getContentPane().add(textField);
+		textField.setColumns(10);
+
+		JPasswordField passwordField = new JPasswordField();
+		passwordField.setBounds(287, 227, 110, 27);
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+		loginProf.getContentPane().add(passwordField);
+
+		JLabel lblWelcome = new JLabel("Welcome to proffesor panel. Please, enter your ID and password bellow!");
+		lblWelcome.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWelcome.setBounds(85, 122, 560, 56);
+		loginProf.getContentPane().add(lblWelcome);
+
+		JLabel lblId = new JLabel("ID");
+		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblId.setBounds(231, 195, 46, 14);
+		loginProf.getContentPane().add(lblId);
+
+		JLabel lblPw = new JLabel("PW");
+		lblPw.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPw.setBounds(231, 233, 46, 14);
+		loginProf.getContentPane().add(lblPw);
+
+		JButton button = new JButton("LogIn");
+		button.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				Professor p = a.findProfessor(textField.getText());
+				loginProf.dispose();
+				JFrame loginProfPage = new JFrame();
+				loginProfPage.setVisible(true);
+				loginProfPage.setBounds(100, 100, 700, 511);
+				loginProfPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				loginProfPage.getContentPane().setLayout(null);
+
+				JLabel lblWelcomeL = new JLabel("Hi professor. Take some operations..");
+				lblWelcomeL.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+				lblWelcomeL.setHorizontalAlignment(SwingConstants.CENTER);
+				lblWelcomeL.setBounds(65, 122, 540, 56);
+
+				loginProfPage.getContentPane().add(lblWelcomeL);
+			}
+		});
+		button.setBounds(296, 281, 89, 23);
+		loginProf.getContentPane().add(button);
+
+	}
+
+	private void initialize(Admin a, Professor pr) {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 511);
@@ -558,69 +619,6 @@ public class SIS {
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(lblWelcomeToStudent);
 
-		JButton btnLogInAs = new JButton("Login as Professor");
-		btnLogInAs.setBackground(SystemColor.inactiveCaptionBorder);
-		btnLogInAs.setBounds(250, 274, 185, 99);
-		btnLogInAs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				JFrame loginProf = new JFrame();
-				loginProf.setVisible(true);
-				loginProf.setBounds(100, 100, 700, 511);
-				loginProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				loginProf.getContentPane().setLayout(null);
-				JTextField textField = new JTextField();
-				textField.setBounds(287, 189, 110, 27);
-				loginProf.getContentPane().add(textField);
-				textField.setColumns(10);
-
-				JPasswordField passwordField = new JPasswordField();
-				passwordField.setBounds(287, 227, 110, 27);
-				loginProf.getContentPane().add(passwordField);
-
-				JLabel lblWelcomeL = new JLabel("Hi professor. Take some operations..");
-				lblWelcomeL.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-				lblWelcomeL.setHorizontalAlignment(SwingConstants.CENTER);
-				lblWelcomeL.setBounds(65, 122, 540, 56);
-
-				JButton button = new JButton("LogIn");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Professor p = a.findProfessor(textField.getText());
-						frame.dispose();
-						JFrame loginProf = new JFrame();
-						loginProf.setVisible(true);
-						loginProf.setBounds(100, 100, 700, 511);
-						loginProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-						loginProf.getContentPane().setLayout(null);
-						loginProf.getContentPane().add(lblWelcomeL);
-					}
-				});
-				button.setBounds(296, 281, 89, 23);
-				loginProf.getContentPane().add(button);
-
-				JLabel lblWelcome = new JLabel(
-						"Welcome to proffesor panel. Please, enter your ID and password bellow!");
-				lblWelcome.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-				lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-				lblWelcome.setBounds(85, 122, 560, 56);
-				loginProf.getContentPane().add(lblWelcome);
-
-				JLabel lblId = new JLabel("ID");
-				lblId.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblId.setBounds(231, 195, 46, 14);
-				loginProf.getContentPane().add(lblId);
-
-				JLabel lblPw = new JLabel("PW");
-				lblPw.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblPw.setBounds(231, 233, 46, 14);
-				loginProf.getContentPane().add(lblPw);
-
-			}
-		});
-		frame.getContentPane().add(btnLogInAs);
-		frame.getContentPane().add(button);
-
 		JButton button_1 = new JButton("Log in as Admin");
 		button_1.setBackground(SystemColor.inactiveCaptionBorder);
 		button_1.setBounds(466, 274, 185, 99);
@@ -631,6 +629,18 @@ public class SIS {
 			}
 		});
 		frame.getContentPane().add(button_1);
+
+		JButton button_2 = new JButton("Log in as Professor");
+		button_2.setBackground(SystemColor.inactiveCaptionBorder);
+		button_2.setBounds(235, 274, 185, 99);
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				SIS prof = new SIS(1, pr);
+			}
+		});
+
+		frame.getContentPane().add(button_2);
 
 		JLabel lblNewLabel_2 = new JLabel("Powered by MOCHA");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
