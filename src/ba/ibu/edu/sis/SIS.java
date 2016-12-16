@@ -27,11 +27,26 @@ public class SIS {
 	private JFrame login;
 	private JFrame adminPage;
 
+	private void setLogo(JFrame frejm) {
+		JLabel lblNewLabel_logo = new JLabel("");
+		lblNewLabel_logo.setIcon(new ImageIcon("logo_sis.png"));
+		lblNewLabel_logo.setBounds(14, 5, 168, 83);
+		frejm.getContentPane().add(lblNewLabel_logo);
+	}
+
 	private void setPozadina(JFrame frejm) {
 		JLabel pozadina = new JLabel("");
 		pozadina.setBounds(0, 0, 684, 473);
 		pozadina.setIcon(new ImageIcon("burch2.jpg"));
 		frejm.getContentPane().add(pozadina);
+	}
+
+	private void setPowered(JFrame pFrame) {
+		JLabel lblNewLabel_2 = new JLabel("Powered by MOCHA");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setBounds(276, 445, 128, 21);
+		pFrame.getContentPane().add(lblNewLabel_2);
 	}
 
 	static class Admin {
@@ -213,8 +228,8 @@ public class SIS {
 		Student magarac = new Student();
 		Professor dino = new Professor();
 		dino.setName("Dino Keco");
-		dino.setId("120");
-		dino.setPassword("passe");
+		dino.setId("1");
+		dino.setPassword("1");
 		admin.Professors.add(dino);
 		magarac.setName("magarac");
 		magarac.setId("1");
@@ -259,7 +274,7 @@ public class SIS {
 
 		JLabel lblNewLabel = new JLabel("Enter password for Admin");
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("TAHOMA", Font.BOLD, 13));
+		lblNewLabel.setFont(new Font("TAHOMA", Font.BOLD, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setToolTipText("");
 		lblNewLabel.setBounds(229, 208, 226, 14);
@@ -491,6 +506,7 @@ public class SIS {
 					lblGender.setForeground(Color.WHITE);
 					lblGender.setBounds(23, 305, 106, 25);
 					adminPage.getContentPane().add(lblGender);
+					setPowered(adminPage);
 					setPozadina(adminPage);
 
 				} else {
@@ -501,6 +517,7 @@ public class SIS {
 		});
 		btnLogIn.setBounds(300, 264, 89, 23);
 		login.getContentPane().add(btnLogIn);
+		setPowered(login);
 		setPozadina(login);
 
 	}
@@ -523,7 +540,8 @@ public class SIS {
 		loginProf.getContentPane().add(passwordField);
 
 		JLabel lblWelcome = new JLabel("Welcome to proffesor panel. Please, enter your ID and password bellow!");
-		lblWelcome.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+		lblWelcome.setFont(new Font("TAHOMA", Font.BOLD, 14));
+		lblWelcome.setForeground(Color.WHITE);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcome.setBounds(85, 122, 560, 56);
 		loginProf.getContentPane().add(lblWelcome);
@@ -531,11 +549,13 @@ public class SIS {
 		JLabel lblId = new JLabel("ID");
 		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblId.setBounds(231, 195, 46, 14);
+		lblId.setForeground(Color.WHITE);
 		loginProf.getContentPane().add(lblId);
 
 		JLabel lblPw = new JLabel("PW");
 		lblPw.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPw.setBounds(231, 233, 46, 14);
+		lblPw.setForeground(Color.WHITE);
 		loginProf.getContentPane().add(lblPw);
 
 		JButton button = new JButton("LogIn");
@@ -550,14 +570,107 @@ public class SIS {
 					loginProfPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					loginProfPage.getContentPane().setLayout(null);
 
-					JLabel lblWelcomeL = new JLabel("Hi professor. Take some operations..");
-					lblWelcomeL.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-					lblWelcomeL.setHorizontalAlignment(SwingConstants.CENTER);
-					lblWelcomeL.setBounds(65, 122, 540, 56);
+					JButton btnEditMyProfile = new JButton("Edit my profile");
+					btnEditMyProfile.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+						}
+					});
+					btnEditMyProfile.setForeground(Color.WHITE);
+					btnEditMyProfile.setBounds(540, 22, 150, 23);
+					btnEditMyProfile.setFont(new Font("TAHOMA", Font.BOLD, 11));
+					btnEditMyProfile.setContentAreaFilled(false);
+					btnEditMyProfile.setBorder(null);
 
-					loginProfPage.getContentPane().add(lblWelcomeL);
+					loginProfPage.add(btnEditMyProfile);
+
+					JButton btnLogout = new JButton("Logout");
+					btnLogout.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+						}
+					});
+					btnLogout.setForeground(Color.WHITE);
+					btnLogout.setContentAreaFilled(false);
+					btnLogout.setBounds(470, 22, 110, 23);
+					btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
+					btnLogout.setBorder(null);
+					loginProfPage.add(btnLogout);
+
+					JTextField txtCourseSection = new JTextField();
+					txtCourseSection.setFont(new Font("Tahoma", Font.BOLD, 13));
+					txtCourseSection.setForeground(Color.WHITE);
+					txtCourseSection.setText("Course section");
+					txtCourseSection.setBounds(10, 120, 674, 20);
+					txtCourseSection.setOpaque(false);
+					txtCourseSection.setBorder(null);
+					loginProfPage.add(txtCourseSection);
+					txtCourseSection.setColumns(10);
+
+					JTextField txtSearchCourse = new JTextField();
+					txtSearchCourse.setFont(new Font("Tahoma", Font.BOLD, 13));
+					txtSearchCourse.setForeground(Color.WHITE);
+					txtSearchCourse.setText("Search course");
+					txtSearchCourse.setBounds(36, 157, 100, 40);
+					txtSearchCourse.setOpaque(false);
+					txtSearchCourse.setBorder(null);
+					loginProfPage.add(txtSearchCourse);
+					txtSearchCourse.setColumns(10);
+
+					JTextField textField = new JTextField();
+					textField.setBounds(155, 157, 442, 40);
+					loginProfPage.add(textField);
+					textField.setColumns(10);
+
+					JButton btnGo = new JButton("GO");
+					btnGo.setBounds(605, 157, 52, 40);
+					loginProfPage.add(btnGo);
+
+					JButton btnAddNewCourse = new JButton("Add new course");
+					btnAddNewCourse.setBounds(36, 228, 139, 39);
+					loginProfPage.add(btnAddNewCourse);
+
+					JButton btnEditCourse = new JButton("Edit course");
+					btnEditCourse.setBounds(277, 228, 139, 39);
+					loginProfPage.add(btnEditCourse);
+
+					JButton btnDeleteCourse = new JButton("Delete course");
+					btnDeleteCourse.setBounds(518, 228, 139, 39);
+					loginProfPage.add(btnDeleteCourse);
+
+					JTextField txtStudentSection = new JTextField();
+					txtStudentSection.setText("Student section");
+					txtStudentSection.setOpaque(false);
+					txtStudentSection.setForeground(Color.WHITE);
+					txtStudentSection.setFont(new Font("Tahoma", Font.BOLD, 13));
+					txtStudentSection.setColumns(10);
+					txtStudentSection.setBorder(null);
+					txtStudentSection.setBounds(10, 303, 674, 20);
+					loginProfPage.add(txtStudentSection);
+
+					JTextField txtSearchStudent = new JTextField();
+					txtSearchStudent.setFont(new Font("Tahoma", Font.BOLD, 13));
+					txtSearchStudent.setForeground(Color.WHITE);
+					txtSearchStudent.setText("Search student");
+					txtSearchStudent.setBounds(36, 340, 100, 40);
+					txtSearchStudent.setOpaque(false);
+					txtSearchStudent.setBorder(null);
+					loginProfPage.add(txtSearchStudent);
+					txtSearchStudent.setColumns(10);
+
+					JTextField textField_2 = new JTextField();
+					textField_2.setBounds(155, 340, 442, 40);
+					loginProfPage.add(textField_2);
+					textField_2.setColumns(10);
+
+					JButton btnGo_2 = new JButton("GO");
+					btnGo_2.setBounds(605, 340, 52, 40);
+					loginProfPage.add(btnGo_2);
+
+					setLogo(loginProfPage);
+
+					setPowered(loginProfPage);
+					setPozadina(loginProfPage);
 				} else {
-					JOptionPane.showMessageDialog(null, "You are enter wrong password or ID. Please try again.");
+					JOptionPane.showMessageDialog(null, "Wrong password or ID. Please try again.");
 				}
 				passwordField.setText("");
 				textField.setText("");
@@ -565,7 +678,8 @@ public class SIS {
 		});
 		button.setBounds(296, 281, 89, 23);
 		loginProf.getContentPane().add(button);
-
+		setPowered(loginProf);
+		setPozadina(loginProf);
 	}
 
 	private void initialize(Admin a, Professor pr) {
@@ -657,16 +771,11 @@ public class SIS {
 
 		frame.getContentPane().add(button_2);
 
-		JLabel lblNewLabel_2 = new JLabel("Powered by MOCHA");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(276, 440, 128, 21);
-		frame.getContentPane().add(lblNewLabel_2);
-
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("logo_sis.png"));
 		lblNewLabel_1.setBounds(274, 11, 268, 173);
 		frame.getContentPane().add(lblNewLabel_1);
+		setPowered(frame);
 		setPozadina(frame);
 
 	}
