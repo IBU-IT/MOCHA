@@ -106,11 +106,20 @@ public class SIS {
 			this.phone = phone;
 		}
 
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
 		private String Id;
 		private String name;
 		private String surname;
 		private String email;
 		private String phone;
+		private String password;
 	}
 
 	static class Student {
@@ -205,6 +214,7 @@ public class SIS {
 		Professor dino = new Professor();
 		dino.setName("Dino Keco");
 		dino.setId("120");
+		dino.setPassword("passe");
 		admin.Professors.add(dino);
 		magarac.setName("magarac");
 		magarac.setId("1");
@@ -532,20 +542,25 @@ public class SIS {
 		button.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				Professor p = a.findProfessor(textField.getText());
-				loginProf.dispose();
-				JFrame loginProfPage = new JFrame();
-				loginProfPage.setVisible(true);
-				loginProfPage.setBounds(100, 100, 700, 511);
-				loginProfPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				loginProfPage.getContentPane().setLayout(null);
+				if (passwordField.getText().equals(pr.getPassword()) && textField.getText().equals(pr.getId())) {
+					loginProf.dispose();
+					JFrame loginProfPage = new JFrame();
+					loginProfPage.setVisible(true);
+					loginProfPage.setBounds(100, 100, 700, 511);
+					loginProfPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					loginProfPage.getContentPane().setLayout(null);
 
-				JLabel lblWelcomeL = new JLabel("Hi professor. Take some operations..");
-				lblWelcomeL.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-				lblWelcomeL.setHorizontalAlignment(SwingConstants.CENTER);
-				lblWelcomeL.setBounds(65, 122, 540, 56);
+					JLabel lblWelcomeL = new JLabel("Hi professor. Take some operations..");
+					lblWelcomeL.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+					lblWelcomeL.setHorizontalAlignment(SwingConstants.CENTER);
+					lblWelcomeL.setBounds(65, 122, 540, 56);
 
-				loginProfPage.getContentPane().add(lblWelcomeL);
+					loginProfPage.getContentPane().add(lblWelcomeL);
+				} else {
+					JOptionPane.showMessageDialog(null, "You are enter wrong password or ID. Please try again.");
+				}
+				passwordField.setText("");
+				textField.setText("");
 			}
 		});
 		button.setBounds(296, 281, 89, 23);
