@@ -679,17 +679,22 @@ public class SIS implements Serializable {
 					JButton btnAddNewCourse = new JButton("Add new course");
 					btnAddNewCourse.setBounds(36, 228, 139, 39);
 					loginProfPage.add(btnAddNewCourse);
-					/*{						System.out.print("Enter Course id\t\t:");
+					/*{	try{				Course c=new Course();
+			    							BufferedReader read= new BufferedReader(new InputStreamReader(System.in));
+			    							Scanner s=new Scanner(System.in);
+											System.out.print("Enter Course id\t\t:");
 											c.CourseID=read.readLine();
 											System.out.print("Enter Course name\t:");
 											c.CourseName=read.readLine();
-											System.out.print("Enter Mentor name\t:");
-											c.MentorName=read.readLine();
 											System.out.print("Enter number of credits\t:");
-											c.ncredits=s.nextInt();
+											c.numOfCredits=s.nextInt();
 											System.out.print("Enter number of Students:");
-											c.noofstudents=s.nextInt();
-											c.add(c);
+											c.numOfStudents=s.nextInt();
+											c.add(c);}
+					catch(Exception p){
+						System.out.println(p);
+
+					}
 					  }*/
 
 					JButton btnDisplayCourse = new JButton("Display Courses");
@@ -704,14 +709,19 @@ public class SIS implements Serializable {
 					JButton btnUpdateCourse = new JButton("Update course students");
 					btnUpdateCourse.setBounds(518, 228, 139, 39);
 					loginProfPage.add(btnUpdateCourse);
-					/*{						int nos;
+					{	try{					BufferedReader read= new BufferedReader(new InputStreamReader(System.in));
+											Scanner s=new Scanner(System.in);
+											int nos;
 											System.out.print("Enter course ID you want to update\t:");
-											up=read.readLine();
+											String up=read.readLine();
 											System.out.print("Enter how many number of student\t:");
 											nos=s.nextInt();
-											c.update(up,nos);
-					 * }*/
-
+											/*c.update(up,nos);*/}
+					  
+					catch(Exception k){
+						System.out.println(k);
+					}
+					}
 					JTextField txtStudentSection = new JTextField();
 					txtStudentSection.setText("Student section");
 					txtStudentSection.setOpaque(false);

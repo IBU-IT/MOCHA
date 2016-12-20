@@ -66,7 +66,7 @@ public class Course implements Serializable {
 				FileInputStream fstream=new FileInputStream("information.txt");
 				DataInputStream in=new DataInputStream(fstream);
 				while(in.available()!=0)
-				/*{
+				{
 					str=in.readLine();
 					StringTokenizer st = new StringTokenizer(str,",");
 					CourseID = st.nextToken();
@@ -78,7 +78,7 @@ public class Course implements Serializable {
 					numOfStudents = Integer.parseInt(st.nextToken());
 					System.out.println("No of Students\t:"+numOfStudents);
 					System.out.println("---------------------------------------------------------");
-				}*/
+				}
 				in.close();
 			}
 			catch(Exception e)
