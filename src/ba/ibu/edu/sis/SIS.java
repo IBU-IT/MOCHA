@@ -20,8 +20,13 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.Scanner;
+import java.io.Serializable;
+import java.io.*;
 
-public class SIS {
+public class SIS implements Serializable {
 
 	private JFrame frame;
 	private JFrame login;
@@ -222,8 +227,15 @@ public class SIS {
 		}
 	}
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args)  {
+		
+    	BufferedReader read= new BufferedReader(new InputStreamReader(System.in));
+		String strDirectoy ="course";
+		boolean success = (new File(strDirectoy)).mkdir();
+		if(success) 
+		{
+			System.out.println("Directory: " + strDirectoy + " created");
+		}   
 		Admin admin = new Admin();
 		Student magarac = new Student();
 		Professor dino = new Professor();
@@ -257,6 +269,14 @@ public class SIS {
 
 	public SIS(int i, Professor pr) {
 		init(pr);
+	}
+	
+	interface Faculty
+	{
+		String name=" ";
+		String Id=" ";
+		void display_details();
+		void conduct_session();
 	}
 
 	private void init(Admin a) {
@@ -377,7 +397,39 @@ public class SIS {
 					JButton btnNewButton = new JButton("Add Student");
 					btnNewButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							Student kreten = new Student();
+							ObjectOutputStream outputStream = null;
+							try{
+							FileOutputStream buf=new FileOutputStream("students.txt",true);
+							PrintStream q = new PrintStream(buf);
+							q.print(textField.getText());
+							q.print(",");
+							q.print(textField_1.getText());
+							q.print(",");
+							q.print(textField_2.getText());
+							q.print(",");
+							q.print(textField_3.getText());
+							q.print(",");
+							q.print(textField_4.getText());
+							q.print(",");
+							q.print(textField_7.getText());
+							q.print(",");
+							q.print(textField_5.getText());
+							q.print(",");
+							
+							
+							
+							if (rdbtnMale.isSelected()) {
+								q.print("Male");
+								q.print(",");
+							} else {
+								q.print("Female");
+								q.print(",");
+							}}
+							catch(Exception a)
+							{
+								System.out.println(a);
+							}
+							Student kreten = new Student();							
 							kreten.setName(textField.getText());
 							kreten.setSurname(textField_1.getText());
 							kreten.setId(textField_2.getText());
@@ -387,6 +439,7 @@ public class SIS {
 							kreten.setEmail(textField_5.getText());
 							if (rdbtnMale.isSelected()) {
 								kreten.setGender("Male");
+								
 							} else {
 								kreten.setGender("Female");
 							}
@@ -401,7 +454,7 @@ public class SIS {
 							rdbtnMale.setSelected(false);
 							rdbtnFemale.setSelected(false);
 							JOptionPane.showMessageDialog(null, "Student successfully added!");
-						}
+							}
 					});
 					btnNewButton.setBounds(319, 330, 140, 40);
 					adminPage.getContentPane().add(btnNewButton);
@@ -523,7 +576,6 @@ public class SIS {
 	}
 
 	private void init(Professor pr) {
-		Admin a = new Admin();
 		JFrame loginProf = new JFrame();
 		loginProf.setVisible(true);
 		loginProf.setBounds(100, 100, 700, 511);
@@ -539,7 +591,7 @@ public class SIS {
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		loginProf.getContentPane().add(passwordField);
 
-		JLabel lblWelcome = new JLabel("Welcome to proffesor panel. Please, enter your ID and password bellow!");
+		JLabel lblWelcome = new JLabel("Welcome to proffesor panel. Please, enter your ID and password below!");
 		lblWelcome.setFont(new Font("TAHOMA", Font.BOLD, 14));
 		lblWelcome.setForeground(Color.WHITE);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
@@ -627,14 +679,38 @@ public class SIS {
 					JButton btnAddNewCourse = new JButton("Add new course");
 					btnAddNewCourse.setBounds(36, 228, 139, 39);
 					loginProfPage.add(btnAddNewCourse);
+					/*{						System.out.print("Enter Course id\t\t:");
+											c.CourseID=read.readLine();
+											System.out.print("Enter Course name\t:");
+											c.CourseName=read.readLine();
+											System.out.print("Enter Mentor name\t:");
+											c.MentorName=read.readLine();
+											System.out.print("Enter number of credits\t:");
+											c.ncredits=s.nextInt();
+											System.out.print("Enter number of Students:");
+											c.noofstudents=s.nextInt();
+											c.add(c);
+					  }*/
 
-					JButton btnEditCourse = new JButton("Edit course");
-					btnEditCourse.setBounds(277, 228, 139, 39);
-					loginProfPage.add(btnEditCourse);
+					JButton btnDisplayCourse = new JButton("Display Courses");
+					btnDisplayCourse.setBounds(277, 228, 139, 39);
+					loginProfPage.add(btnDisplayCourse);
+					/*{	
+					 * 											c.displaycourseinf();
 
-					JButton btnDeleteCourse = new JButton("Delete course");
-					btnDeleteCourse.setBounds(518, 228, 139, 39);
-					loginProfPage.add(btnDeleteCourse);
+					 * }
+					 */
+
+					JButton btnUpdateCourse = new JButton("Update course students");
+					btnUpdateCourse.setBounds(518, 228, 139, 39);
+					loginProfPage.add(btnUpdateCourse);
+					/*{						int nos;
+											System.out.print("Enter course ID you want to update\t:");
+											up=read.readLine();
+											System.out.print("Enter how many number of student\t:");
+											nos=s.nextInt();
+											c.update(up,nos);
+					 * }*/
 
 					JTextField txtStudentSection = new JTextField();
 					txtStudentSection.setText("Student section");
