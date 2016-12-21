@@ -146,6 +146,7 @@ public class SIS implements Serializable {
 		private String id;
 		private String email;
 		private String nationality;
+		private char password[];
 
 		public String getEmail() {
 			return email;
@@ -225,6 +226,30 @@ public class SIS implements Serializable {
 		public void setGrades(int[] grades) {
 			this.grades = grades;
 		}
+		
+		public char[] getPassword(){
+			return password;
+		}
+		public void setPassword(char password[]){
+			this.password=new char[password.length];
+			for(int i=0;i<this.password.length;i++){
+				this.password[i]=password[i];
+			}
+		}
+		public boolean checkPassword(char password[]){
+			if(this.password.length!=password.length){
+				return false;
+			}
+			else{
+				for(int i=0;i<password.length;i++){
+					if(this.password[i]!=password[i]){
+						return false;
+					}
+				}
+				return true;
+			}
+	
+		}
 	}
 
 	public static void main(String[] args)  {
@@ -245,11 +270,14 @@ public class SIS implements Serializable {
 		admin.Professors.add(dino);
 		magarac.setName("magarac");
 		magarac.setId("1");
+		char mPassword[]= new char[1];
+		mPassword[0]='1';
+		magarac.setPassword(mPassword);
 		admin.Students.add(magarac);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SIS window = new SIS(admin, dino);
+					SIS window = new SIS(admin, dino, magarac);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -259,8 +287,8 @@ public class SIS implements Serializable {
 
 	}
 
-	public SIS(Admin a, Professor pr) {
-		initialize(a, pr);
+	public SIS(Admin a, Professor pr, Student s) {
+		initialize(a, pr, s);
 	}
 
 	public SIS(int i, Admin a) {
@@ -269,6 +297,10 @@ public class SIS implements Serializable {
 
 	public SIS(int i, Professor pr) {
 		init(pr);
+	}
+	
+	public SIS(int i, Student s, Admin a){
+		init(s,a);
 	}
 	
 	interface Faculty
@@ -768,7 +800,73 @@ public class SIS implements Serializable {
 		setPozadina(loginProf);
 	}
 
-	private void initialize(Admin a, Professor pr) {
+	private void init(Student s, Admin a){
+		
+		JFrame loginStudent = new JFrame();
+		loginStudent.setVisible(true);
+		loginStudent.setBounds(100, 100, 700, 511);
+		loginStudent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginStudent.getContentPane().setLayout(null);
+
+		JLabel label = new JLabel("Welcome!");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+		label.setForeground(Color.white);
+		label.setBounds(271, 137, 140, 56);
+		loginStudent.getContentPane().add(label);
+
+		JTextField textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(286, 204, 110, 27);
+		loginStudent.getContentPane().add(textField);
+
+		JPasswordField passwordField = new JPasswordField(16);
+		passwordField.setBounds(286, 242, 110, 27);
+		loginStudent.getContentPane().add(passwordField);
+
+		JLabel label_1 = new JLabel("ID");
+		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_1.setBounds(230, 210, 46, 14);
+		label_1.setForeground(Color.white);
+		loginStudent.getContentPane().add(label_1);
+
+		JLabel label_2 = new JLabel("PW");
+		label_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_2.setBounds(230, 248, 46, 14);
+		label_2.setForeground(Color.white);
+		loginStudent.getContentPane().add(label_2);
+
+		JButton button = new JButton("Log In");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Student xStudent=a.findStudent(textField.getText());
+				
+				if(xStudent==null){
+					JOptionPane.showMessageDialog(null, "Wrong ID");
+				}
+				else if(xStudent.checkPassword(passwordField.getPassword())){
+					JFrame stdLogIn= new JFrame("Welcome " + xStudent.name);
+					stdLogIn.setVisible(true);
+					stdLogIn.setBounds(100, 100, 700, 511);
+					stdLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					stdLogIn.getContentPane().setLayout(null);
+					setPowered(stdLogIn);
+					setPozadina(stdLogIn);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Wrong password " + xStudent.name);
+				}
+					
+			}
+		});
+		button.setBackground(SystemColor.inactiveCaptionBorder);
+		button.setBounds(250, 280, 150, 25);
+		loginStudent.getContentPane().add(button);
+		setPozadina(loginStudent);
+		setPowered(loginStudent);
+	}
+	private void initialize(Admin a, Professor pr, Student s) {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 511);
@@ -786,54 +884,16 @@ public class SIS implements Serializable {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				JFrame loginStudent = new JFrame();
-				loginStudent.setVisible(true);
-				loginStudent.setBounds(100, 100, 700, 511);
-				loginStudent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				loginStudent.getContentPane().setLayout(null);
-
-				JLabel label = new JLabel("Welcome!");
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				label.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-				label.setBounds(271, 137, 140, 56);
-				loginStudent.getContentPane().add(label);
-
-				JTextField textField = new JTextField();
-				textField.setColumns(10);
-				textField.setBounds(286, 204, 110, 27);
-				loginStudent.getContentPane().add(textField);
-
-				JPasswordField passwordField = new JPasswordField();
-				passwordField.setBounds(286, 242, 110, 27);
-				loginStudent.getContentPane().add(passwordField);
-
-				JLabel label_1 = new JLabel("ID");
-				label_1.setHorizontalAlignment(SwingConstants.RIGHT);
-				label_1.setBounds(230, 210, 46, 14);
-				loginStudent.getContentPane().add(label_1);
-
-				JLabel label_2 = new JLabel("PW");
-				label_2.setHorizontalAlignment(SwingConstants.RIGHT);
-				label_2.setBounds(230, 248, 46, 14);
-				loginStudent.getContentPane().add(label_2);
-
-				JButton button = new JButton("Log In");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Student s = a.findStudent(textField.getText());
-						JOptionPane.showMessageDialog(null, s.getName());
-					}
-				});
-				button.setBounds(296, 281, 89, 23);
-				loginStudent.getContentPane().add(button);
-
-				// studentlogin2 m= new studentlogin2(a);
+				SIS studentWindow= new SIS(1,s,a);
 
 			}
 		});
+		frame.getContentPane().add(button);
+
+		
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(lblWelcomeToStudent);
-
+	
 		JButton button_1 = new JButton("Log in as Admin");
 		button_1.setBackground(SystemColor.inactiveCaptionBorder);
 		button_1.setBounds(466, 274, 185, 99);
