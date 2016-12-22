@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+
 import java.awt.Font;
 import javax.swing.JButton;
 
@@ -20,14 +22,14 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.SystemColor;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.util.Scanner;
-import java.io.Serializable;
 import java.io.*;
 
 public class SIS implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JFrame login;
 	private JFrame adminPage;
@@ -110,6 +112,28 @@ public class SIS implements Serializable {
 			}
 			return null;
 		}
+		
+		public void restore() {
+			try {
+				ObjectInputStream in = new ObjectInputStream(new FileInputStream("students_ob.txt"));
+				Students = (List<Student>) in.readObject();
+				in.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		public void save() {
+			try {
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("students_ob.txt"));
+				out.writeObject(Students);
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 	static class Professor {
@@ -182,7 +206,7 @@ public class SIS implements Serializable {
 		private String password;
 	}
 
-	static class Student {
+	static class Student implements Serializable {
 		private String id;
 		private String email;
 		private String nationality;
@@ -302,47 +326,37 @@ public class SIS implements Serializable {
 			System.out.println("Directory: " + strDirectoy + " created");
 		}
 		Admin admin = new Admin();
-		Student magarac = new Student();
 		Professor dino = new Professor();
 		Course c = new Course();
-
+		admin.restore();
 		dino.setName("Dino Keco");
 		dino.setId("1");
 		dino.setPassword("1");
 		admin.Professors.add(dino);
-		magarac.setName("magarac");
-		magarac.setId("1");
-		char mPassword[] = new char[1];
-		mPassword[0] = '1';
-		magarac.setPassword(mPassword);
-		admin.Students.add(magarac);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SIS window = new SIS(admin, dino, magarac);
+					SIS window = new SIS(admin, dino);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-
 	}
 
-	public SIS(Admin a, Professor pr, Student s) {
-		initialize(a, pr, s);
+	public SIS(Admin a, Professor pr) {
+		initialize(a, pr);
 	}
 
-	public SIS(int i, Admin a) {
-		init(a);
-	}
+
 
 	public SIS(int i, Professor pr) {
 		init(pr);
 	}
 
-	public SIS(int i, Student s, Admin a) {
-		init(s, a);
+	public SIS(int i, Admin a) {
+		init( a);
 	}
 
 	interface Faculty {
@@ -503,6 +517,10 @@ public class SIS implements Serializable {
 							} catch (Exception a) {
 								System.out.println(a);
 							}
+							if(a.findStudent(textField_2.getText())!=null){
+								JOptionPane.showMessageDialog(null, "This ID is already taken. Please enter another ID.");
+							}
+							else{
 							Student kreten = new Student();
 							kreten.setName(textField.getText());
 							kreten.setSurname(textField_1.getText());
@@ -528,6 +546,8 @@ public class SIS implements Serializable {
 							rdbtnMale.setSelected(false);
 							rdbtnFemale.setSelected(false);
 							JOptionPane.showMessageDialog(null, "Student successfully added!");
+							a.save();
+							}
 						}
 					});
 					btnNewButton.setBounds(319, 330, 140, 40);
@@ -553,6 +573,7 @@ public class SIS implements Serializable {
 							rdbtnMale.setSelected(false);
 							rdbtnFemale.setSelected(false);
 							JOptionPane.showMessageDialog(null, "Student deleted.");
+							a.save();
 						}
 					});
 					btnDeleteStudent.setBounds(486, 330, 140, 40);
@@ -646,7 +667,7 @@ public class SIS implements Serializable {
 		login.getContentPane().add(btnLogIn);
 		setPowered(login);
 		setPozadina(login);
-
+		a.save();
 	}
 
 	private void init(Professor pr) {
@@ -927,7 +948,7 @@ public class SIS implements Serializable {
 		setPowered(loginStudent);
 	}
 
-	private void initialize(Admin a, Professor pr, Student s) {
+	private void initialize(Admin a, Professor pr) {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 511);
@@ -945,7 +966,7 @@ public class SIS implements Serializable {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				SIS studentWindow = new SIS(1, s, a);
+				SIS studentWindow = new SIS(1, a);
 
 			}
 		});
