@@ -32,6 +32,13 @@ public class SIS implements Serializable {
 	private JFrame login;
 	private JFrame adminPage;
 
+	private void setLogo2(JFrame logo2Frame) {
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("logo_sis.png"));
+		lblNewLabel_1.setBounds(274, 11, 268, 173);
+		logo2Frame.getContentPane().add(lblNewLabel_1);
+	}
+
 	private void setLogo(JFrame frejm) {
 		JLabel lblNewLabel_logo = new JLabel("");
 		lblNewLabel_logo.setIcon(new ImageIcon("logo_sis.png"));
@@ -74,18 +81,6 @@ public class SIS implements Serializable {
 
 	}
 
-	Course c = new Course();
-
-	Course findCourse(String id) {
-
-		for (Course course : c.a) {
-			if (course.getCourseID().equals(id)) {
-				return c;
-			}
-		}
-		return null;
-	}
-
 	static class Admin {
 		public List<Student> Students = new ArrayList<Student>();
 		private List<Professor> Professors = new ArrayList<Professor>();
@@ -118,6 +113,19 @@ public class SIS implements Serializable {
 	}
 
 	static class Professor {
+
+		Course c = new Course();
+
+		Course findCourse(String id) {
+
+			for (Course course : c.a) {
+				if (course.getCourseID().equals(id)) {
+					return course;
+				}
+			}
+			return null;
+		}
+
 		public String getId() {
 			return Id;
 		}
@@ -355,18 +363,18 @@ public class SIS implements Serializable {
 		login.getContentPane().setLayout(null);
 
 		JPasswordField pwdEnterYourPassword = new JPasswordField();
-		pwdEnterYourPassword.setBounds(264, 233, 155, 20);
+		pwdEnterYourPassword.setBounds(240, 260, 200, 35);
 		pwdEnterYourPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		login.getContentPane().add(pwdEnterYourPassword);
 
-		JLabel lblNewLabel = new JLabel("Enter password for Admin");
+		JLabel lblNewLabel = new JLabel("Welcome to admin panel. Please enter your password bellow");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("TAHOMA", Font.BOLD, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setToolTipText("");
-		lblNewLabel.setBounds(229, 208, 226, 14);
+		lblNewLabel.setBounds(65, 190, 560, 56);
 		login.getContentPane().add(lblNewLabel);
-
+		setLogo2(login);
 		homeButton(login);
 
 		JButton btnLogIn = new JButton("Log In");
@@ -634,7 +642,7 @@ public class SIS implements Serializable {
 				pwdEnterYourPassword.setText("");
 			}
 		});
-		btnLogIn.setBounds(300, 264, 89, 23);
+		btnLogIn.setBounds(290, 320, 100, 35);
 		login.getContentPane().add(btnLogIn);
 		setPowered(login);
 		setPozadina(login);
@@ -645,7 +653,7 @@ public class SIS implements Serializable {
 		SIS sis = new SIS();
 		Admin a = new Admin();
 		Student s = new Student();
-
+		Course c = new Course();
 		JFrame loginProf = new JFrame();
 		loginProf.setVisible(true);
 		loginProf.setBounds(100, 100, 700, 511);
@@ -653,37 +661,38 @@ public class SIS implements Serializable {
 
 		loginProf.getContentPane().setLayout(null);
 		JTextField textField = new JTextField();
-		textField.setBounds(287, 189, 110, 27);
+		textField.setBounds(240, 220, 200, 35);
 		loginProf.getContentPane().add(textField);
 		textField.setColumns(10);
 
 		JPasswordField passwordField = new JPasswordField();
-		passwordField.setBounds(287, 227, 110, 27);
-		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField.setBounds(240, 300, 200, 35);
+		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		loginProf.getContentPane().add(passwordField);
 
-		JLabel lblWelcome = new JLabel("Welcome to proffesor panel. Please, enter your ID and password below!");
+		JLabel lblWelcome = new JLabel("Welcome to professor panel. Please, enter your ID and password below");
 		lblWelcome.setFont(new Font("TAHOMA", Font.BOLD, 14));
 		lblWelcome.setForeground(Color.WHITE);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcome.setBounds(85, 122, 560, 56);
+		lblWelcome.setBounds(65, 142, 560, 56);
 		loginProf.getContentPane().add(lblWelcome);
-
+		setLogo2(loginProf);
 		homeButton(loginProf);
 
-		JLabel lblId = new JLabel("ID");
-		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblId.setBounds(231, 195, 46, 14);
+		JLabel lblId = new JLabel("ID number");
+		lblId.setHorizontalAlignment(SwingConstants.CENTER);
+		lblId.setBounds(220, 195, 100, 25);
 		lblId.setForeground(Color.WHITE);
 		loginProf.getContentPane().add(lblId);
 
-		JLabel lblPw = new JLabel("PW");
-		lblPw.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPw.setBounds(231, 233, 46, 14);
+		JLabel lblPw = new JLabel("Password");
+		lblPw.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPw.setBounds(220, 275, 100, 25);
 		lblPw.setForeground(Color.WHITE);
 		loginProf.getContentPane().add(lblPw);
 
-		JButton button = new JButton("LogIn");
+		JButton button = new JButton("Log In");
+
 		button.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -711,6 +720,7 @@ public class SIS implements Serializable {
 					JButton btnLogout = new JButton("Logout");
 					btnLogout.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
+							loginProfPage.dispose();
 							sis.init(pr);
 						}
 					});
@@ -751,10 +761,11 @@ public class SIS implements Serializable {
 
 					btnGo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
-							Course wanted = c.findCourse(txtSearchCourse.getText());
-							if (c.findCourse(txtSearchCourse.getText()) == null) {
+							Course wanted = pr.findCourse(txtSearchCourse.getText());
+							if (pr.findCourse(textField.getText()) == null) {
 								JOptionPane.showMessageDialog(null, "Course not found.");
-								txtSearchCourse.setText(null);
+								JOptionPane.showMessageDialog(null, textField.getText());
+								textField.setText(null);
 							} else {
 								JOptionPane.showMessageDialog(null, "OKE");
 							}
@@ -764,7 +775,7 @@ public class SIS implements Serializable {
 					loginProfPage.add(btnGo);
 
 					JButton btnAddNewCourse = new JButton("Add new course");
-					btnAddNewCourse.setBounds(36, 228, 139, 39);
+					btnAddNewCourse.setBounds(36, 228, 139, 34);
 					btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
 
 					btnAddNewCourse.addActionListener(new ActionListener() {
@@ -845,7 +856,7 @@ public class SIS implements Serializable {
 				textField.setText("");
 			}
 		});
-		button.setBounds(296, 281, 89, 23);
+		button.setBounds(290, 350, 100, 35);
 		loginProf.getContentPane().add(button);
 		setPowered(loginProf);
 		setPozadina(loginProf);
@@ -858,33 +869,33 @@ public class SIS implements Serializable {
 		loginStudent.setBounds(100, 100, 700, 511);
 		loginStudent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginStudent.getContentPane().setLayout(null);
-
+		setLogo2(loginStudent);
 		homeButton(loginStudent);
-		JLabel label = new JLabel("Welcome!");
+		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+		label.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label.setForeground(Color.white);
-		label.setBounds(271, 137, 140, 56);
+		label.setBounds(65, 142, 560, 56);
 		loginStudent.getContentPane().add(label);
 
 		JTextField textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(286, 204, 110, 27);
+		textField.setBounds(240, 220, 200, 35);
 		loginStudent.getContentPane().add(textField);
 
 		JPasswordField passwordField = new JPasswordField(16);
-		passwordField.setBounds(286, 242, 110, 27);
+		passwordField.setBounds(240, 300, 200, 35);
 		loginStudent.getContentPane().add(passwordField);
 
-		JLabel label_1 = new JLabel("ID");
+		JLabel label_1 = new JLabel("ID number");
 		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_1.setBounds(230, 210, 46, 14);
+		label_1.setBounds(200, 195, 100, 25);
 		label_1.setForeground(Color.white);
 		loginStudent.getContentPane().add(label_1);
 
-		JLabel label_2 = new JLabel("PW");
+		JLabel label_2 = new JLabel("Password");
 		label_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_2.setBounds(230, 248, 46, 14);
+		label_2.setBounds(200, 275, 100, 25);
 		label_2.setForeground(Color.white);
 		loginStudent.getContentPane().add(label_2);
 
@@ -910,7 +921,7 @@ public class SIS implements Serializable {
 			}
 		});
 		button.setBackground(SystemColor.inactiveCaptionBorder);
-		button.setBounds(250, 280, 150, 25);
+		button.setBounds(290, 350, 100, 35);
 		loginStudent.getContentPane().add(button);
 		setPozadina(loginStudent);
 		setPowered(loginStudent);
@@ -922,8 +933,8 @@ public class SIS implements Serializable {
 		frame.setBounds(100, 100, 700, 511);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel lblWelcomeToStudent = new JLabel("\r\n\r\n\r\nWelcome to Student Information System!");
-		lblWelcomeToStudent.setBounds(32, 184, 630, 31);
+		JLabel lblWelcomeToStudent = new JLabel("Welcome to Student Information System!");
+		lblWelcomeToStudent.setBounds(65, 142, 560, 56);
 		lblWelcomeToStudent.setForeground(new Color(255, 255, 255));
 		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblWelcomeToStudent.setHorizontalAlignment(SwingConstants.CENTER);
@@ -956,7 +967,7 @@ public class SIS implements Serializable {
 
 		JButton button_2 = new JButton("Log in as Professor");
 		button_2.setBackground(SystemColor.inactiveCaptionBorder);
-		button_2.setBounds(235, 274, 185, 99);
+		button_2.setBounds(248, 274, 185, 99);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -966,10 +977,7 @@ public class SIS implements Serializable {
 
 		frame.getContentPane().add(button_2);
 
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("logo_sis.png"));
-		lblNewLabel_1.setBounds(274, 11, 268, 173);
-		frame.getContentPane().add(lblNewLabel_1);
+		setLogo2(frame);
 		setPowered(frame);
 		setPozadina(frame);
 

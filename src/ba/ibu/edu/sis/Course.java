@@ -279,16 +279,6 @@ public class Course implements Serializable {
 		setPozadina(displayCourse);
 	}
 
-	Course findCourse(String id) {
-
-		for (Course c : a) {
-			if (c.getCourseID().equals(id)) {
-				return c;
-			}
-		}
-		return null;
-	}
-
 	void searchCo() {
 
 	}
