@@ -3,6 +3,7 @@ package ba.ibu.edu.sis;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -21,13 +22,14 @@ import javax.swing.border.EmptyBorder;
 
 import ba.ibu.edu.sis.StudentInformationSystem;
 import ba.ibu.edu.sis.SIS.Admin;
+import ba.ibu.edu.sis.SIS.Professor;
 import ba.ibu.edu.sis.SIS.Student;
 
 public class Course implements Serializable {
 
 	String CourseID, CourseName, ProfessorName;
 	int numOfCredits, numOfStudents;
-	ArrayList<Course> a = new ArrayList();
+	public ArrayList<Course> a = new ArrayList();
 
 	/**
 	 * @wbp.parser.entryPoint
@@ -261,9 +263,9 @@ public class Course implements Serializable {
 			String line;
 			while ((line = br.readLine()) != null) {
 				JLabel addLe = new JLabel(line);
-				addLe.setFont(new Font("TAHOMA", Font.PLAIN, 13));
+				addLe.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 				addLe.setForeground(Color.WHITE);
-				addLe.setBounds(350, 280, 146, 35);
+				addLe.setBounds(23, 50, 500, 35);
 				displayCourse.getContentPane().add(addLe);
 
 			}

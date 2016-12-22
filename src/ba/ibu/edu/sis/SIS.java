@@ -54,6 +54,38 @@ public class SIS implements Serializable {
 		pFrame.getContentPane().add(lblNewLabel_2);
 	}
 
+	private void homeButton(JFrame hFrame) {
+		JButton btnHome = new JButton("HOME");
+		btnHome.setForeground(Color.WHITE);
+		btnHome.setBounds(500, 382, 250, 35);
+		btnHome.setFont(new Font("TAHOMA", Font.BOLD, 13));
+		btnHome.setContentAreaFilled(false);
+		btnHome.setBorder(null);
+		hFrame.add(btnHome);
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				hFrame.dispose();
+				main(null);
+			}
+		});
+	}
+
+	SIS() {
+
+	}
+
+	Course c = new Course();
+
+	Course findCourse(String id) {
+
+		for (Course course : c.a) {
+			if (course.getCourseID().equals(id)) {
+				return c;
+			}
+		}
+		return null;
+	}
+
 	static class Admin {
 		public List<Student> Students = new ArrayList<Student>();
 		private List<Professor> Professors = new ArrayList<Professor>();
@@ -335,6 +367,8 @@ public class SIS implements Serializable {
 		lblNewLabel.setBounds(229, 208, 226, 14);
 		login.getContentPane().add(lblNewLabel);
 
+		homeButton(login);
+
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
@@ -608,6 +642,10 @@ public class SIS implements Serializable {
 	}
 
 	private void init(Professor pr) {
+		SIS sis = new SIS();
+		Admin a = new Admin();
+		Student s = new Student();
+
 		JFrame loginProf = new JFrame();
 		loginProf.setVisible(true);
 		loginProf.setBounds(100, 100, 700, 511);
@@ -630,6 +668,8 @@ public class SIS implements Serializable {
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcome.setBounds(85, 122, 560, 56);
 		loginProf.getContentPane().add(lblWelcome);
+
+		homeButton(loginProf);
 
 		JLabel lblId = new JLabel("ID");
 		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -671,6 +711,7 @@ public class SIS implements Serializable {
 					JButton btnLogout = new JButton("Logout");
 					btnLogout.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
+							sis.init(pr);
 						}
 					});
 					btnLogout.setForeground(Color.WHITE);
@@ -704,12 +745,19 @@ public class SIS implements Serializable {
 					textField.setBounds(155, 157, 442, 40);
 					loginProfPage.add(textField);
 					textField.setColumns(10);
-					Course c = new Course();
+
 					JButton btnGo = new JButton("GO");
 					btnGo.setBounds(605, 157, 52, 40);
+
 					btnGo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
-							c.searchCo();
+							Course wanted = c.findCourse(txtSearchCourse.getText());
+							if (c.findCourse(txtSearchCourse.getText()) == null) {
+								JOptionPane.showMessageDialog(null, "Course not found.");
+								txtSearchCourse.setText(null);
+							} else {
+								JOptionPane.showMessageDialog(null, "OKE");
+							}
 						}
 					});
 
@@ -788,7 +836,9 @@ public class SIS implements Serializable {
 
 					setPowered(loginProfPage);
 					setPozadina(loginProfPage);
-				} else {
+				} else
+
+				{
 					JOptionPane.showMessageDialog(null, "Wrong password or ID. Please try again.");
 				}
 				passwordField.setText("");
@@ -809,6 +859,7 @@ public class SIS implements Serializable {
 		loginStudent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginStudent.getContentPane().setLayout(null);
 
+		homeButton(loginStudent);
 		JLabel label = new JLabel("Welcome!");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Sylfaen", Font.PLAIN, 18));
