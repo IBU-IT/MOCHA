@@ -227,18 +227,19 @@ public class SIS implements Serializable {
 		}
 	}
 
-	public static void main(String[] args)  {
-		
-    	BufferedReader read= new BufferedReader(new InputStreamReader(System.in));
-		String strDirectoy ="course";
+	public static void main(String[] args) {
+
+		BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+		String strDirectoy = "course";
 		boolean success = (new File(strDirectoy)).mkdir();
-		if(success) 
-		{
+		if (success) {
 			System.out.println("Directory: " + strDirectoy + " created");
-		}   
+		}
 		Admin admin = new Admin();
 		Student magarac = new Student();
 		Professor dino = new Professor();
+		Course c = new Course();
+
 		dino.setName("Dino Keco");
 		dino.setId("1");
 		dino.setPassword("1");
@@ -270,12 +271,13 @@ public class SIS implements Serializable {
 	public SIS(int i, Professor pr) {
 		init(pr);
 	}
-	
-	interface Faculty
-	{
-		String name=" ";
-		String Id=" ";
+
+	interface Faculty {
+		String name = " ";
+		String Id = " ";
+
 		void display_details();
+
 		void conduct_session();
 	}
 
@@ -398,38 +400,35 @@ public class SIS implements Serializable {
 					btnNewButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							ObjectOutputStream outputStream = null;
-							try{
-							FileOutputStream buf=new FileOutputStream("students.txt",true);
-							PrintStream q = new PrintStream(buf);
-							q.print(textField.getText());
-							q.print(",");
-							q.print(textField_1.getText());
-							q.print(",");
-							q.print(textField_2.getText());
-							q.print(",");
-							q.print(textField_3.getText());
-							q.print(",");
-							q.print(textField_4.getText());
-							q.print(",");
-							q.print(textField_7.getText());
-							q.print(",");
-							q.print(textField_5.getText());
-							q.print(",");
-							
-							
-							
-							if (rdbtnMale.isSelected()) {
-								q.print("Male");
+							try {
+								FileOutputStream buf = new FileOutputStream("students.txt", true);
+								PrintStream q = new PrintStream(buf);
+								q.print(textField.getText());
 								q.print(",");
-							} else {
-								q.print("Female");
+								q.print(textField_1.getText());
 								q.print(",");
-							}}
-							catch(Exception a)
-							{
+								q.print(textField_2.getText());
+								q.print(",");
+								q.print(textField_3.getText());
+								q.print(",");
+								q.print(textField_4.getText());
+								q.print(",");
+								q.print(textField_7.getText());
+								q.print(",");
+								q.print(textField_5.getText());
+								q.print(",");
+
+								if (rdbtnMale.isSelected()) {
+									q.print("Male");
+									q.print(",");
+								} else {
+									q.print("Female");
+									q.print(",");
+								}
+							} catch (Exception a) {
 								System.out.println(a);
 							}
-							Student kreten = new Student();							
+							Student kreten = new Student();
 							kreten.setName(textField.getText());
 							kreten.setSurname(textField_1.getText());
 							kreten.setId(textField_2.getText());
@@ -439,7 +438,7 @@ public class SIS implements Serializable {
 							kreten.setEmail(textField_5.getText());
 							if (rdbtnMale.isSelected()) {
 								kreten.setGender("Male");
-								
+
 							} else {
 								kreten.setGender("Female");
 							}
@@ -454,7 +453,7 @@ public class SIS implements Serializable {
 							rdbtnMale.setSelected(false);
 							rdbtnFemale.setSelected(false);
 							JOptionPane.showMessageDialog(null, "Student successfully added!");
-							}
+						}
 					});
 					btnNewButton.setBounds(319, 330, 140, 40);
 					adminPage.getContentPane().add(btnNewButton);
@@ -671,57 +670,57 @@ public class SIS implements Serializable {
 					textField.setBounds(155, 157, 442, 40);
 					loginProfPage.add(textField);
 					textField.setColumns(10);
-
+					Course c = new Course();
 					JButton btnGo = new JButton("GO");
 					btnGo.setBounds(605, 157, 52, 40);
+					btnGo.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							c.searchCo();
+						}
+					});
+
 					loginProfPage.add(btnGo);
 
 					JButton btnAddNewCourse = new JButton("Add new course");
 					btnAddNewCourse.setBounds(36, 228, 139, 39);
-					loginProfPage.add(btnAddNewCourse);
-					/*{	try{				Course c=new Course();
-			    							BufferedReader read= new BufferedReader(new InputStreamReader(System.in));
-			    							Scanner s=new Scanner(System.in);
-											System.out.print("Enter Course id\t\t:");
-											c.CourseID=read.readLine();
-											System.out.print("Enter Course name\t:");
-											c.CourseName=read.readLine();
-											System.out.print("Enter number of credits\t:");
-											c.numOfCredits=s.nextInt();
-											System.out.print("Enter number of Students:");
-											c.numOfStudents=s.nextInt();
-											c.add(c);}
-					catch(Exception p){
-						System.out.println(p);
+					btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
 
-					}
-					  }*/
+					btnAddNewCourse.addActionListener(new ActionListener() {
+
+						public void actionPerformed(ActionEvent e) {
+
+							c.add(c);
+						}
+
+					});
+					loginProfPage.add(btnAddNewCourse);
 
 					JButton btnDisplayCourse = new JButton("Display Courses");
 					btnDisplayCourse.setBounds(277, 228, 139, 39);
+					btnDisplayCourse.setBackground(SystemColor.inactiveCaptionBorder);
+					btnDisplayCourse.addActionListener(new ActionListener() {
+
+						public void actionPerformed(ActionEvent e) {
+
+							c.displaycourseinf();
+						}
+
+					});
 					loginProfPage.add(btnDisplayCourse);
-					/*{	
-					 * 											c.displaycourseinf();
-
-					 * }
-					 */
-
 					JButton btnUpdateCourse = new JButton("Update course students");
 					btnUpdateCourse.setBounds(518, 228, 139, 39);
 					loginProfPage.add(btnUpdateCourse);
-					{	try{					BufferedReader read= new BufferedReader(new InputStreamReader(System.in));
-											Scanner s=new Scanner(System.in);
-											int nos;
-											System.out.print("Enter course ID you want to update\t:");
-											String up=read.readLine();
-											System.out.print("Enter how many number of student\t:");
-											nos=s.nextInt();
-											/*c.update(up,nos);*/}
-					  
-					catch(Exception k){
-						System.out.println(k);
-					}
-					}
+					/*
+					 * { try { BufferedReader read = new BufferedReader(new
+					 * InputStreamReader(System.in)); Scanner s = new
+					 * Scanner(System.in); int nos;
+					 * System.out.print("Enter course ID you want to update\t:"
+					 * ); String up = read.readLine();
+					 * System.out.print("Enter how many number of student\t:");
+					 * nos = s.nextInt(); /* c.update(up,nos); }
+					 * 
+					 * catch (Exception k) { System.out.println(k); } }
+					 */
 					JTextField txtStudentSection = new JTextField();
 					txtStudentSection.setText("Student section");
 					txtStudentSection.setOpaque(false);
