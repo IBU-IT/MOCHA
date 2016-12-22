@@ -226,29 +226,30 @@ public class SIS implements Serializable {
 		public void setGrades(int[] grades) {
 			this.grades = grades;
 		}
-		
-		public char[] getPassword(){
+
+		public char[] getPassword() {
 			return password;
 		}
-		public void setPassword(char password[]){
-			this.password=new char[password.length];
-			for(int i=0;i<this.password.length;i++){
-				this.password[i]=password[i];
+
+		public void setPassword(char password[]) {
+			this.password = new char[password.length];
+			for (int i = 0; i < this.password.length; i++) {
+				this.password[i] = password[i];
 			}
 		}
-		public boolean checkPassword(char password[]){
-			if(this.password.length!=password.length){
+
+		public boolean checkPassword(char password[]) {
+			if (this.password.length != password.length) {
 				return false;
-			}
-			else{
-				for(int i=0;i<password.length;i++){
-					if(this.password[i]!=password[i]){
+			} else {
+				for (int i = 0; i < password.length; i++) {
+					if (this.password[i] != password[i]) {
 						return false;
 					}
 				}
 				return true;
 			}
-	
+
 		}
 	}
 
@@ -271,8 +272,8 @@ public class SIS implements Serializable {
 		admin.Professors.add(dino);
 		magarac.setName("magarac");
 		magarac.setId("1");
-		char mPassword[]= new char[1];
-		mPassword[0]='1';
+		char mPassword[] = new char[1];
+		mPassword[0] = '1';
 		magarac.setPassword(mPassword);
 		admin.Students.add(magarac);
 		EventQueue.invokeLater(new Runnable() {
@@ -299,9 +300,9 @@ public class SIS implements Serializable {
 	public SIS(int i, Professor pr) {
 		init(pr);
 	}
-	
-	public SIS(int i, Student s, Admin a){
-		init(s,a);
+
+	public SIS(int i, Student s, Admin a) {
+		init(s, a);
 	}
 
 	interface Faculty {
@@ -611,6 +612,7 @@ public class SIS implements Serializable {
 		loginProf.setVisible(true);
 		loginProf.setBounds(100, 100, 700, 511);
 		loginProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		loginProf.getContentPane().setLayout(null);
 		JTextField textField = new JTextField();
 		textField.setBounds(287, 189, 110, 27);
@@ -720,7 +722,7 @@ public class SIS implements Serializable {
 					btnAddNewCourse.addActionListener(new ActionListener() {
 
 						public void actionPerformed(ActionEvent e) {
-
+							loginProfPage.dispose();
 							c.add(c);
 						}
 
@@ -733,7 +735,7 @@ public class SIS implements Serializable {
 					btnDisplayCourse.addActionListener(new ActionListener() {
 
 						public void actionPerformed(ActionEvent e) {
-
+							loginProfPage.dispose();
 							c.displaycourseinf();
 						}
 
@@ -799,8 +801,8 @@ public class SIS implements Serializable {
 		setPozadina(loginProf);
 	}
 
-	private void init(Student s, Admin a){
-		
+	private void init(Student s, Admin a) {
+
 		JFrame loginStudent = new JFrame();
 		loginStudent.setVisible(true);
 		loginStudent.setBounds(100, 100, 700, 511);
@@ -838,25 +840,22 @@ public class SIS implements Serializable {
 		JButton button = new JButton("Log In");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Student xStudent=a.findStudent(textField.getText());
-				
-				if(xStudent==null){
+				Student xStudent = a.findStudent(textField.getText());
+
+				if (xStudent == null) {
 					JOptionPane.showMessageDialog(null, "Wrong ID");
-				}
-				else if(xStudent.checkPassword(passwordField.getPassword())){
-					JFrame stdLogIn= new JFrame("Welcome " + xStudent.name);
+				} else if (xStudent.checkPassword(passwordField.getPassword())) {
+					JFrame stdLogIn = new JFrame("Welcome " + xStudent.name);
 					stdLogIn.setVisible(true);
 					stdLogIn.setBounds(100, 100, 700, 511);
 					stdLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					stdLogIn.getContentPane().setLayout(null);
 					setPowered(stdLogIn);
 					setPozadina(stdLogIn);
-				}
-				else
-				{
+				} else {
 					JOptionPane.showMessageDialog(null, "Wrong password " + xStudent.name);
 				}
-					
+
 			}
 		});
 		button.setBackground(SystemColor.inactiveCaptionBorder);
@@ -865,6 +864,7 @@ public class SIS implements Serializable {
 		setPozadina(loginStudent);
 		setPowered(loginStudent);
 	}
+
 	private void initialize(Admin a, Professor pr, Student s) {
 
 		frame = new JFrame();
@@ -883,16 +883,15 @@ public class SIS implements Serializable {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				SIS studentWindow= new SIS(1,s,a);
+				SIS studentWindow = new SIS(1, s, a);
 
 			}
 		});
 		frame.getContentPane().add(button);
 
-		
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(lblWelcomeToStudent);
-	
+
 		JButton button_1 = new JButton("Log in as Admin");
 		button_1.setBackground(SystemColor.inactiveCaptionBorder);
 		button_1.setBounds(466, 274, 185, 99);

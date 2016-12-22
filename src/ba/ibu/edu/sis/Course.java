@@ -94,6 +94,9 @@ public class Course implements Serializable {
 		this.numOfStudents = numOfStudents;
 	}
 
+	JTextField addCtextField, addCtextField_1, addCtextField_2, addCtextField_3, addCtextField_4, addCtextField_5,
+			addCtextField_6;
+
 	public void add(Course c) {
 
 		JFrame addCourse = new JFrame();
@@ -144,37 +147,37 @@ public class Course implements Serializable {
 		addLe.setBounds(350, 280, 146, 35);
 		addCourse.getContentPane().add(addLe);
 
-		JTextField addCtextField = new JTextField();
+		addCtextField = new JTextField();
 		addCtextField.setBounds(23, 155, 200, 35);
 		addCourse.getContentPane().add(addCtextField);
 		addCtextField.setColumns(10);
 
-		JTextField addCtextField_1 = new JTextField();
+		addCtextField_1 = new JTextField();
 		addCtextField_1.setColumns(10);
 		addCtextField_1.setBounds(23, 235, 200, 35);
 		addCourse.getContentPane().add(addCtextField_1);
 
-		JTextField addCtextField_2 = new JTextField();
+		addCtextField_2 = new JTextField();
 		addCtextField_2.setColumns(10);
 		addCtextField_2.setBounds(23, 315, 200, 35);
 		addCourse.getContentPane().add(addCtextField_2);
 
-		JTextField addCtextField_3 = new JTextField();
+		addCtextField_3 = new JTextField();
 		addCtextField_3.setColumns(10);
 		addCtextField_3.setBounds(23, 395, 200, 35);
 		addCourse.getContentPane().add(addCtextField_3);
 
-		JTextField addCtextField_4 = new JTextField();
+		addCtextField_4 = new JTextField();
 		addCtextField_4.setColumns(10);
 		addCtextField_4.setBounds(350, 155, 200, 35);
 		addCourse.getContentPane().add(addCtextField_4);
 
-		JTextField addCtextField_5 = new JTextField();
+		addCtextField_5 = new JTextField();
 		addCtextField_5.setColumns(10);
 		addCtextField_5.setBounds(350, 235, 200, 35);
 		addCourse.getContentPane().add(addCtextField_5);
 
-		JTextField addCtextField_6 = new JTextField();
+		addCtextField_6 = new JTextField();
 		addCtextField_6.setColumns(10);
 		addCtextField_6.setBounds(350, 315, 200, 35);
 		addCourse.getContentPane().add(addCtextField_6);
@@ -253,12 +256,19 @@ public class Course implements Serializable {
 
 			FileOutputStream buf = new FileOutputStream("course.txt", true);
 			PrintStream q = new PrintStream(buf);
-			while (in.available() != 0) {
-				str = in.readLine();
-				StringTokenizer st = new StringTokenizer(str, ",");
+
+			BufferedReader br = new BufferedReader(new FileReader("course.txt"));
+			String line;
+			while ((line = br.readLine()) != null) {
+				JLabel addLe = new JLabel(line);
+				addLe.setFont(new Font("TAHOMA", Font.PLAIN, 13));
+				addLe.setForeground(Color.WHITE);
+				addLe.setBounds(350, 280, 146, 35);
+				displayCourse.getContentPane().add(addLe);
 
 			}
-			in.close();
+			br.close();
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
