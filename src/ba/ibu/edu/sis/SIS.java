@@ -79,7 +79,7 @@ public class SIS implements Serializable {
 		});
 	}
 
-	SIS() {
+	public SIS() {
 
 	}
 
@@ -349,16 +349,6 @@ public class SIS implements Serializable {
 
 	public SIS(Admin a, Professor pr) {
 		initialize(a, pr);
-	}
-
-
-
-	public SIS(int i, Professor pr) {
-		init(pr);
-	}
-
-	public SIS(int i, Admin a) {
-		init( a);
 	}
 
 	interface Faculty {
@@ -980,7 +970,8 @@ public class SIS implements Serializable {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				SIS prozor = new SIS(1, a);
+				SIS prozor = new SIS();
+				prozor.init(a);
 			}
 		});
 		frame.getContentPane().add(button_1);
@@ -991,7 +982,8 @@ public class SIS implements Serializable {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				SIS prof = new SIS(1, pr);
+				SIS prof = new SIS();
+				prof.init(pr);
 			}
 		});
 
