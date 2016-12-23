@@ -911,12 +911,13 @@ public class SIS implements Serializable {
 
 		JButton button = new JButton("Log In");
 		button.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Student xStudent = a.findStudent(textField.getText());
 
 				if (xStudent == null) {
 					JOptionPane.showMessageDialog(null, "Wrong ID");
-				} else if (xStudent.getPassword().equals((passwordField.getPassword()))) {
+				} else if (xStudent.getPassword().equals(passwordField.getText())) {
 					JFrame stdLogIn = new JFrame("Welcome " + xStudent.name);
 					stdLogIn.setVisible(true);
 					stdLogIn.setBounds(100, 100, 700, 511);
