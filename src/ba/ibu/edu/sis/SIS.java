@@ -207,6 +207,10 @@ public class SIS implements Serializable {
 	}
 
 	static class Student implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private String id;
 		private String email;
 		private String nationality;
@@ -319,7 +323,6 @@ public class SIS implements Serializable {
 
 	public static void main(String[] args) {
 
-		BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 		String strDirectoy = "course";
 		boolean success = (new File(strDirectoy)).mkdir();
 		if (success) {
@@ -327,7 +330,6 @@ public class SIS implements Serializable {
 		}
 		Admin admin = new Admin();
 		Professor dino = new Professor();
-		Course c = new Course();
 		admin.restore();
 		dino.setName("Dino Keco");
 		dino.setId("1");
@@ -487,11 +489,11 @@ public class SIS implements Serializable {
 
 					JButton btnNewButton = new JButton("Add Student");
 					btnNewButton.addActionListener(new ActionListener() {
+						private PrintStream q;
 						public void actionPerformed(ActionEvent e) {
-							ObjectOutputStream outputStream = null;
 							try {
 								FileOutputStream buf = new FileOutputStream("students.txt", true);
-								PrintStream q = new PrintStream(buf);
+								q = new PrintStream(buf);
 								q.print(textField.getText());
 								q.print(",");
 								q.print(textField_1.getText());
@@ -672,8 +674,6 @@ public class SIS implements Serializable {
 
 	private void init(Professor pr) {
 		SIS sis = new SIS();
-		Admin a = new Admin();
-		Student s = new Student();
 		Course c = new Course();
 		JFrame loginProf = new JFrame();
 		loginProf.setVisible(true);
@@ -782,7 +782,6 @@ public class SIS implements Serializable {
 
 					btnGo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
-							Course wanted = pr.findCourse(txtSearchCourse.getText());
 							if (pr.findCourse(textField.getText()) == null) {
 								JOptionPane.showMessageDialog(null, "Course not found.");
 								JOptionPane.showMessageDialog(null, textField.getText());
@@ -883,7 +882,7 @@ public class SIS implements Serializable {
 		setPozadina(loginProf);
 	}
 
-	private void init(Student s, Admin a) {
+	private void init_stud(Admin a) {
 
 		JFrame loginStudent = new JFrame();
 		loginStudent.setVisible(true);
@@ -966,8 +965,8 @@ public class SIS implements Serializable {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				SIS studentWindow = new SIS(1, a);
-
+				SIS studentWindow = new SIS();
+				studentWindow.init_stud(a);
 			}
 		});
 		frame.getContentPane().add(button);
