@@ -376,6 +376,8 @@ public class SIS implements Serializable {
 					adminPage.setBounds(100, 100, 700, 511);
 					adminPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					adminPage.getContentPane().setLayout(null);
+					homeButton(adminPage);
+					
 					JLabel lblStudentName = new JLabel("Student Name");
 					lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentName.setForeground(Color.WHITE);
@@ -460,16 +462,16 @@ public class SIS implements Serializable {
 
 					JRadioButton rdbtnMale = new JRadioButton("Male");
 					rdbtnMale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					rdbtnMale.setForeground(Color.WHITE);
+					rdbtnMale.setForeground(Color.BLACK);
 					rdbtnMale.setBounds(139, 275, 66, 23);
 					adminPage.getContentPane().add(rdbtnMale);
 
 					JRadioButton rdbtnFemale = new JRadioButton("Female");
 					rdbtnFemale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					rdbtnFemale.setForeground(Color.WHITE);
+					rdbtnFemale.setForeground(Color.BLACK);
 					rdbtnFemale.setBounds(207, 275, 66, 23);
 					adminPage.getContentPane().add(rdbtnFemale);
-
+					
 					JButton btnNewButton = new JButton("Add Student");
 					btnNewButton.addActionListener(new ActionListener() {
 						private PrintStream q;
@@ -881,6 +883,7 @@ public class SIS implements Serializable {
 		loginStudent.getContentPane().setLayout(null);
 		setLogo2(loginStudent);
 		homeButton(loginStudent);
+		
 		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -914,20 +917,77 @@ public class SIS implements Serializable {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Student xStudent = a.findStudent(textField.getText());
-
+				
 				if (xStudent == null) {
 					JOptionPane.showMessageDialog(null, "Wrong ID");
+					
 				} else if (xStudent.getPassword().equals(passwordField.getText())) {
 					JFrame stdLogIn = new JFrame("Welcome " + xStudent.name);
 					stdLogIn.setVisible(true);
 					stdLogIn.setBounds(100, 100, 700, 511);
 					stdLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					stdLogIn.getContentPane().setLayout(null);
+					homeButton(stdLogIn);
+					setLogo2(stdLogIn);
+					
+					JButton btnEdit = new JButton("Edit my profile");
+					btnEdit.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							
+						}
+					});
+					btnEdit.setForeground(Color.WHITE);
+					btnEdit.setBounds(540, 22, 150, 23);
+					btnEdit.setFont(new Font("TAHOMA", Font.BOLD, 11));
+					btnEdit.setContentAreaFilled(false);
+					btnEdit.setBorder(null);
+
+					stdLogIn.add(btnEdit);
+
+					JButton btnLogOut = new JButton("Logout");
+					btnLogOut.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							stdLogIn.dispose();
+							init_stud(a);
+						}
+					});
+					btnLogOut.setForeground(Color.WHITE);
+					btnLogOut.setContentAreaFilled(false);
+					btnLogOut.setBounds(470, 22, 110, 23);
+					btnLogOut.setFont(new Font("TAHOMA", Font.BOLD, 11));
+					btnLogOut.setBorder(null);
+					stdLogIn.add(btnLogOut);
+					
+					ImageIcon gradesI=new ImageIcon("grades.png");
+					JButton grades = new JButton("Grades",gradesI);
+					grades.setBackground(SystemColor.inactiveCaptionBorder);
+					grades.setBounds(50, 180,150, 90);
+					stdLogIn.add(grades);
+					grades.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							stdLogIn.dispose();
+							JFrame gradesF = new JFrame("Welcome " + xStudent.name);
+							gradesF.setVisible(true);
+							gradesF.setBounds(100, 100, 700, 511);
+							gradesF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							gradesF.getContentPane().setLayout(null);
+							setLogo2(gradesF);
+							homeButton(gradesF);
+							
+							
+							
+							setPowered(gradesF);
+							setPozadina(gradesF);
+
+						}
+					});
 					setPowered(stdLogIn);
 					setPozadina(stdLogIn);
 				} else {
-					JOptionPane.showMessageDialog(null, "Wrong password " + xStudent.name);
+					JOptionPane.showMessageDialog(null, "Wrong password ");
 				}
+				textField.setText("");
+				passwordField.setText("");
 
 			}
 		});
