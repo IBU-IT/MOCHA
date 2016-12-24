@@ -61,9 +61,11 @@ public class SIS implements Serializable {
 	}
 
 	private void homeButton(JFrame hFrame) {
-		JButton btnHome = new JButton("HOME");
+		ImageIcon homeIcon=new ImageIcon("home_icon.png");
+		JButton btnHome = new JButton(homeIcon);
 		btnHome.setForeground(Color.WHITE);
-		btnHome.setBounds(500, 382, 250, 35);
+		
+		btnHome.setBounds(635, 20, 30, 30);
 		btnHome.setFont(new Font("TAHOMA", Font.BOLD, 13));
 		btnHome.setContentAreaFilled(false);
 		btnHome.setBorder(null);
