@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.SystemColor;
@@ -474,6 +475,10 @@ public class SIS implements Serializable {
 					rdbtnFemale.setBounds(207, 275, 66, 23);
 					adminPage.getContentPane().add(rdbtnFemale);
 					
+					ButtonGroup gender=new ButtonGroup();//so that only one button can be selected
+					gender.add(rdbtnFemale);
+					gender.add(rdbtnMale);
+					
 					JButton btnNewButton = new JButton("Add Student");
 					btnNewButton.addActionListener(new ActionListener() {
 						private PrintStream q;
@@ -600,6 +605,7 @@ public class SIS implements Serializable {
 							rdbtnMale.setSelected(false);
 							rdbtnFemale.setSelected(false);
 							JOptionPane.showMessageDialog(null, "Information updated.");
+							a.save();
 						}
 					});
 					btnNewButton_1.setBounds(370, 381, 207, 65);
@@ -661,6 +667,7 @@ public class SIS implements Serializable {
 		});
 		btnLogIn.setBounds(290, 320, 100, 35);
 		login.getContentPane().add(btnLogIn);
+		login.getRootPane().setDefaultButton(btnLogIn);
 		setPowered(login);
 		setPozadina(login);
 		a.save();
@@ -937,6 +944,181 @@ public class SIS implements Serializable {
 					JButton btnEdit = new JButton("Edit my profile");
 					btnEdit.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
+							stdLogIn.dispose();
+							JFrame editProfile=new JFrame();
+							editProfile.setVisible(true);
+							editProfile.setBounds(100, 100, 700, 511);
+							editProfile.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							editProfile.getContentPane().setLayout(null);
+							
+							JLabel lblStudentName = new JLabel("Student Name");
+							lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblStudentName.setForeground(Color.WHITE);
+							lblStudentName.setBounds(23, 30, 106, 25);
+							editProfile.getContentPane().add(lblStudentName);
+
+							JLabel lblStudentSurname = new JLabel("Student Surname");
+							lblStudentSurname.setBounds(23, 73, 106, 25);
+							lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblStudentSurname.setForeground(Color.WHITE);
+							editProfile.getContentPane().add(lblStudentSurname);
+
+							JLabel lblStudentId = new JLabel("Student ID");
+							lblStudentId.setBounds(23, 122, 106, 25);
+							lblStudentId.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblStudentId.setForeground(Color.WHITE);
+							editProfile.getContentPane().add(lblStudentId);
+
+							JLabel lblStudentAge = new JLabel("Student Date of Birth");
+							lblStudentAge.setBounds(23, 171, 106, 25);
+							lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblStudentAge.setForeground(Color.WHITE);
+							editProfile.getContentPane().add(lblStudentAge);
+
+							JLabel lblStudentYear = new JLabel("Student Year");
+							lblStudentYear.setBounds(23, 220, 106, 25);
+							lblStudentYear.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblStudentYear.setForeground(Color.WHITE);
+							editProfile.getContentPane().add(lblStudentYear);
+
+							JLabel lblGender = new JLabel("Gender");
+							lblGender.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblGender.setForeground(Color.WHITE);
+							lblGender.setBounds(23, 269, 106, 25);
+							editProfile.getContentPane().add(lblGender);
+							
+							JLabel lblStudentNationality = new JLabel("Student Nationality");
+							lblStudentNationality.setBounds(23, 318, 106, 25);
+							lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblStudentNationality.setForeground(Color.WHITE);
+							editProfile.getContentPane().add(lblStudentNationality);
+							
+							JLabel lblStudentEmail = new JLabel("Student Email");
+							lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblStudentEmail.setForeground(Color.WHITE);
+							lblStudentEmail.setBounds(23, 367, 106, 25);
+							editProfile.getContentPane().add(lblStudentEmail);
+
+							JLabel lblStudentPassword = new JLabel("Student Password");
+							lblStudentPassword.setBounds(23, 416, 106, 25);
+							lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							lblStudentPassword.setForeground(Color.WHITE);
+							editProfile.getContentPane().add(lblStudentPassword);
+							
+							JTextField textField = new JTextField();
+							textField.setBounds(139, 25, 117, 25);
+							textField.setColumns(10);
+							textField.setText(xStudent.getName());
+							editProfile.getContentPane().add(textField);
+							
+							JTextField textField_1 = new JTextField();
+							textField_1.setColumns(10);
+							textField_1.setBounds(139, 75, 117, 25);
+							textField_1.setText(xStudent.getSurname());
+							editProfile.getContentPane().add(textField_1);
+
+							JTextField textField_2 = new JTextField();
+							textField_2.setColumns(10);
+							textField_2.setBounds(139, 125, 117, 25);
+							textField_2.setText(xStudent.getId());
+							editProfile.getContentPane().add(textField_2);
+
+							JTextField textField_3 = new JTextField();
+							textField_3.setColumns(10);
+							textField_3.setBounds(139, 175, 117, 25);
+							textField_3.setText(xStudent.getDateOfBirth());
+							editProfile.getContentPane().add(textField_3);
+
+							JTextField textField_4 = new JTextField();
+							textField_4.setColumns(10);
+							textField_4.setBounds(139, 318, 117, 25);
+							textField_4.setText(xStudent.getNationality());
+							editProfile.getContentPane().add(textField_4);
+
+							JTextField textField_5 = new JTextField();
+							textField_5.setColumns(10);
+							textField_5.setBounds(139, 367, 117, 25);
+							textField_5.setText(xStudent.getEmail());
+							editProfile.getContentPane().add(textField_5);
+
+							JTextField textField_6 = new JTextField();
+							textField_6.setColumns(10);
+							textField_6.setBounds(139, 225, 117, 25);
+							textField_6.setText(xStudent.getYear());
+							editProfile.getContentPane().add(textField_6);
+							
+							JTextField textField_7 = new JTextField();
+							textField_7.setColumns(10);
+							textField_7.setBounds(139, 416, 117, 25);
+							textField_7.setText(xStudent.getPassword());
+							editProfile.getContentPane().add(textField_7);
+
+							JRadioButton rdbtnMale = new JRadioButton("Male");
+							rdbtnMale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							rdbtnMale.setForeground(Color.BLACK);
+							rdbtnMale.setBounds(139, 275, 66, 23);
+							editProfile.getContentPane().add(rdbtnMale);
+
+							JRadioButton rdbtnFemale = new JRadioButton("Female");
+							rdbtnFemale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							rdbtnFemale.setForeground(Color.BLACK);
+							rdbtnFemale.setBounds(207, 275, 66, 23);
+							editProfile.getContentPane().add(rdbtnFemale);
+							
+							ButtonGroup gender=new ButtonGroup();//so that only one button can be selected
+							gender.add(rdbtnFemale);
+							gender.add(rdbtnMale);
+							
+							if(xStudent.getGender()=="Male"){
+								rdbtnMale.setSelected(true);
+							}
+							else{
+								rdbtnFemale.setSelected(true);
+							}
+							
+							JButton btnUpdate= new JButton("Update student information");
+							btnUpdate.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent arg0) {
+									xStudent.setName(textField.getText());
+									xStudent.setSurname(textField_1.getText());
+									xStudent.setId(textField_2.getText());
+									xStudent.setDateOfBirth(textField_3.getText());
+									xStudent.setYear(textField_6.getText());
+									xStudent.setNationality(textField_4.getText());
+									xStudent.setEmail(textField_5.getText());
+									xStudent.setPassword(textField_7.getText());
+									
+									xStudent.setPassword(textField.getText());
+									if(rdbtnMale.isSelected()){
+										xStudent.setGender("Male");
+									}
+									else{
+										xStudent.setGender("Female");
+									}
+									JOptionPane.showMessageDialog(null, "Information updated.");
+									
+									textField.setText(null);
+									textField_1.setText(null);
+									textField_2.setText(null);
+									textField_3.setText(null);
+									textField_4.setText(null);
+									textField_5.setText(null);
+									textField_6.setText(null);
+									textField_7.setText(null);
+									rdbtnMale.setSelected(false);
+									rdbtnFemale.setSelected(false);
+									
+									a.save();
+									
+								}
+							});
+							
+							editProfile.getContentPane().add(btnUpdate);
+							btnUpdate.setBounds(400, 200, 200, 50);
+							
+							setPozadina(editProfile);
+							setPowered(editProfile);
+							
 							
 						}
 					});
