@@ -1,4 +1,4 @@
-package ba.ibu.edu.sis;
+ package ba.ibu.edu.sis;
 
 import java.awt.EventQueue;
 
@@ -61,12 +61,12 @@ public class SIS implements Serializable {
 		pFrame.getContentPane().add(lblNewLabel_2);
 	}
 
-	private void homeButton(JFrame hFrame) {
+	private void homeButton(JFrame hFrame, int shift) {
 		ImageIcon homeIcon=new ImageIcon("home_icon.png");
 		JButton btnHome = new JButton(homeIcon);
 		btnHome.setForeground(Color.WHITE);
 		
-		btnHome.setBounds(635, 20, 30, 30);
+		btnHome.setBounds(635, 20+shift, 30, 30);
 		btnHome.setFont(new Font("TAHOMA", Font.BOLD, 13));
 		btnHome.setContentAreaFilled(false);
 		btnHome.setBorder(null);
@@ -367,7 +367,7 @@ public class SIS implements Serializable {
 		lblNewLabel.setBounds(65, 190, 560, 56);
 		login.getContentPane().add(lblNewLabel);
 		setLogo2(login);
-		homeButton(login);
+		homeButton(login,0);
 
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
@@ -380,6 +380,7 @@ public class SIS implements Serializable {
 					adminPage.setBounds(100, 100, 700, 511);
 					adminPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					adminPage.getContentPane().setLayout(null);
+					homeButton(adminPage,45);
 					
 					JLabel lblStudentName = new JLabel("Student Name");
 					lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
@@ -700,7 +701,7 @@ public class SIS implements Serializable {
 		lblWelcome.setBounds(65, 142, 560, 56);
 		loginProf.getContentPane().add(lblWelcome);
 		setLogo2(loginProf);
-		homeButton(loginProf);
+		homeButton(loginProf,0);
 
 		JLabel lblId = new JLabel("ID number");
 		lblId.setHorizontalAlignment(SwingConstants.CENTER);
@@ -893,7 +894,7 @@ public class SIS implements Serializable {
 		loginStudent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginStudent.getContentPane().setLayout(null);
 		setLogo2(loginStudent);
-		homeButton(loginStudent);
+		homeButton(loginStudent,0);
 		
 		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
