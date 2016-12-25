@@ -1087,8 +1087,7 @@ public class SIS implements Serializable {
 									xStudent.setNationality(textField_4.getText());
 									xStudent.setEmail(textField_5.getText());
 									xStudent.setPassword(textField_7.getText());
-									
-									xStudent.setPassword(textField.getText());
+								
 									if(rdbtnMale.isSelected()){
 										xStudent.setGender("Male");
 									}
@@ -1116,6 +1115,18 @@ public class SIS implements Serializable {
 							editProfile.getContentPane().add(btnUpdate);
 							btnUpdate.setBounds(400, 200, 200, 50);
 							
+							ImageIcon back= new ImageIcon("back.png");
+							JButton btnBack=new JButton(back);
+							btnBack.addActionListener(new ActionListener() {
+								
+								public void actionPerformed(ActionEvent e) {
+									editProfile.dispose();
+									stdLogIn.setVisible(true);	
+								}
+							});
+							
+							btnBack.setBounds(340, 200, 50, 50);
+							editProfile.getContentPane().add(btnBack);
 							setPozadina(editProfile);
 							setPowered(editProfile);
 							
