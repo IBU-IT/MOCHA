@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import ba.ibu.edu.sis.AdminOptions;
 
 
 import java.awt.Font;
@@ -29,7 +30,7 @@ public class SIS implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	private JFrame login;
+	public JFrame login;
 	private JFrame adminPage;
 
 	private void setLogo2(JFrame logo2Frame) {
@@ -388,13 +389,15 @@ public class SIS implements Serializable {
 		void conduct_session();
 	}
 
-	private void init(Admin a) {
-
+	
+	public void initOptions(Admin a){
 		login = new JFrame();
 		login.setVisible(true);
 		login.setBounds(100, 100, 700, 511);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		login.getContentPane().setLayout(null);
+		
+	
 
 		JPasswordField pwdEnterYourPassword = new JPasswordField();
 		pwdEnterYourPassword.setBounds(240, 260, 200, 35);
@@ -411,13 +414,34 @@ public class SIS implements Serializable {
 		login.getContentPane().add(lblNewLabel);
 		setLogo2(login);
 		homeButton(login,0);
-
+		
+		
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				if (pwdEnterYourPassword.getText().equals(a.getPassword())) {
 					login.dispose();
+					AdminOptions AdminOptions;
+					AdminOptions = new AdminOptions(a);
+					AdminOptions.setVisible(true);
+					AdminOptions.setPozadina(AdminOptions);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "ne moze");
+				}
+				pwdEnterYourPassword.setText("");
+			}
+		});
+		btnLogIn.setBounds(290, 320, 100, 35);
+		login.getContentPane().add(btnLogIn);
+		login.getRootPane().setDefaultButton(btnLogIn);
+		setPowered(login);
+		setPozadina(login);
+	}
+	
+	public void init(Admin a) {
+					
 					adminPage = new JFrame();
 					adminPage.setVisible(true);
 					adminPage.setBounds(100, 100, 700, 511);
@@ -703,17 +727,7 @@ public class SIS implements Serializable {
 					setPowered(adminPage);
 					setPozadina(adminPage);
 
-				} else {
-					JOptionPane.showMessageDialog(null, "ne moze");
-				}
-				pwdEnterYourPassword.setText("");
-			}
-		});
-		btnLogIn.setBounds(290, 320, 100, 35);
-		login.getContentPane().add(btnLogIn);
-		login.getRootPane().setDefaultButton(btnLogIn);
-		setPowered(login);
-		setPozadina(login);
+		
 		a.save();
 	}
 
@@ -1242,7 +1256,7 @@ public class SIS implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				SIS prozor = new SIS();
-				prozor.init(a);
+				prozor.initOptions(a);
 			}
 		});
 		frame.getContentPane().add(button_1);
