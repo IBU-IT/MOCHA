@@ -1,4 +1,4 @@
- package ba.ibu.edu.sis;
+package ba.ibu.edu.sis;
 
 import java.awt.EventQueue;
 
@@ -718,7 +718,6 @@ public class SIS implements Serializable {
 	}
 
 	public void init(Professor pr) {
-		SIS sis = new SIS();
 		Course c = new Course();
 		JFrame loginProf = new JFrame();
 		loginProf.setVisible(true);
