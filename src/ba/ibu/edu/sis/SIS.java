@@ -78,7 +78,50 @@ public class SIS implements Serializable {
 			}
 		});
 	}
+	
+	public void prof_menu(JFrame nFrame, Professor pr){
+		SIS sis = new SIS();
+		JButton btnEditMyProfile = new JButton("Edit my profile");
+		btnEditMyProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnEditMyProfile.setForeground(Color.WHITE);
+		btnEditMyProfile.setBounds(470, 22, 150, 23);
+		btnEditMyProfile.setFont(new Font("TAHOMA", Font.BOLD, 11));
+		btnEditMyProfile.setContentAreaFilled(false);
+		btnEditMyProfile.setBorder(null);
 
+		nFrame.getContentPane().add(btnEditMyProfile);
+
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				nFrame.dispose();
+				sis.init(pr);
+				
+			}
+		});
+		btnLogout.setForeground(Color.WHITE);
+		btnLogout.setContentAreaFilled(false);
+		btnLogout.setBounds(570, 22, 110, 23);
+		btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
+		btnLogout.setBorder(null);
+		nFrame.getContentPane().add(btnLogout);
+		
+		JButton btnmess = new JButton("Messages");
+		btnmess.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnmess.setForeground(Color.WHITE);
+		btnmess.setContentAreaFilled(false);
+		btnmess.setBounds(400, 22, 110, 23);
+		btnmess.setFont(new Font("TAHOMA", Font.BOLD, 11));
+		btnmess.setBorder(null);
+		nFrame.getContentPane().add(btnmess);
+	}
+	
 	public SIS() {
 
 	}
@@ -728,32 +771,7 @@ public class SIS implements Serializable {
 					loginProfPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					loginProfPage.getContentPane().setLayout(null);
 
-					JButton btnEditMyProfile = new JButton("Edit my profile");
-					btnEditMyProfile.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-						}
-					});
-					btnEditMyProfile.setForeground(Color.WHITE);
-					btnEditMyProfile.setBounds(540, 22, 150, 23);
-					btnEditMyProfile.setFont(new Font("TAHOMA", Font.BOLD, 11));
-					btnEditMyProfile.setContentAreaFilled(false);
-					btnEditMyProfile.setBorder(null);
-
-					loginProfPage.getContentPane().add(btnEditMyProfile);
-
-					JButton btnLogout = new JButton("Logout");
-					btnLogout.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							loginProfPage.dispose();
-							sis.init(pr);
-						}
-					});
-					btnLogout.setForeground(Color.WHITE);
-					btnLogout.setContentAreaFilled(false);
-					btnLogout.setBounds(470, 22, 110, 23);
-					btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
-					btnLogout.setBorder(null);
-					loginProfPage.getContentPane().add(btnLogout);
+					prof_menu(loginProfPage, pr);
 
 					JTextField txtCourseSection = new JTextField();
 					txtCourseSection.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -797,47 +815,42 @@ public class SIS implements Serializable {
 
 					loginProfPage.getContentPane().add(btnGo);
 
-					JButton btnAddNewCourse = new JButton("Add new course");
-					btnAddNewCourse.setBounds(36, 228, 139, 34);
+					JButton btnAddNewCourse = new JButton("Course 1");
+					btnAddNewCourse.setBounds(35, 270, 180, 80);
 					btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
 
 					btnAddNewCourse.addActionListener(new ActionListener() {
 
 						public void actionPerformed(ActionEvent e) {
 							loginProfPage.dispose();
-							c.add(c);
+							c.course_inf(pr);
+							
 						}
 
 					});
 					loginProfPage.getContentPane().add(btnAddNewCourse);
 
-					JButton btnDisplayCourse = new JButton("Display Courses");
-					btnDisplayCourse.setBounds(277, 228, 139, 39);
+					JButton btnDisplayCourse = new JButton("Course 2");
+					btnDisplayCourse.setBounds(255, 270, 180, 80);
 					btnDisplayCourse.setBackground(SystemColor.inactiveCaptionBorder);
 					btnDisplayCourse.addActionListener(new ActionListener() {
 
-						public void actionPerformed(ActionEvent e) {
-							loginProfPage.dispose();
-							c.displaycourseinf();
+						public void actionPerformed(ActionEvent e) {							
 						}
 
 					});
 					loginProfPage.getContentPane().add(btnDisplayCourse);
-					JButton btnUpdateCourse = new JButton("Update course students");
-					btnUpdateCourse.setBounds(518, 228, 139, 39);
+					JButton btnUpdateCourse = new JButton("Course 3");
+					btnUpdateCourse.setBounds(475, 270, 180, 80);
 					loginProfPage.getContentPane().add(btnUpdateCourse);
-					/*
-					 * { try { BufferedReader read = new BufferedReader(new
-					 * InputStreamReader(System.in)); Scanner s = new
-					 * Scanner(System.in); int nos;
-					 * System.out.print("Enter course ID you want to update\t:"
-					 * ); String up = read.readLine();
-					 * System.out.print("Enter how many number of student\t:");
-					 * nos = s.nextInt(); /* c.update(up,nos); }
-					 * 
-					 * catch (Exception k) { System.out.println(k); } }
-					 */
-					JTextField txtStudentSection = new JTextField();
+					btnDisplayCourse.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					
+					}
+					});
+					
+					
+					/*JTextField txtStudentSection = new JTextField();
 					txtStudentSection.setText("Student section");
 					txtStudentSection.setOpaque(false);
 					txtStudentSection.setForeground(Color.WHITE);
@@ -865,7 +878,7 @@ public class SIS implements Serializable {
 					JButton btnGo_2 = new JButton("GO");
 					btnGo_2.setBounds(605, 340, 52, 40);
 					loginProfPage.getContentPane().add(btnGo_2);
-
+*/
 					setLogo(loginProfPage);
 
 					setPowered(loginProfPage);
@@ -1253,5 +1266,7 @@ public class SIS implements Serializable {
 		setPozadina(frame);
 
 	}
+	
+	
 
 }

@@ -413,4 +413,19 @@ public class Course implements Serializable {
 	public void setAttendence(int numOfLecture) {
 		this.attendence[numOfLecture] = 100;
 	}
+	
+	public void course_inf(Professor pr){
+		Professor p = new Professor();
+		SIS sis = new SIS();
+		JFrame courseInf = new JFrame();
+		courseInf.setVisible(true);
+		courseInf.setBounds(100, 100, 700, 511);
+		courseInf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		courseInf.getContentPane().setLayout(null);
+		
+		sis.prof_menu(courseInf, pr);
+		setLogo(courseInf);
+		setPowered(courseInf);
+		setPozadina(courseInf);
+	}
 }
