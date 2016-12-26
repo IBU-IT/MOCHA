@@ -425,7 +425,11 @@ public class SIS implements Serializable {
 					AdminOptions AdminOptions;
 					AdminOptions = new AdminOptions(a);
 					AdminOptions.setVisible(true);
+					AdminOptions.setPowered(AdminOptions);
+					homeButton(AdminOptions, 0);
+					AdminOptions.setLogo2(AdminOptions);
 					AdminOptions.setPozadina(AdminOptions);
+					
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "ne moze");
