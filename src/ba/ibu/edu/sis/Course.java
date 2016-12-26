@@ -1,6 +1,7 @@
 package ba.ibu.edu.sis;
 
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -17,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -423,9 +425,126 @@ public class Course implements Serializable {
 		courseInf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		courseInf.getContentPane().setLayout(null);
 		
+		JTextField txtCourseSection = new JTextField();
+		txtCourseSection.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtCourseSection.setForeground(Color.WHITE);
+		txtCourseSection.setText("COURSE DETAILS");
+		txtCourseSection.setBounds(25, 120, 674, 20);
+		txtCourseSection.setOpaque(false);
+		txtCourseSection.setBorder(null);
+		courseInf.getContentPane().add(txtCourseSection);
+		txtCourseSection.setColumns(10);
+		
+		JTextField txtCourseName = new JTextField();
+		txtCourseName.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtCourseName.setForeground(Color.WHITE);
+		txtCourseName.setText("Course name: ");
+		txtCourseName.setBounds(25, 150, 674, 20);
+		txtCourseName.setOpaque(false);
+		txtCourseName.setBorder(null);
+		courseInf.getContentPane().add(txtCourseName);
+		txtCourseName.setColumns(10);
+		
+		JTextField txtCourseCode = new JTextField();
+		txtCourseCode.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtCourseCode.setForeground(Color.WHITE);
+		txtCourseCode.setText("Course code: ");
+		txtCourseCode.setBounds(25, 180, 674, 20);
+		txtCourseCode.setOpaque(false);
+		txtCourseCode.setBorder(null);
+		courseInf.getContentPane().add(txtCourseCode);
+		txtCourseCode.setColumns(10);
+		
+		JTextField txtCourseNumOfStd = new JTextField();
+		txtCourseNumOfStd.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtCourseNumOfStd.setForeground(Color.WHITE);
+		txtCourseNumOfStd.setText("Number of students: ");
+		txtCourseNumOfStd.setBounds(25, 210, 674, 20);
+		txtCourseNumOfStd.setOpaque(false);
+		txtCourseNumOfStd.setBorder(null);
+		courseInf.getContentPane().add(txtCourseNumOfStd);
+		txtCourseNumOfStd.setColumns(10);
+		
+		JTextField txtCourseNumOfCr = new JTextField();
+		txtCourseNumOfCr.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtCourseNumOfCr.setForeground(Color.WHITE);
+		txtCourseNumOfCr.setText("Number of credits: ");
+		txtCourseNumOfCr.setBounds(25, 240, 674, 20);
+		txtCourseNumOfCr.setOpaque(false);
+		txtCourseNumOfCr.setBorder(null);
+		courseInf.getContentPane().add(txtCourseNumOfCr);
+		txtCourseNumOfCr.setColumns(10);
+		
+		JButton btneditDet = new JButton("Edit course details");
+		btneditDet.setBounds(25, 300, 200, 40);
+		courseInf.getContentPane().add(btneditDet);
+		
+		JButton btneditStd = new JButton("Edit student life");
+		btneditStd.setBounds(25, 360, 200, 40);
+		courseInf.getContentPane().add(btneditStd);
+		
+		JTextField txtCourseStu = new JTextField();
+		txtCourseStu.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtCourseStu.setForeground(Color.WHITE);
+		txtCourseStu.setText("ADD STUDENTS TO COURSE");
+		txtCourseStu.setBounds(350, 120, 200, 20);
+		txtCourseStu.setOpaque(false);
+		txtCourseStu.setBorder(null);
+		courseInf.getContentPane().add(txtCourseStu);
+		txtCourseStu.setColumns(10);
+		
+		
+		JTextField txtSearchCourse = new JTextField();
+		txtSearchCourse.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtSearchCourse.setForeground(Color.WHITE);
+		txtSearchCourse.setText("Search student");
+		txtSearchCourse.setBounds(350, 150, 100, 20);
+		txtSearchCourse.setOpaque(false);
+		txtSearchCourse.setBorder(null);
+		courseInf.getContentPane().add(txtSearchCourse);
+		txtSearchCourse.setColumns(10);
+
+		JTextField textField = new JTextField();
+		textField.setBounds(350, 180, 250, 40);
+		courseInf.getContentPane().add(textField);
+		textField.setColumns(10);
+		JButton btnGo = new JButton("GO");
+		btnGo.setBounds(605, 180, 52, 40);
+		courseInf.getContentPane().add(btnGo);
+		
+		JTextArea txTemp = new JTextArea();
+		txTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txTemp.setForeground(Color.WHITE);
+		txTemp.setText("There will be listed student name and id,\n when somone search student by id.");
+		txTemp.setBounds(350, 250, 300, 50);
+		txTemp.setOpaque(false);
+		txTemp.setBorder(null);
+		courseInf.add(txTemp, BorderLayout.WEST);
+		
+		
+		JButton btnAdd = new JButton("ADD STUDENT");
+		btnAdd.setBounds(350, 330, 150, 40);
+		courseInf.getContentPane().add(btnAdd);
+		
+		backPrPn(courseInf,pr);
 		sis.prof_menu(courseInf, pr);
 		setLogo(courseInf);
 		setPowered(courseInf);
 		setPozadina(courseInf);
+	}
+	
+	public void backPrPn(JFrame nFrame,Professor pr){
+		JButton backPrPn = new JButton("ALL COURSE");
+		backPrPn.setBounds(25, 420, 120, 30);	
+		nFrame.getContentPane().add(backPrPn);
+		backPrPn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SIS sis = new SIS();
+				Professor p = new Professor();
+				
+				
+				
+			}
+		});
 	}
 }

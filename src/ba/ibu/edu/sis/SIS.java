@@ -717,7 +717,7 @@ public class SIS implements Serializable {
 		a.save();
 	}
 
-	private void init(Professor pr) {
+	public void init(Professor pr) {
 		SIS sis = new SIS();
 		Course c = new Course();
 		JFrame loginProf = new JFrame();
