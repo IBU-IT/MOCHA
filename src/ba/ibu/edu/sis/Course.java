@@ -4,45 +4,27 @@ import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.Scanner;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import ba.ibu.edu.sis.StudentInformationSystem;
-import ba.ibu.edu.sis.SIS.Admin;
 import ba.ibu.edu.sis.SIS.Professor;
-import ba.ibu.edu.sis.SIS.Student;
 
 public class Course implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	String CourseID, CourseName, ProfessorName;
 	int numOfCredits, numOfStudents;
-	public ArrayList<Course> a = new ArrayList();
+	public ArrayList<Course> a = new ArrayList<Course>();
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
-	Course() {
-		this.CourseID = CourseID;
-		this.CourseName = CourseName;
-		this.ProfessorName = ProfessorName;
-		this.numOfCredits = numOfCredits;
-		this.numOfStudents = numOfStudents;
-	}
+	
 
 	private void setLogo(JFrame frejm) {
 		JLabel lblNewLabel_logo = new JLabel("");
@@ -188,14 +170,13 @@ public class Course implements Serializable {
 
 		JButton addCBtn = new JButton("Add Course");
 		addCBtn.addActionListener(new ActionListener() {
+			private PrintStream q;
+
 			public void actionPerformed(ActionEvent e) {
-				ObjectOutputStream outputStream = null;
 				try {
 					a.add(c);
-					FileOutputStream buff = new FileOutputStream("information.txt", true);
-					PrintStream p = new PrintStream(buff);
 					FileOutputStream buf = new FileOutputStream("course.txt", true);
-					PrintStream q = new PrintStream(buf);
+					q = new PrintStream(buf);
 
 					q.print(addCtextField.getText());
 					q.print(",");
@@ -238,8 +219,6 @@ public class Course implements Serializable {
 		addCBtn.setBounds(403, 400, 150, 35);
 		addCourse.getContentPane().add(addCBtn);
 
-		String ptr, ch;
-
 		setLogo(addCourse);
 		setPowered(addCourse);
 		setPozadina(addCourse);
@@ -254,13 +233,6 @@ public class Course implements Serializable {
 		displayCourse.getContentPane().setLayout(null);
 
 		try {
-			String str;
-			FileInputStream fstream = new FileInputStream("information.txt");
-			DataInputStream in = new DataInputStream(fstream);
-
-			FileOutputStream buf = new FileOutputStream("course.txt", true);
-			PrintStream q = new PrintStream(buf);
-
 			BufferedReader br = new BufferedReader(new FileReader("course.txt"));
 			String line;
 			while ((line = br.readLine()) != null) {
@@ -285,6 +257,7 @@ public class Course implements Serializable {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	void update(String s, int no) {
 		try {
 			String str;
@@ -340,7 +313,6 @@ public class Course implements Serializable {
 			while ((len = in1.read(bu)) > 0) {
 				out1.write(bu, 0, len);
 			}
-			FileOutputStream buff = new FileOutputStream("hello1.txt");
 			in1.close();
 			out1.close();
 		} catch (FileNotFoundException ex) {
@@ -417,7 +389,6 @@ public class Course implements Serializable {
 	}
 	
 	public void course_inf(Professor pr){
-		Professor p = new Professor();
 		SIS sis = new SIS();
 		JFrame courseInf = new JFrame();
 		courseInf.setVisible(true);
@@ -547,9 +518,7 @@ public class Course implements Serializable {
 		backPrPn.setBounds(25, 420, 120, 30);	
 		nFrame.getContentPane().add(backPrPn);
 		backPrPn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				SIS sis = new SIS();
-				Professor p = new Professor();		
+			public void actionPerformed(ActionEvent arg0) {		
 			}
 		});
 	}
