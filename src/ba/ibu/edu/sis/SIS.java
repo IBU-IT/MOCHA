@@ -460,7 +460,7 @@ public class SIS implements Serializable {
 					adminPage.getContentPane().add(lblStudentName);
 
 					JLabel lblStudentSurname = new JLabel("Student Surname");
-					lblStudentSurname.setBounds(23, 73, 106, 25);
+					lblStudentSurname.setBounds(23, 73, 126, 25);
 					lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentSurname.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentSurname);
@@ -472,7 +472,7 @@ public class SIS implements Serializable {
 					adminPage.getContentPane().add(lblStudentId);
 
 					JLabel lblStudentAge = new JLabel("Student Date of Birth");
-					lblStudentAge.setBounds(23, 171, 106, 25);
+					lblStudentAge.setBounds(23, 171, 146, 25);
 					lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentAge.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentAge);
@@ -484,72 +484,87 @@ public class SIS implements Serializable {
 					adminPage.getContentPane().add(lblStudentYear);
 
 					JLabel lblStudentNationality = new JLabel("Student Nationality");
-					lblStudentNationality.setBounds(23, 318, 106, 25);
+					lblStudentNationality.setBounds(23, 318, 126, 25);
 					lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentNationality.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentNationality);
 					
 					JLabel lblStudentPassword = new JLabel("Student Password");
-					lblStudentPassword.setBounds(23, 416, 106, 25);
+					lblStudentPassword.setBounds(23, 416, 126, 25);
 					lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblStudentPassword.setForeground(Color.WHITE);
 					adminPage.getContentPane().add(lblStudentPassword);
 					
 					JTextField textField_8 = new JTextField();
 					textField_8.setColumns(10);
-					textField_8.setBounds(139, 416, 117, 25);
+					textField_8.setBounds(155, 416, 137, 25);
 					adminPage.getContentPane().add(textField_8);
 					
 					JTextField textField = new JTextField();
-					textField.setBounds(139, 25, 117, 25);
+					textField.setBounds(155, 25, 137, 25);
 					adminPage.getContentPane().add(textField);
 					textField.setColumns(10);
 
 					JTextField textField_1 = new JTextField();
 					textField_1.setColumns(10);
-					textField_1.setBounds(139, 75, 117, 25);
+					textField_1.setBounds(155, 75, 137, 25);
 					adminPage.getContentPane().add(textField_1);
 
 					JTextField textField_2 = new JTextField();
 					textField_2.setColumns(10);
-					textField_2.setBounds(139, 125, 117, 25);
+					textField_2.setBounds(155, 125, 137, 25);
 					adminPage.getContentPane().add(textField_2);
 
 					JTextField textField_3 = new JTextField();
 					textField_3.setColumns(10);
-					textField_3.setBounds(139, 175, 117, 25);
+					textField_3.setBounds(155, 175, 137, 25);
 					adminPage.getContentPane().add(textField_3);
 
 					JTextField textField_4 = new JTextField();
 					textField_4.setColumns(10);
-					textField_4.setBounds(139, 318, 117, 25);
+					textField_4.setBounds(155, 318, 137, 25);
 					adminPage.getContentPane().add(textField_4);
 
 					JTextField textField_5 = new JTextField();
 					textField_5.setColumns(10);
-					textField_5.setBounds(139, 367, 117, 25);
+					textField_5.setBounds(155, 367, 137, 25);
 					adminPage.getContentPane().add(textField_5);
 
 					JTextField textField_7 = new JTextField();
 					textField_7.setColumns(10);
-					textField_7.setBounds(139, 225, 117, 25);
+					textField_7.setBounds(155, 225, 137, 25);
 					adminPage.getContentPane().add(textField_7);
 
 					JRadioButton rdbtnMale = new JRadioButton("Male");
-					rdbtnMale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+					rdbtnMale.setFont(new Font("TAHOMA", Font.BOLD, 12));
 					rdbtnMale.setForeground(Color.BLACK);
-					rdbtnMale.setBounds(139, 275, 66, 23);
+					rdbtnMale.setBounds(155, 275, 66, 23);
 					adminPage.getContentPane().add(rdbtnMale);
 
 					JRadioButton rdbtnFemale = new JRadioButton("Female");
-					rdbtnFemale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+					rdbtnFemale.setFont(new Font("TAHOMA", Font.BOLD, 12));
 					rdbtnFemale.setForeground(Color.BLACK);
-					rdbtnFemale.setBounds(207, 275, 66, 23);
+					rdbtnFemale.setBounds(223, 275, 66, 23);
 					adminPage.getContentPane().add(rdbtnFemale);
 					
 					ButtonGroup gender=new ButtonGroup();//so that only one button can be selected
 					gender.add(rdbtnFemale);
 					gender.add(rdbtnMale);
+					
+					JButton btnLogout = new JButton("Logout");
+					btnLogout.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							adminPage.dispose();
+							SIS prozor = new SIS();
+							prozor.initOptions(a);
+						}
+					});
+					btnLogout.setForeground(Color.WHITE);
+					btnLogout.setContentAreaFilled(false);
+					btnLogout.setBounds(590, 102, 110, 23);
+					btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
+					btnLogout.setBorder(null);
+					adminPage.getContentPane().add(btnLogout);
 					
 					JButton btnNewButton = new JButton("Add Student");
 					btnNewButton.addActionListener(new ActionListener() {
@@ -686,7 +701,7 @@ public class SIS implements Serializable {
 					JLabel lblNewLabel = new JLabel("Search by Student ID");
 					lblNewLabel.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 					lblNewLabel.setForeground(Color.WHITE);
-					lblNewLabel.setBounds(354, 22, 129, 31);
+					lblNewLabel.setBounds(344, 22, 159, 31);
 					adminPage.getContentPane().add(lblNewLabel);
 
 					JButton btnNewButton_2 = new JButton("Go");
@@ -747,11 +762,12 @@ public class SIS implements Serializable {
 		textField.setBounds(240, 220, 200, 35);
 		loginProf.getContentPane().add(textField);
 		textField.setColumns(10);
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.grabFocus();
 
 		JPasswordField passwordField = new JPasswordField();
 		passwordField.setBounds(240, 300, 200, 35);
-		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		loginProf.getContentPane().add(passwordField);
 
 		JLabel lblWelcome = new JLabel("Welcome to professor panel. Please, enter your ID and password below");
@@ -936,10 +952,12 @@ public class SIS implements Serializable {
 		JTextField textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(240, 220, 200, 35);
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		loginStudent.getContentPane().add(textField);
 
 		JPasswordField passwordField = new JPasswordField(16);
 		passwordField.setBounds(240, 300, 200, 35);
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		loginStudent.getContentPane().add(passwordField);
 
 		JLabel label_1 = new JLabel("ID number");

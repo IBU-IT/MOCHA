@@ -80,6 +80,22 @@ public class AdminOptions extends JFrame {
 				
 			}
 		});
+		
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				SIS prozor = new SIS();
+				prozor.initOptions(a);
+			}
+		});
+		btnLogout.setForeground(Color.WHITE);
+		btnLogout.setContentAreaFilled(false);
+		btnLogout.setBounds(590, 62, 110, 23);
+		btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
+		btnLogout.setBorder(null);
+		contentPane.add(btnLogout);
+		
 		btnAddStudent.setBounds(268, 269, 144, 56);
 		contentPane.add(btnAddStudent);
 		
