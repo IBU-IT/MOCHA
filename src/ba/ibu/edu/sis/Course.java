@@ -479,9 +479,15 @@ public class Course implements Serializable {
 		btneditDet.setBounds(25, 300, 200, 40);
 		courseInf.getContentPane().add(btneditDet);
 		
-		JButton btneditStd = new JButton("Edit student life");
+		JButton btneditStd = new JButton("Edit student list");
 		btneditStd.setBounds(25, 360, 200, 40);
 		courseInf.getContentPane().add(btneditStd);
+		btneditStd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				courseInf.dispose();
+				student_list(pr);
+			}
+		});
 		
 		JTextField txtCourseStu = new JTextField();
 		txtCourseStu.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -513,18 +519,21 @@ public class Course implements Serializable {
 		courseInf.getContentPane().add(btnGo);
 		
 		JTextArea txTemp = new JTextArea();
-		txTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txTemp.setFont(new Font("Tahoma", Font.BOLD, 14));
 		txTemp.setForeground(Color.WHITE);
-		txTemp.setText("There will be listed student name and id,\n when somone search student by id.");
-		txTemp.setBounds(350, 250, 300, 50);
+		txTemp.setText("1. Huso Cubarkapa");
+		txTemp.setBounds(350, 260, 300, 50);
 		txTemp.setOpaque(false);
 		txTemp.setBorder(null);
 		courseInf.add(txTemp, BorderLayout.WEST);
-		
-		
-		JButton btnAdd = new JButton("ADD STUDENT");
-		btnAdd.setBounds(350, 330, 150, 40);
-		courseInf.getContentPane().add(btnAdd);
+
+		JButton btnUpdateStd = new JButton("ADD TO COURSE");
+		btnUpdateStd.setForeground(Color.WHITE);
+		btnUpdateStd.setFont(new Font("TAHOMA", Font.BOLD, 12));
+		btnUpdateStd.setBounds(550, 255, 100, 30);
+		courseInf.getContentPane().add(btnUpdateStd);
+		btnUpdateStd.setContentAreaFilled(false);
+		btnUpdateStd.setBorder(null);
 		
 		backPrPn(courseInf,pr);
 		sis.prof_menu(courseInf, pr);
@@ -540,11 +549,151 @@ public class Course implements Serializable {
 		backPrPn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				SIS sis = new SIS();
-				Professor p = new Professor();
-				
-				
-				
+				Professor p = new Professor();		
 			}
 		});
+	}
+	
+	public void student_list(Professor pr){
+		SIS sis = new SIS();
+		JFrame std_coPanel = new JFrame();
+		std_coPanel.setVisible(true);
+		std_coPanel.setBounds(100, 100, 700, 511);
+		std_coPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		std_coPanel.getContentPane().setLayout(null);
+		
+		JTextField txtCourseSection = new JTextField();
+		txtCourseSection.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtCourseSection.setForeground(Color.WHITE);
+		txtCourseSection.setText("LIST OF STUDENTS");
+		txtCourseSection.setBounds(25, 120, 674, 20);
+		txtCourseSection.setOpaque(false);
+		txtCourseSection.setBorder(null);
+		std_coPanel.getContentPane().add(txtCourseSection);
+		
+		JTextArea txTemp = new JTextArea();
+		txTemp.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txTemp.setForeground(Color.WHITE);
+		txTemp.setText("1. Huso Cubarkapa");
+		txTemp.setBounds(25, 170, 200, 30);
+		txTemp.setOpaque(false);
+		txTemp.setBorder(null);
+		std_coPanel.add(txTemp, BorderLayout.WEST);
+		
+		JButton btnUpdateStd = new JButton("UPDATE");
+		btnUpdateStd.setForeground(Color.WHITE);
+		btnUpdateStd.setFont(new Font("TAHOMA", Font.BOLD, 12));
+		btnUpdateStd.setBounds(250, 160, 100, 30);
+		std_coPanel.getContentPane().add(btnUpdateStd);
+		btnUpdateStd.setContentAreaFilled(false);
+		btnUpdateStd.setBorder(null);
+		btnUpdateStd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				std_coPanel.dispose();
+				updateStd(pr);
+			}
+		});
+		
+		backPrPn(std_coPanel,pr);
+		sis.prof_menu(std_coPanel, pr);
+		setLogo(std_coPanel);
+		setPowered(std_coPanel);
+		setPozadina(std_coPanel);
+	}
+	
+	public void updateStd(Professor pr){
+		SIS sis = new SIS();
+		JFrame std_updPanel = new JFrame();
+		std_updPanel.setVisible(true);
+		std_updPanel.setBounds(100, 100, 700, 511);
+		std_updPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		std_updPanel.getContentPane().setLayout(null);
+	
+	JTextField stdID = new JTextField();
+	stdID.setFont(new Font("Tahoma", Font.BOLD, 13));
+	stdID.setForeground(Color.WHITE);
+	stdID.setText("Student ID:");
+	stdID.setBounds(25, 110, 200, 30);
+	stdID.setOpaque(false);
+	stdID.setBorder(null);
+	std_updPanel.getContentPane().add(stdID);
+	
+	JTextField stdname = new JTextField();
+	stdname.setFont(new Font("Tahoma", Font.BOLD, 13));
+	stdname.setForeground(Color.WHITE);
+	stdname.setText("Student Name:");
+	stdname.setBounds(200, 110, 200, 30);
+	stdname.setOpaque(false);
+	stdname.setBorder(null);
+	std_updPanel.getContentPane().add(stdname);
+	
+	
+	JLabel updQuiz = new JLabel("Quiz grade");
+	updQuiz.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+	updQuiz.setForeground(Color.WHITE);
+	updQuiz.setBounds(25, 160, 130, 25);
+	std_updPanel.getContentPane().add(updQuiz);
+	
+	JLabel updMid = new JLabel("Midterm grade");
+	updMid.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+	updMid.setForeground(Color.WHITE);
+	updMid.setBounds(25, 210, 130, 25);
+	std_updPanel.getContentPane().add(updMid);
+	
+	JLabel updFin = new JLabel("Final grade");
+	updFin.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+	updFin.setForeground(Color.WHITE);
+	updFin.setBounds(25, 260, 130, 25);
+	std_updPanel.getContentPane().add(updFin);
+	
+	JLabel updHome = new JLabel("Assignment grade");
+	updHome.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+	updHome.setForeground(Color.WHITE);
+	updHome.setBounds(25, 310, 130, 25);
+	std_updPanel.getContentPane().add(updHome);
+	
+	JLabel updAtt = new JLabel("Attendance");
+	updAtt.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+	updAtt.setForeground(Color.WHITE);
+	updAtt.setBounds(25, 360, 130, 25);
+	std_updPanel.getContentPane().add(updAtt);
+	
+	JTextField textField_1 = new JTextField();
+	textField_1.setColumns(10);
+	textField_1.setBounds(160, 160, 150, 25);
+	std_updPanel.getContentPane().add(textField_1);
+	
+	JTextField textField_2 = new JTextField();
+	textField_2.setColumns(10);
+	textField_2.setBounds(160, 210, 150, 25);
+	std_updPanel.getContentPane().add(textField_2);
+	
+	JTextField textField_3 = new JTextField();
+	textField_3.setColumns(10);
+	textField_3.setBounds(160, 260, 150, 25);
+	std_updPanel.getContentPane().add(textField_3);
+	
+	JTextField textField_4 = new JTextField();
+	textField_4.setColumns(10);
+	textField_4.setBounds(160, 310, 150, 25);
+	std_updPanel.getContentPane().add(textField_4);
+	
+	JTextField textField_5 = new JTextField();
+	textField_5.setColumns(10);
+	textField_5.setBounds(160, 360, 150, 25);
+	std_updPanel.getContentPane().add(textField_5);
+	
+	JButton btnUpdateStd = new JButton("UPDATE");
+	
+	btnUpdateStd.setFont(new Font("TAHOMA", Font.BOLD, 11));
+	btnUpdateStd.setBounds(25, 400, 100, 35);
+	std_updPanel.getContentPane().add(btnUpdateStd);
+	
+	
+	sis.prof_menu(std_updPanel, pr);
+	setLogo(std_updPanel);
+	setPowered(std_updPanel);
+	setPozadina(std_updPanel);
+
 	}
 }
