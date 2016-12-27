@@ -7,12 +7,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ba.ibu.edu.sis.SIS.Admin;
-
+import ba.ibu.edu.sis.AddProfessor;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import ba.ibu.edu.sis.SIS;
 
 public class AdminOptions extends JFrame {
 
@@ -50,7 +52,7 @@ public class AdminOptions extends JFrame {
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				hFrame.dispose();
-				main(null);
+				SIS.main(null);
 			}
 		});
 	}
@@ -63,7 +65,7 @@ public class AdminOptions extends JFrame {
 	}
 
 
-	public AdminOptions(Admin a) {
+	public AdminOptions(Admin a,List<Course> lista) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 511);
 		contentPane = new JPanel();
@@ -76,7 +78,7 @@ public class AdminOptions extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				SIS blabla = new SIS();
-				blabla.init(a);	
+				blabla.init(a, lista);	
 				
 			}
 		});
@@ -86,7 +88,7 @@ public class AdminOptions extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 				SIS prozor = new SIS();
-				prozor.initOptions(a);
+				prozor.initOptions(a, lista);
 			}
 		});
 		btnLogout.setForeground(Color.WHITE);
@@ -100,6 +102,18 @@ public class AdminOptions extends JFrame {
 		contentPane.add(btnAddStudent);
 		
 		JButton btnAddProfessor = new JButton("Add Professor");
+		btnAddProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				AddProfessor AddProfessor;
+				AddProfessor = new AddProfessor(a,lista);
+				AddProfessor.setVisible(true);
+				setPowered(AddProfessor);
+				homeButton(AddProfessor, 0);
+				setPozadina(AddProfessor);
+				
+			}
+		});
 		btnAddProfessor.setBounds(268, 190, 144, 56);
 		contentPane.add(btnAddProfessor);
 		

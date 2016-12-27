@@ -129,7 +129,8 @@ public class SIS implements Serializable {
 
 	static class Admin {
 		public List<Student> Students = new ArrayList<Student>();
-		private List<Professor> Professors = new ArrayList<Professor>();
+		public List<Professor> Professors = new ArrayList<Professor>();
+		public List<Course> Courses = new ArrayList<Course>();
 
 		private String password = "password";
 
@@ -359,15 +360,21 @@ public class SIS implements Serializable {
 		}
 		Admin admin = new Admin();
 		Professor dino = new Professor();
+		Course math = new Course();
+		Course physics = new Course();
+		physics.setCourseName("PHYSICS");
+		math.setCourseName("MATH");
 		admin.restore();
 		dino.setName("Dino Keco");
 		dino.setId("1");
 		dino.setPassword("1");
 		admin.Professors.add(dino);
+		admin.Courses.add(math);
+		admin.Courses.add(physics);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SIS window = new SIS(admin, dino);
+					SIS window = new SIS(admin, dino,admin.Courses);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -376,8 +383,8 @@ public class SIS implements Serializable {
 		});
 	}
 
-	public SIS(Admin a, Professor pr) {
-		initialize(a, pr);
+	public SIS(Admin a, Professor pr, List<Course> lista) {
+		initialize(a, pr, lista);
 	}
 
 	interface Faculty {
@@ -390,7 +397,7 @@ public class SIS implements Serializable {
 	}
 
 	
-	public void initOptions(Admin a){
+	public void initOptions(Admin a,List<Course> lista){
 		login = new JFrame();
 		login.setVisible(true);
 		login.setBounds(100, 100, 700, 511);
@@ -423,7 +430,7 @@ public class SIS implements Serializable {
 				if (pwdEnterYourPassword.getText().equals(a.getPassword())) {
 					login.dispose();
 					AdminOptions AdminOptions;
-					AdminOptions = new AdminOptions(a);
+					AdminOptions = new AdminOptions(a,lista);
 					AdminOptions.setVisible(true);
 					AdminOptions.setPowered(AdminOptions);
 					homeButton(AdminOptions, 0);
@@ -444,7 +451,7 @@ public class SIS implements Serializable {
 		setPozadina(login);
 	}
 	
-	public void init(Admin a) {
+	public void init(Admin a, List<Course> lista) {
 					
 					adminPage = new JFrame();
 					adminPage.setVisible(true);
@@ -556,7 +563,7 @@ public class SIS implements Serializable {
 						public void actionPerformed(ActionEvent arg0) {
 							adminPage.dispose();
 							SIS prozor = new SIS();
-							prozor.initOptions(a);
+							prozor.initOptions(a,lista);
 						}
 					});
 					btnLogout.setForeground(Color.WHITE);
@@ -1244,7 +1251,7 @@ public class SIS implements Serializable {
 		setPowered(loginStudent);
 	}
 
-	private void initialize(Admin a, Professor pr) {
+	private void initialize(Admin a, Professor pr, List<Course> lista) {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 511);
@@ -1278,7 +1285,7 @@ public class SIS implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				SIS prozor = new SIS();
-				prozor.initOptions(a);
+				prozor.initOptions(a, lista);
 			}
 		});
 		frame.getContentPane().add(button_1);
