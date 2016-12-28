@@ -148,6 +148,16 @@ public class SIS implements Serializable {
 			return null;
 		}
 
+		Course findCourse(String id) {
+
+			for (Course course : Courses) {
+				if (course.getCourseName().equals(id)) {
+					return course;
+				}
+			}
+			return null;
+		}
+		
 		Professor findProfessor(String id) {
 
 			for (Professor p : Professors) {
@@ -242,6 +252,16 @@ public class SIS implements Serializable {
 
 		public String getPassword() {
 			return password;
+		}
+
+		private List<Course> MyCourses = new ArrayList<Course>();
+		
+		public List<Course> getMyCourses() {
+			return MyCourses;
+		}
+
+		public void setMyCourses(List<Course> myCourses) {
+			MyCourses = myCourses;
 		}
 
 		private String Id;
