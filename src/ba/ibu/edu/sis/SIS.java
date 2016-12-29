@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import ba.ibu.edu.sis.AdminOptions;
 
 
@@ -169,7 +170,7 @@ public class SIS implements Serializable {
 		}
 		
 		@SuppressWarnings("unchecked")
-		public void restore() {
+		public void restoreS() {
 			try {
 				ObjectInputStream in = new ObjectInputStream(new FileInputStream("students_ob.txt"));
 				Students = (List<Student>) in.readObject();
@@ -180,10 +181,32 @@ public class SIS implements Serializable {
 
 		}
 		
-		public void save() {
+		public void saveS() {
 			try {
 				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("students_ob.txt"));
 				out.writeObject(Students);
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		@SuppressWarnings("unchecked")
+		public void restoreC() {
+			try {
+				ObjectInputStream in = new ObjectInputStream(new FileInputStream("courses_ob.txt"));
+				Courses = (List<Course>) in.readObject();
+				in.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		public void saveC() {
+			try {
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("courses_ob.txt"));
+				out.writeObject(Courses);
 				out.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -194,17 +217,7 @@ public class SIS implements Serializable {
 
 	static class Professor {
 
-		Course c = new Course();
-
-		Course findCourse(String id) {
-
-			for (Course course : c.a) {
-				if (course.getCourseID().equals(id)) {
-					return course;
-				}
-			}
-			return null;
-		}
+	
 
 		public String getId() {
 			return Id;
@@ -372,25 +385,15 @@ public class SIS implements Serializable {
 	}
 
 	public static void main(String[] args) {
-
-		String strDirectoy = "course";
-		boolean success = (new File(strDirectoy)).mkdir();
-		if (success) {
-			System.out.println("Directory: " + strDirectoy + " created");
-		}
+		
 		Admin admin = new Admin();
+		admin.restoreC();
+		admin.restoreS();
 		Professor dino = new Professor();
-		Course math = new Course();
-		Course physics = new Course();
-		physics.setCourseName("PHYSICS");
-		math.setCourseName("MATH");
-		admin.restore();
 		dino.setName("Dino Keco");
 		dino.setId("1");
 		dino.setPassword("1");
 		admin.Professors.add(dino);
-		admin.Courses.add(math);
-		admin.Courses.add(physics);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -656,7 +659,7 @@ public class SIS implements Serializable {
 							rdbtnMale.setSelected(false);
 							rdbtnFemale.setSelected(false);
 							JOptionPane.showMessageDialog(null, "Student successfully added!");
-							a.save();
+							a.saveS();
 							}
 						}
 					});
@@ -685,7 +688,7 @@ public class SIS implements Serializable {
 							rdbtnMale.setSelected(false);
 							rdbtnFemale.setSelected(false);
 							JOptionPane.showMessageDialog(null, "Student deleted.");
-							a.save();
+							a.saveS();
 						}
 					});
 					btnDeleteStudent.setBounds(486, 330, 140, 40);
@@ -719,7 +722,7 @@ public class SIS implements Serializable {
 							rdbtnMale.setSelected(false);
 							rdbtnFemale.setSelected(false);
 							JOptionPane.showMessageDialog(null, "Information updated.");
-							a.save();
+							a.saveS();
 						}
 					});
 					btnNewButton_1.setBounds(370, 381, 207, 65);
@@ -774,7 +777,7 @@ public class SIS implements Serializable {
 					setPozadina(adminPage);
 
 		
-		a.save();
+		a.saveS();
 	}
 
 	public void init(Professor pr) {
@@ -861,17 +864,7 @@ public class SIS implements Serializable {
 					JButton btnGo = new JButton("GO");
 					btnGo.setBounds(605, 157, 52, 40);
 
-					btnGo.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							if (pr.findCourse(textField.getText()) == null) {
-								JOptionPane.showMessageDialog(null, "Course not found.");
-								JOptionPane.showMessageDialog(null, textField.getText());
-								textField.setText(null);
-							} else {
-								JOptionPane.showMessageDialog(null, "OKE");
-							}
-						}
-					});
+					
 
 					loginProfPage.getContentPane().add(btnGo);
 
@@ -960,7 +953,8 @@ public class SIS implements Serializable {
 	}
 
 	private void init_stud(Admin a) {
-
+		
+		
 		JFrame loginStudent = new JFrame();
 		loginStudent.setVisible(true);
 		loginStudent.setBounds(100, 100, 700, 511);
@@ -968,6 +962,7 @@ public class SIS implements Serializable {
 		loginStudent.getContentPane().setLayout(null);
 		setLogo2(loginStudent);
 		homeButton(loginStudent,0);
+		
 		
 		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1183,7 +1178,7 @@ public class SIS implements Serializable {
 									rdbtnMale.setSelected(false);
 									rdbtnFemale.setSelected(false);
 									
-									a.save();
+									a.saveS();
 									
 								}
 							});

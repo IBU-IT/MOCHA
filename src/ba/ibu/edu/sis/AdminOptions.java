@@ -3,9 +3,10 @@ package ba.ibu.edu.sis;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
+import ba.ibu.edu.sis.Course;
 import ba.ibu.edu.sis.SIS.Admin;
 import ba.ibu.edu.sis.AddProfessor;
 import javax.swing.JButton;
@@ -118,6 +119,14 @@ public class AdminOptions extends JFrame {
 		contentPane.add(btnAddProfessor);
 		
 		JButton btnAddCourse = new JButton("Add Course");
+		btnAddCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Course c = new Course();
+				c.blabla(a, a.Courses);
+				
+			}
+		});
 		btnAddCourse.setBounds(268, 348, 144, 56);
 		contentPane.add(btnAddCourse);
 		

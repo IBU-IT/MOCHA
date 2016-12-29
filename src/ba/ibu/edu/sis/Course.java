@@ -1,9 +1,10 @@
 package ba.ibu.edu.sis;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -15,14 +16,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import ba.ibu.edu.sis.SIS.Admin;
 import ba.ibu.edu.sis.SIS.Professor;
 
 public class Course implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	String CourseID, CourseName, ProfessorName;
+	private String CourseID, CourseName;
 	int numOfCredits, numOfStudents;
-	public ArrayList<Course> a = new ArrayList<Course>();
+	//public ArrayList<Course> a = new ArrayList<Course>();
 
 	
 
@@ -82,8 +85,10 @@ public class Course implements Serializable {
 
 	JTextField addCtextField, addCtextField_1, addCtextField_2, addCtextField_3, addCtextField_4, addCtextField_5,
 			addCtextField_6;
-
-	public void add(Course c) {
+	
+	public Course(){
+	}
+	public  void blabla (Admin a,List<Course> lista){
 
 		JFrame addCourse = new JFrame();
 		addCourse.setVisible(true);
@@ -168,33 +173,10 @@ public class Course implements Serializable {
 		addCtextField_6.setBounds(350, 315, 200, 35);
 		addCourse.getContentPane().add(addCtextField_6);
 
+	
 		JButton addCBtn = new JButton("Add Course");
 		addCBtn.addActionListener(new ActionListener() {
-			private PrintStream q;
-
-			public void actionPerformed(ActionEvent e) {
-				try {
-					a.add(c);
-					FileOutputStream buf = new FileOutputStream("course.txt", true);
-					q = new PrintStream(buf);
-
-					q.print(addCtextField.getText());
-					q.print(",");
-					q.print(addCtextField_1.getText());
-					q.print(",");
-					q.print(addCtextField_2.getText());
-					q.print(",");
-					q.print(addCtextField_3.getText());
-					q.print(",");
-					q.print(addCtextField_4.getText());
-					q.print(",");
-					q.print(addCtextField_5.getText());
-					q.print(",");
-					q.print(addCtextField_6.getText());
-
-				} catch (Exception a) {
-					System.out.println(a);
-				}
+			public  void actionPerformed(ActionEvent e) {
 				Course co = new Course();
 				co.setCourseID(addCtextField.getText());
 				co.setCourseName(addCtextField_1.getText());
@@ -203,8 +185,8 @@ public class Course implements Serializable {
 				co.setNumOfQuizzes(Integer.parseInt(addCtextField_4.getText()));
 				co.setNumOfHw(Integer.parseInt(addCtextField_5.getText()));
 				co.setNumOfLectures(Integer.parseInt(addCtextField_6.getText()));
-
-				a.add(co);
+				
+				
 				addCtextField.setText(null);
 				addCtextField_1.setText(null);
 				addCtextField_2.setText(null);
@@ -212,16 +194,21 @@ public class Course implements Serializable {
 				addCtextField_4.setText(null);
 				addCtextField_5.setText(null);
 				addCtextField_6.setText(null);
-
+				lista.add(co);
+				a.saveC();
 				JOptionPane.showMessageDialog(null, "Course successfully added!");
-			}
+				
+		}
 		});
 		addCBtn.setBounds(403, 400, 150, 35);
 		addCourse.getContentPane().add(addCBtn);
 
+		
+		
 		setLogo(addCourse);
 		setPowered(addCourse);
 		setPozadina(addCourse);
+		
 	}
 
 	public void displaycourseinf() {
