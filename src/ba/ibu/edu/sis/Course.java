@@ -88,14 +88,35 @@ public class Course implements Serializable {
 	
 	public Course(){
 	}
+	
+	public void homeButton(JFrame hFrame, int shift) {
+		ImageIcon homeIcon=new ImageIcon("home_icon.png");
+		JButton btnHome = new JButton(homeIcon);
+		btnHome.setForeground(Color.WHITE);
+		
+		btnHome.setBounds(635, 20+shift, 30, 30);
+		btnHome.setFont(new Font("TAHOMA", Font.BOLD, 13));
+		btnHome.setContentAreaFilled(false);
+		btnHome.setBorder(null);
+		hFrame.getContentPane().add(btnHome);
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				hFrame.dispose();
+				SIS.main(null);
+			}
+		});
+	}
+	
 	public  void blabla (Admin a,List<Course> lista){
-
+		
 		JFrame addCourse = new JFrame();
 		addCourse.setVisible(true);
 		addCourse.setBounds(100, 100, 700, 511);
 		addCourse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addCourse.getContentPane().setLayout(null);
 
+		homeButton(addCourse, 0);
+		
 		JLabel addCoID = new JLabel("Course ID");
 		addCoID.setFont(new Font("TAHOMA", Font.PLAIN, 13));
 		addCoID.setForeground(Color.WHITE);

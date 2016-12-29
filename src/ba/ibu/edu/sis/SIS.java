@@ -213,11 +213,33 @@ public class SIS implements Serializable {
 			}
 
 		}
+		
+		@SuppressWarnings("unchecked")
+		public void restoreP() {
+			try {
+				ObjectInputStream in = new ObjectInputStream(new FileInputStream("professors_ob.txt"));
+				Professors = (List<Professor>) in.readObject();
+				in.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		public void saveP() {
+			try {
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("professors_ob.txt"));
+				out.writeObject(Professors);
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
-	static class Professor {
+	static class Professor implements Serializable{
 
-	
+		private static final long serialVersionUID = 1L;
 
 		public String getId() {
 			return Id;
@@ -388,6 +410,7 @@ public class SIS implements Serializable {
 		
 		Admin admin = new Admin();
 		admin.restoreC();
+		admin.restoreP();
 		admin.restoreS();
 		Professor dino = new Professor();
 		dino.setName("Dino Keco");

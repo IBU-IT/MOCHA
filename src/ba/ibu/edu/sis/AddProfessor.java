@@ -212,12 +212,12 @@ public class AddProfessor extends JFrame {
 					p.setPassword(profpassword.getText());
 					p.setPhone(phone.getText());
 					List<Course> CoursesToAdd = new ArrayList<Course>();
-					for (int i = 0; i <DLM1.size(); i++) {
+					for (int i = 0; i < DLM1.size(); i++) {
 						CoursesToAdd.add(a.findCourse(DLM1.getElementAt(i)));
-
 					}
 					p.setMyCourses(CoursesToAdd);
 					a.Professors.add(p);
+					a.saveP();
 					profname.setText(null);
 					profsurname.setText(null);
 					profemail.setText(null);
@@ -247,10 +247,30 @@ public class AddProfessor extends JFrame {
 					profpassword.setText(wanted.getPassword());
 					phone.setText(wanted.getPhone());
 					textField.setText(null);
+					DLM1.clear();
+					for (int i = 0; i < wanted.getMyCourses().size(); i++) {
+						DLM1.addElement(wanted.getMyCourses().get(i).getCourseName());
+					}
+					dodaj.setModel(DLM1);
 				}
+				DLM.clear();
+				for (int i = 0; i < lista.size(); i++) {
+					DLM.addElement(lista.get(i).getCourseName());
+				}
+				list.setModel(DLM);
 			}
 		});
 		btnNewButton_1.setBounds(541, 343, 59, 38);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DLM1.clear();
+				dodaj.setModel(DLM1);
+			}
+		});
+		btnClear.setBounds(563, 316, 89, 23);
+		contentPane.add(btnClear);
 	}
 }
