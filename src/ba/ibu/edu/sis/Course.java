@@ -117,6 +117,21 @@ public class Course implements Serializable {
 
 		homeButton(addCourse, 0);
 		
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addCourse.dispose();
+				SIS prozor = new SIS();
+				prozor.initOptions(a, lista);
+			}
+		});
+		btnLogout.setForeground(Color.WHITE);
+		btnLogout.setContentAreaFilled(false);
+		btnLogout.setBounds(590, 62, 110, 23);
+		btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
+		btnLogout.setBorder(null);
+		addCourse.add(btnLogout);
+		
 		JLabel addCoID = new JLabel("Course ID");
 		addCoID.setFont(new Font("TAHOMA", Font.PLAIN, 13));
 		addCoID.setForeground(Color.WHITE);
@@ -396,7 +411,7 @@ public class Course implements Serializable {
 		this.attendence[numOfLecture] = 100;
 	}
 	
-	public void course_inf(Professor pr){
+	public void course_inf(Professor pr, Admin a){
 		SIS sis = new SIS();
 		JFrame courseInf = new JFrame();
 		courseInf.setVisible(true);
@@ -464,7 +479,7 @@ public class Course implements Serializable {
 		btneditStd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				courseInf.dispose();
-				student_list(pr);
+				student_list(pr,a);
 			}
 		});
 		
@@ -515,7 +530,7 @@ public class Course implements Serializable {
 		btnUpdateStd.setBorder(null);
 		
 		backPrPn(courseInf,pr);
-		sis.prof_menu(courseInf, pr);
+		sis.prof_menu(courseInf, pr,a);
 		setLogo(courseInf);
 		setPowered(courseInf);
 		setPozadina(courseInf);
@@ -531,7 +546,7 @@ public class Course implements Serializable {
 		});
 	}
 	
-	public void student_list(Professor pr){
+	public void student_list(Professor pr,Admin a){
 		SIS sis = new SIS();
 		JFrame std_coPanel = new JFrame();
 		std_coPanel.setVisible(true);
@@ -567,18 +582,18 @@ public class Course implements Serializable {
 		btnUpdateStd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				std_coPanel.dispose();
-				updateStd(pr);
+				updateStd(pr,a);
 			}
 		});
 		
 		backPrPn(std_coPanel,pr);
-		sis.prof_menu(std_coPanel, pr);
+		sis.prof_menu(std_coPanel, pr,a);
 		setLogo(std_coPanel);
 		setPowered(std_coPanel);
 		setPozadina(std_coPanel);
 	}
 	
-	public void updateStd(Professor pr){
+	public void updateStd(Professor pr, Admin a){
 		SIS sis = new SIS();
 		JFrame std_updPanel = new JFrame();
 		std_updPanel.setVisible(true);
@@ -667,7 +682,7 @@ public class Course implements Serializable {
 	std_updPanel.getContentPane().add(btnUpdateStd);
 	
 	
-	sis.prof_menu(std_updPanel, pr);
+	sis.prof_menu(std_updPanel, pr,a);
 	setLogo(std_updPanel);
 	setPowered(std_updPanel);
 	setPozadina(std_updPanel);

@@ -1,19 +1,16 @@
 package ba.ibu.edu.sis;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import ba.ibu.edu.sis.AdminOptions;
 
-
 import java.awt.Font;
 import javax.swing.JButton;
 
 import javax.swing.JOptionPane;
-
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ArrayList;
@@ -64,11 +61,11 @@ public class SIS implements Serializable {
 	}
 
 	private void homeButton(JFrame hFrame, int shift) {
-		ImageIcon homeIcon=new ImageIcon("home_icon.png");
+		ImageIcon homeIcon = new ImageIcon("home_icon.png");
 		JButton btnHome = new JButton(homeIcon);
 		btnHome.setForeground(Color.WHITE);
-		
-		btnHome.setBounds(635, 20+shift, 30, 30);
+
+		btnHome.setBounds(635, 20 + shift, 30, 30);
 		btnHome.setFont(new Font("TAHOMA", Font.BOLD, 13));
 		btnHome.setContentAreaFilled(false);
 		btnHome.setBorder(null);
@@ -80,8 +77,8 @@ public class SIS implements Serializable {
 			}
 		});
 	}
-	
-	public void prof_menu(JFrame nFrame, Professor pr){
+
+	public void prof_menu(JFrame nFrame, Professor pr, Admin a) {
 		SIS sis = new SIS();
 		JButton btnEditMyProfile = new JButton("Edit my profile");
 		btnEditMyProfile.addActionListener(new ActionListener() {
@@ -100,8 +97,8 @@ public class SIS implements Serializable {
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				nFrame.dispose();
-				sis.init(pr);
-				
+				sis.init(pr, a);
+
 			}
 		});
 		btnLogout.setForeground(Color.WHITE);
@@ -110,7 +107,7 @@ public class SIS implements Serializable {
 		btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
 		btnLogout.setBorder(null);
 		nFrame.getContentPane().add(btnLogout);
-		
+
 		JButton btnmess = new JButton("Messages");
 		btnmess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -123,7 +120,7 @@ public class SIS implements Serializable {
 		btnmess.setBorder(null);
 		nFrame.getContentPane().add(btnmess);
 	}
-	
+
 	public SIS() {
 
 	}
@@ -158,7 +155,7 @@ public class SIS implements Serializable {
 			}
 			return null;
 		}
-		
+
 		Professor findProfessor(String id) {
 
 			for (Professor p : Professors) {
@@ -168,7 +165,7 @@ public class SIS implements Serializable {
 			}
 			return null;
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		public void restoreS() {
 			try {
@@ -180,7 +177,7 @@ public class SIS implements Serializable {
 			}
 
 		}
-		
+
 		public void saveS() {
 			try {
 				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("students_ob.txt"));
@@ -191,7 +188,7 @@ public class SIS implements Serializable {
 			}
 
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		public void restoreC() {
 			try {
@@ -203,6 +200,7 @@ public class SIS implements Serializable {
 			}
 
 		}
+
 		public void saveC() {
 			try {
 				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("courses_ob.txt"));
@@ -213,7 +211,7 @@ public class SIS implements Serializable {
 			}
 
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		public void restoreP() {
 			try {
@@ -225,6 +223,7 @@ public class SIS implements Serializable {
 			}
 
 		}
+
 		public void saveP() {
 			try {
 				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("professors_ob.txt"));
@@ -237,7 +236,7 @@ public class SIS implements Serializable {
 		}
 	}
 
-	static class Professor implements Serializable{
+	static class Professor implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 
@@ -245,6 +244,11 @@ public class SIS implements Serializable {
 			return Id;
 		}
 
+		public String toString(){
+			String output = "Professor name: "+getName()+"\n"+"Professor surname: "+getSurname()+"\nProfessor ID: "+getId()+"\nProfessor email: "+getEmail()+"\nProfessor phone: "+getPhone();
+			return output;
+		}
+		
 		public void setId(String id) {
 			Id = id;
 		}
@@ -290,7 +294,7 @@ public class SIS implements Serializable {
 		}
 
 		private List<Course> MyCourses = new ArrayList<Course>();
-		
+
 		public List<Course> getMyCourses() {
 			return MyCourses;
 		}
@@ -407,7 +411,7 @@ public class SIS implements Serializable {
 	}
 
 	public static void main(String[] args) {
-		
+
 		Admin admin = new Admin();
 		admin.restoreC();
 		admin.restoreP();
@@ -420,7 +424,7 @@ public class SIS implements Serializable {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SIS window = new SIS(admin, dino,admin.Courses);
+					SIS window = new SIS(admin, dino, admin.Courses);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -442,15 +446,12 @@ public class SIS implements Serializable {
 		void conduct_session();
 	}
 
-	
-	public void initOptions(Admin a,List<Course> lista){
+	public void initOptions(Admin a, List<Course> lista) {
 		login = new JFrame();
 		login.setVisible(true);
 		login.setBounds(100, 100, 700, 511);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		login.getContentPane().setLayout(null);
-		
-	
 
 		JPasswordField pwdEnterYourPassword = new JPasswordField();
 		pwdEnterYourPassword.setBounds(240, 260, 200, 35);
@@ -466,9 +467,8 @@ public class SIS implements Serializable {
 		lblNewLabel.setBounds(65, 190, 560, 56);
 		login.getContentPane().add(lblNewLabel);
 		setLogo2(login);
-		homeButton(login,0);
-		
-		
+		homeButton(login, 0);
+
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
@@ -476,15 +476,14 @@ public class SIS implements Serializable {
 				if (pwdEnterYourPassword.getText().equals(a.getPassword())) {
 					login.dispose();
 					AdminOptions AdminOptions;
-					AdminOptions = new AdminOptions(a,lista);
+					AdminOptions = new AdminOptions(a, lista);
 					AdminOptions.setVisible(true);
 					AdminOptions.setPowered(AdminOptions);
 					homeButton(AdminOptions, 0);
 					AdminOptions.setLogo2(AdminOptions);
 					AdminOptions.setPozadina(AdminOptions);
-					
-				}
-				else {
+
+				} else {
 					JOptionPane.showMessageDialog(null, "ne moze");
 				}
 				pwdEnterYourPassword.setText("");
@@ -496,320 +495,319 @@ public class SIS implements Serializable {
 		setPowered(login);
 		setPozadina(login);
 	}
-	
+
 	public void init(Admin a, List<Course> lista) {
-					
-					adminPage = new JFrame();
-					adminPage.setVisible(true);
-					adminPage.setBounds(100, 100, 700, 511);
-					adminPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					adminPage.getContentPane().setLayout(null);
-					homeButton(adminPage,45);
-					
-					JLabel lblStudentName = new JLabel("Student Name");
-					lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblStudentName.setForeground(Color.WHITE);
-					lblStudentName.setBounds(23, 30, 106, 25);
-					adminPage.getContentPane().add(lblStudentName);
 
-					JLabel lblStudentSurname = new JLabel("Student Surname");
-					lblStudentSurname.setBounds(23, 73, 126, 25);
-					lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblStudentSurname.setForeground(Color.WHITE);
-					adminPage.getContentPane().add(lblStudentSurname);
+		adminPage = new JFrame();
+		adminPage.setVisible(true);
+		adminPage.setBounds(100, 100, 700, 511);
+		adminPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		adminPage.getContentPane().setLayout(null);
+		homeButton(adminPage, 45);
 
-					JLabel lblStudentId = new JLabel("Student ID");
-					lblStudentId.setBounds(23, 122, 106, 25);
-					lblStudentId.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblStudentId.setForeground(Color.WHITE);
-					adminPage.getContentPane().add(lblStudentId);
+		JLabel lblStudentName = new JLabel("Student Name");
+		lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblStudentName.setForeground(Color.WHITE);
+		lblStudentName.setBounds(23, 30, 106, 25);
+		adminPage.getContentPane().add(lblStudentName);
 
-					JLabel lblStudentAge = new JLabel("Student Date of Birth");
-					lblStudentAge.setBounds(23, 171, 146, 25);
-					lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblStudentAge.setForeground(Color.WHITE);
-					adminPage.getContentPane().add(lblStudentAge);
+		JLabel lblStudentSurname = new JLabel("Student Surname");
+		lblStudentSurname.setBounds(23, 73, 126, 25);
+		lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblStudentSurname.setForeground(Color.WHITE);
+		adminPage.getContentPane().add(lblStudentSurname);
 
-					JLabel lblStudentYear = new JLabel("Student Year");
-					lblStudentYear.setBounds(23, 220, 106, 25);
-					lblStudentYear.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblStudentYear.setForeground(Color.WHITE);
-					adminPage.getContentPane().add(lblStudentYear);
+		JLabel lblStudentId = new JLabel("Student ID");
+		lblStudentId.setBounds(23, 122, 106, 25);
+		lblStudentId.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblStudentId.setForeground(Color.WHITE);
+		adminPage.getContentPane().add(lblStudentId);
 
-					JLabel lblStudentNationality = new JLabel("Student Nationality");
-					lblStudentNationality.setBounds(23, 318, 126, 25);
-					lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblStudentNationality.setForeground(Color.WHITE);
-					adminPage.getContentPane().add(lblStudentNationality);
-					
-					JLabel lblStudentPassword = new JLabel("Student Password");
-					lblStudentPassword.setBounds(23, 416, 126, 25);
-					lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblStudentPassword.setForeground(Color.WHITE);
-					adminPage.getContentPane().add(lblStudentPassword);
-					
-					JTextField textField_8 = new JTextField();
-					textField_8.setColumns(10);
-					textField_8.setBounds(155, 416, 137, 25);
-					adminPage.getContentPane().add(textField_8);
-					
-					JTextField textField = new JTextField();
-					textField.setBounds(155, 25, 137, 25);
-					adminPage.getContentPane().add(textField);
-					textField.setColumns(10);
+		JLabel lblStudentAge = new JLabel("Student Date of Birth");
+		lblStudentAge.setBounds(23, 171, 146, 25);
+		lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblStudentAge.setForeground(Color.WHITE);
+		adminPage.getContentPane().add(lblStudentAge);
 
-					JTextField textField_1 = new JTextField();
-					textField_1.setColumns(10);
-					textField_1.setBounds(155, 75, 137, 25);
-					adminPage.getContentPane().add(textField_1);
+		JLabel lblStudentYear = new JLabel("Student Year");
+		lblStudentYear.setBounds(23, 220, 106, 25);
+		lblStudentYear.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblStudentYear.setForeground(Color.WHITE);
+		adminPage.getContentPane().add(lblStudentYear);
 
-					JTextField textField_2 = new JTextField();
-					textField_2.setColumns(10);
-					textField_2.setBounds(155, 125, 137, 25);
-					adminPage.getContentPane().add(textField_2);
+		JLabel lblStudentNationality = new JLabel("Student Nationality");
+		lblStudentNationality.setBounds(23, 318, 126, 25);
+		lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblStudentNationality.setForeground(Color.WHITE);
+		adminPage.getContentPane().add(lblStudentNationality);
 
-					JTextField textField_3 = new JTextField();
-					textField_3.setColumns(10);
-					textField_3.setBounds(155, 175, 137, 25);
-					adminPage.getContentPane().add(textField_3);
+		JLabel lblStudentPassword = new JLabel("Student Password");
+		lblStudentPassword.setBounds(23, 416, 126, 25);
+		lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblStudentPassword.setForeground(Color.WHITE);
+		adminPage.getContentPane().add(lblStudentPassword);
 
-					JTextField textField_4 = new JTextField();
-					textField_4.setColumns(10);
-					textField_4.setBounds(155, 318, 137, 25);
-					adminPage.getContentPane().add(textField_4);
+		JTextField textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(155, 416, 137, 25);
+		adminPage.getContentPane().add(textField_8);
 
-					JTextField textField_5 = new JTextField();
-					textField_5.setColumns(10);
-					textField_5.setBounds(155, 367, 137, 25);
-					adminPage.getContentPane().add(textField_5);
+		JTextField textField = new JTextField();
+		textField.setBounds(155, 25, 137, 25);
+		adminPage.getContentPane().add(textField);
+		textField.setColumns(10);
 
-					JTextField textField_7 = new JTextField();
-					textField_7.setColumns(10);
-					textField_7.setBounds(155, 225, 137, 25);
-					adminPage.getContentPane().add(textField_7);
+		JTextField textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(155, 75, 137, 25);
+		adminPage.getContentPane().add(textField_1);
 
-					JRadioButton rdbtnMale = new JRadioButton("Male");
-					rdbtnMale.setFont(new Font("TAHOMA", Font.BOLD, 12));
-					rdbtnMale.setForeground(Color.BLACK);
-					rdbtnMale.setBounds(155, 275, 66, 23);
-					adminPage.getContentPane().add(rdbtnMale);
+		JTextField textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(155, 125, 137, 25);
+		adminPage.getContentPane().add(textField_2);
 
-					JRadioButton rdbtnFemale = new JRadioButton("Female");
-					rdbtnFemale.setFont(new Font("TAHOMA", Font.BOLD, 12));
-					rdbtnFemale.setForeground(Color.BLACK);
-					rdbtnFemale.setBounds(223, 275, 66, 23);
-					adminPage.getContentPane().add(rdbtnFemale);
-					
-					ButtonGroup gender=new ButtonGroup();//so that only one button can be selected
-					gender.add(rdbtnFemale);
-					gender.add(rdbtnMale);
-					
-					JButton btnLogout = new JButton("Logout");
-					btnLogout.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							adminPage.dispose();
-							SIS prozor = new SIS();
-							prozor.initOptions(a,lista);
-						}
-					});
-					btnLogout.setForeground(Color.WHITE);
-					btnLogout.setContentAreaFilled(false);
-					btnLogout.setBounds(590, 102, 110, 23);
-					btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
-					btnLogout.setBorder(null);
-					adminPage.getContentPane().add(btnLogout);
-					
-					JButton btnNewButton = new JButton("Add Student");
-					btnNewButton.addActionListener(new ActionListener() {
-						private PrintStream q;
-						public void actionPerformed(ActionEvent e) {
-							try {
-								FileOutputStream buf = new FileOutputStream("students.txt", true);
-								q = new PrintStream(buf);
-								q.print(textField.getText());
-								q.print(",");
-								q.print(textField_1.getText());
-								q.print(",");
-								q.print(textField_2.getText());
-								q.print(",");
-								q.print(textField_3.getText());
-								q.print(",");
-								q.print(textField_4.getText());
-								q.print(",");
-								q.print(textField_7.getText());
-								q.print(",");
-								q.print(textField_5.getText());
-								q.print(",");
+		JTextField textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(155, 175, 137, 25);
+		adminPage.getContentPane().add(textField_3);
 
-								if (rdbtnMale.isSelected()) {
-									q.print("Male");
-									q.print(",");
-								} else {
-									q.print("Female");
-									q.print(",");
-								}
-							} catch (Exception a) {
-								System.out.println(a);
-							}
-							if(a.findStudent(textField_2.getText())!=null){
-								JOptionPane.showMessageDialog(null, "This ID is already taken. Please enter another ID.");
-							}
-							else{
-							Student kreten = new Student();
-							kreten.setName(textField.getText());
-							kreten.setSurname(textField_1.getText());
-							kreten.setId(textField_2.getText());
-							kreten.setDateOfBirth(textField_3.getText());
-							kreten.setNationality(textField_4.getText());
-							kreten.setYear(textField_7.getText());
-							kreten.setEmail(textField_5.getText());
-							kreten.setPassword(textField_8.getText());
-							if (rdbtnMale.isSelected()) {
-								kreten.setGender("Male");
+		JTextField textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(155, 318, 137, 25);
+		adminPage.getContentPane().add(textField_4);
 
-							} else {
-								kreten.setGender("Female");
-							}
-							a.Students.add(kreten);
-							textField.setText(null);
-							textField_1.setText(null);
-							textField_2.setText(null);
-							textField_3.setText(null);
-							textField_4.setText(null);
-							textField_7.setText(null);
-							textField_5.setText(null);
-							textField_8.setText(null);
-							rdbtnMale.setSelected(false);
-							rdbtnFemale.setSelected(false);
-							JOptionPane.showMessageDialog(null, "Student successfully added!");
-							a.saveS();
-							}
-						}
-					});
-					btnNewButton.setBounds(319, 330, 140, 40);
-					adminPage.getContentPane().add(btnNewButton);
+		JTextField textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(155, 367, 137, 25);
+		adminPage.getContentPane().add(textField_5);
 
-					
-					JTextField textField_6 = new JTextField();
-					textField_6.setBounds(486, 17, 129, 40);
-					adminPage.getContentPane().add(textField_6);
-					textField_6.setColumns(10);
+		JTextField textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(155, 225, 137, 25);
+		adminPage.getContentPane().add(textField_7);
 
-					JButton btnDeleteStudent = new JButton("Delete Student");
-					btnDeleteStudent.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							Student todelete = a.findStudent(textField_2.getText());
-							a.Students.remove(todelete);
-							textField.setText(null);
-							textField_1.setText(null);
-							textField_2.setText(null);
-							textField_3.setText(null);
-							textField_4.setText(null);
-							textField_7.setText(null);
-							textField_5.setText(null);
-							textField_8.setText(null);
-							rdbtnMale.setSelected(false);
-							rdbtnFemale.setSelected(false);
-							JOptionPane.showMessageDialog(null, "Student deleted.");
-							a.saveS();
-						}
-					});
-					btnDeleteStudent.setBounds(486, 330, 140, 40);
-					adminPage.getContentPane().add(btnDeleteStudent);
+		JRadioButton rdbtnMale = new JRadioButton("Male");
+		rdbtnMale.setFont(new Font("TAHOMA", Font.BOLD, 12));
+		rdbtnMale.setForeground(Color.BLACK);
+		rdbtnMale.setBounds(155, 275, 66, 23);
+		adminPage.getContentPane().add(rdbtnMale);
 
-					JButton btnNewButton_1 = new JButton("Update Student Information");
-					btnNewButton_1.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							Student kreten = a.findStudent(textField_2.getText());
-							kreten.setName(textField.getText());
-							kreten.setSurname(textField_1.getText());
-							kreten.setId(textField_2.getText());
-							kreten.setDateOfBirth(textField_3.getText());
-							kreten.setNationality(textField_4.getText());
-							kreten.setYear(textField_7.getText());
-							kreten.setPassword(textField_8.getText());
-							kreten.setEmail(textField_5.getText());
-							if (rdbtnMale.isSelected()) {
-								kreten.setGender("Male");
-							} else {
-								kreten.setGender("Female");
-							}
-							textField.setText(null);
-							textField_1.setText(null);
-							textField_2.setText(null);
-							textField_3.setText(null);
-							textField_4.setText(null);
-							textField_7.setText(null);
-							textField_8.setText(null);
-							textField_5.setText(null);
-							rdbtnMale.setSelected(false);
-							rdbtnFemale.setSelected(false);
-							JOptionPane.showMessageDialog(null, "Information updated.");
-							a.saveS();
-						}
-					});
-					btnNewButton_1.setBounds(370, 381, 207, 65);
-					adminPage.getContentPane().add(btnNewButton_1);
+		JRadioButton rdbtnFemale = new JRadioButton("Female");
+		rdbtnFemale.setFont(new Font("TAHOMA", Font.BOLD, 12));
+		rdbtnFemale.setForeground(Color.BLACK);
+		rdbtnFemale.setBounds(223, 275, 66, 23);
+		adminPage.getContentPane().add(rdbtnFemale);
 
-					JLabel lblNewLabel = new JLabel("Search by Student ID");
-					lblNewLabel.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblNewLabel.setForeground(Color.WHITE);
-					lblNewLabel.setBounds(344, 22, 159, 31);
-					adminPage.getContentPane().add(lblNewLabel);
+		ButtonGroup gender = new ButtonGroup();// so that only one button can be
+												// selected
+		gender.add(rdbtnFemale);
+		gender.add(rdbtnMale);
 
-					JButton btnNewButton_2 = new JButton("Go");
-					btnNewButton_2.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							Student wanted = a.findStudent(textField_6.getText());
-							if (a.findStudent(textField_6.getText()) == null) {
-								JOptionPane.showMessageDialog(null, "Student not found.");
-								textField_6.setText(null);
-							} else {
-								textField.setText(wanted.getName());
-								textField_1.setText(wanted.getSurname());
-								textField_2.setText(wanted.getId());
-								textField_3.setText(wanted.getDateOfBirth());
-								textField_4.setText(wanted.getNationality());
-								textField_7.setText(wanted.getYear());
-								textField_5.setText(wanted.getEmail());
-								textField_8.setText(wanted.getPassword());
-								if (wanted.getGender() == "Male") {
-									rdbtnMale.setSelected(true);
-								} else {
-									rdbtnFemale.setSelected(true);
-								}
-								textField_6.setText(null);
-							}
-						}
-					});
-					btnNewButton_2.setBounds(622, 17, 52, 40);
-					adminPage.getContentPane().add(btnNewButton_2);
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				adminPage.dispose();
+				SIS prozor = new SIS();
+				prozor.initOptions(a, lista);
+			}
+		});
+		btnLogout.setForeground(Color.WHITE);
+		btnLogout.setContentAreaFilled(false);
+		btnLogout.setBounds(590, 102, 110, 23);
+		btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
+		btnLogout.setBorder(null);
+		adminPage.getContentPane().add(btnLogout);
 
-					JLabel lblStudentEmail = new JLabel("Student Email");
-					lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblStudentEmail.setForeground(Color.WHITE);
-					lblStudentEmail.setBounds(23, 367, 106, 25);
-					adminPage.getContentPane().add(lblStudentEmail);
+		JButton btnNewButton = new JButton("Add Student");
+		btnNewButton.addActionListener(new ActionListener() {
+			private PrintStream q;
 
-					JLabel lblGender = new JLabel("Gender");
-					lblGender.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-					lblGender.setForeground(Color.WHITE);
-					lblGender.setBounds(23, 269, 106, 25);
-					adminPage.getContentPane().add(lblGender);
-					setPowered(adminPage);
-					setPozadina(adminPage);
+			public void actionPerformed(ActionEvent e) {
+				try {
+					FileOutputStream buf = new FileOutputStream("students.txt", true);
+					q = new PrintStream(buf);
+					q.print(textField.getText());
+					q.print(",");
+					q.print(textField_1.getText());
+					q.print(",");
+					q.print(textField_2.getText());
+					q.print(",");
+					q.print(textField_3.getText());
+					q.print(",");
+					q.print(textField_4.getText());
+					q.print(",");
+					q.print(textField_7.getText());
+					q.print(",");
+					q.print(textField_5.getText());
+					q.print(",");
 
-		
+					if (rdbtnMale.isSelected()) {
+						q.print("Male");
+						q.print(",");
+					} else {
+						q.print("Female");
+						q.print(",");
+					}
+				} catch (Exception a) {
+					System.out.println(a);
+				}
+				if (a.findStudent(textField_2.getText()) != null) {
+					JOptionPane.showMessageDialog(null, "This ID is already taken. Please enter another ID.");
+				} else {
+					Student kreten = new Student();
+					kreten.setName(textField.getText());
+					kreten.setSurname(textField_1.getText());
+					kreten.setId(textField_2.getText());
+					kreten.setDateOfBirth(textField_3.getText());
+					kreten.setNationality(textField_4.getText());
+					kreten.setYear(textField_7.getText());
+					kreten.setEmail(textField_5.getText());
+					kreten.setPassword(textField_8.getText());
+					if (rdbtnMale.isSelected()) {
+						kreten.setGender("Male");
+
+					} else {
+						kreten.setGender("Female");
+					}
+					a.Students.add(kreten);
+					textField.setText(null);
+					textField_1.setText(null);
+					textField_2.setText(null);
+					textField_3.setText(null);
+					textField_4.setText(null);
+					textField_7.setText(null);
+					textField_5.setText(null);
+					textField_8.setText(null);
+					rdbtnMale.setSelected(false);
+					rdbtnFemale.setSelected(false);
+					JOptionPane.showMessageDialog(null, "Student successfully added!");
+					a.saveS();
+				}
+			}
+		});
+		btnNewButton.setBounds(319, 330, 140, 40);
+		adminPage.getContentPane().add(btnNewButton);
+
+		JTextField textField_6 = new JTextField();
+		textField_6.setBounds(486, 17, 129, 40);
+		adminPage.getContentPane().add(textField_6);
+		textField_6.setColumns(10);
+
+		JButton btnDeleteStudent = new JButton("Delete Student");
+		btnDeleteStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Student todelete = a.findStudent(textField_2.getText());
+				a.Students.remove(todelete);
+				textField.setText(null);
+				textField_1.setText(null);
+				textField_2.setText(null);
+				textField_3.setText(null);
+				textField_4.setText(null);
+				textField_7.setText(null);
+				textField_5.setText(null);
+				textField_8.setText(null);
+				rdbtnMale.setSelected(false);
+				rdbtnFemale.setSelected(false);
+				JOptionPane.showMessageDialog(null, "Student deleted.");
+				a.saveS();
+			}
+		});
+		btnDeleteStudent.setBounds(486, 330, 140, 40);
+		adminPage.getContentPane().add(btnDeleteStudent);
+
+		JButton btnNewButton_1 = new JButton("Update Student Information");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Student kreten = a.findStudent(textField_2.getText());
+				kreten.setName(textField.getText());
+				kreten.setSurname(textField_1.getText());
+				kreten.setId(textField_2.getText());
+				kreten.setDateOfBirth(textField_3.getText());
+				kreten.setNationality(textField_4.getText());
+				kreten.setYear(textField_7.getText());
+				kreten.setPassword(textField_8.getText());
+				kreten.setEmail(textField_5.getText());
+				if (rdbtnMale.isSelected()) {
+					kreten.setGender("Male");
+				} else {
+					kreten.setGender("Female");
+				}
+				textField.setText(null);
+				textField_1.setText(null);
+				textField_2.setText(null);
+				textField_3.setText(null);
+				textField_4.setText(null);
+				textField_7.setText(null);
+				textField_8.setText(null);
+				textField_5.setText(null);
+				rdbtnMale.setSelected(false);
+				rdbtnFemale.setSelected(false);
+				JOptionPane.showMessageDialog(null, "Information updated.");
+				a.saveS();
+			}
+		});
+		btnNewButton_1.setBounds(370, 381, 207, 65);
+		adminPage.getContentPane().add(btnNewButton_1);
+
+		JLabel lblNewLabel = new JLabel("Search by Student ID");
+		lblNewLabel.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(344, 22, 159, 31);
+		adminPage.getContentPane().add(lblNewLabel);
+
+		JButton btnNewButton_2 = new JButton("Go");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Student wanted = a.findStudent(textField_6.getText());
+				if (a.findStudent(textField_6.getText()) == null) {
+					JOptionPane.showMessageDialog(null, "Student not found.");
+					textField_6.setText(null);
+				} else {
+					textField.setText(wanted.getName());
+					textField_1.setText(wanted.getSurname());
+					textField_2.setText(wanted.getId());
+					textField_3.setText(wanted.getDateOfBirth());
+					textField_4.setText(wanted.getNationality());
+					textField_7.setText(wanted.getYear());
+					textField_5.setText(wanted.getEmail());
+					textField_8.setText(wanted.getPassword());
+					if (wanted.getGender() == "Male") {
+						rdbtnMale.setSelected(true);
+					} else {
+						rdbtnFemale.setSelected(true);
+					}
+					textField_6.setText(null);
+				}
+			}
+		});
+		btnNewButton_2.setBounds(622, 17, 52, 40);
+		adminPage.getContentPane().add(btnNewButton_2);
+
+		JLabel lblStudentEmail = new JLabel("Student Email");
+		lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblStudentEmail.setForeground(Color.WHITE);
+		lblStudentEmail.setBounds(23, 367, 106, 25);
+		adminPage.getContentPane().add(lblStudentEmail);
+
+		JLabel lblGender = new JLabel("Gender");
+		lblGender.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblGender.setForeground(Color.WHITE);
+		lblGender.setBounds(23, 269, 106, 25);
+		adminPage.getContentPane().add(lblGender);
+		setPowered(adminPage);
+		setPozadina(adminPage);
+
 		a.saveS();
 	}
 
-	public void init(Professor pr) {
+	public void init(Professor pr, Admin a) {
 		Course c = new Course();
 		JFrame loginProf = new JFrame();
 		loginProf.setVisible(true);
 		loginProf.setBounds(100, 100, 700, 511);
 		loginProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		loginProf.getContentPane().setLayout(null);
 		JTextField textField = new JTextField();
 		textField.setBounds(240, 220, 200, 35);
@@ -830,7 +828,7 @@ public class SIS implements Serializable {
 		lblWelcome.setBounds(65, 142, 560, 56);
 		loginProf.getContentPane().add(lblWelcome);
 		setLogo2(loginProf);
-		homeButton(loginProf,0);
+		homeButton(loginProf, 0);
 
 		JLabel lblId = new JLabel("ID number");
 		lblId.setHorizontalAlignment(SwingConstants.CENTER);
@@ -849,114 +847,98 @@ public class SIS implements Serializable {
 		button.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if (passwordField.getText().equals(pr.getPassword()) && textField.getText().equals(pr.getId())) {
+				Professor profa = a.findProfessor(textField.getText());
+				if (passwordField.getText().equals(profa.getPassword())) {
 					loginProf.dispose();
-					JFrame loginProfPage = new JFrame();
+
+					ProfessorPanel loginProfPage = new ProfessorPanel(a,profa);
 					loginProfPage.setVisible(true);
 					loginProfPage.setBounds(100, 100, 700, 511);
 					loginProfPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					loginProfPage.getContentPane().setLayout(null);
-
-					prof_menu(loginProfPage, pr);
-
-					JTextField txtCourseSection = new JTextField();
-					txtCourseSection.setFont(new Font("Tahoma", Font.BOLD, 13));
-					txtCourseSection.setForeground(Color.WHITE);
-					txtCourseSection.setText("Course section");
-					txtCourseSection.setBounds(10, 120, 674, 20);
-					txtCourseSection.setOpaque(false);
-					txtCourseSection.setBorder(null);
-					loginProfPage.getContentPane().add(txtCourseSection);
-					txtCourseSection.setColumns(10);
-
-					JTextField txtSearchCourse = new JTextField();
-					txtSearchCourse.setFont(new Font("Tahoma", Font.BOLD, 13));
-					txtSearchCourse.setForeground(Color.WHITE);
-					txtSearchCourse.setText("Search course");
-					txtSearchCourse.setBounds(36, 157, 100, 40);
-					txtSearchCourse.setOpaque(false);
-					txtSearchCourse.setBorder(null);
-					loginProfPage.getContentPane().add(txtSearchCourse);
-					txtSearchCourse.setColumns(10);
-
-					JTextField textField = new JTextField();
-					textField.setBounds(155, 157, 442, 40);
-					loginProfPage.getContentPane().add(textField);
-					textField.setColumns(10);
-
-					JButton btnGo = new JButton("GO");
-					btnGo.setBounds(605, 157, 52, 40);
-
+					prof_menu(loginProfPage, profa, a);
 					
-
-					loginProfPage.getContentPane().add(btnGo);
-
-					JButton btnAddNewCourse = new JButton("Course 1");
-					btnAddNewCourse.setBounds(35, 270, 180, 80);
+					if(profa.MyCourses.size()>0){
+					JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(0).getCourseName());
+					btnAddNewCourse.setBounds(40,250,180,80);
 					btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
-
 					btnAddNewCourse.addActionListener(new ActionListener() {
-
 						public void actionPerformed(ActionEvent e) {
 							loginProfPage.dispose();
-							c.course_inf(pr);
-							
+							c.course_inf(profa, a);
 						}
 
 					});
 					loginProfPage.getContentPane().add(btnAddNewCourse);
-
-					JButton btnDisplayCourse = new JButton("Course 2");
-					btnDisplayCourse.setBounds(255, 270, 180, 80);
-					btnDisplayCourse.setBackground(SystemColor.inactiveCaptionBorder);
-					btnDisplayCourse.addActionListener(new ActionListener() {
-
-						public void actionPerformed(ActionEvent e) {							
-						}
-
-					});
-					loginProfPage.getContentPane().add(btnDisplayCourse);
-					JButton btnUpdateCourse = new JButton("Course 3");
-					btnUpdateCourse.setBounds(475, 270, 180, 80);
-					loginProfPage.getContentPane().add(btnUpdateCourse);
-					btnDisplayCourse.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					
 					}
-					});
+					if(profa.MyCourses.size()>1){
+						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(1).getCourseName());
+						btnAddNewCourse.setBounds(250,250,180,80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								loginProfPage.dispose();
+								c.course_inf(profa, a);
+							}
+
+						});
+						loginProfPage.getContentPane().add(btnAddNewCourse);
+						}
+					if(profa.MyCourses.size()>2){
+						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(2).getCourseName());
+						btnAddNewCourse.setBounds(460,250,180,80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								loginProfPage.dispose();
+								c.course_inf(profa, a);
+							}
+
+						});
+						loginProfPage.getContentPane().add(btnAddNewCourse);
+						}
+					if(profa.MyCourses.size()>3){
+						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(3).getCourseName());
+						btnAddNewCourse.setBounds(40,360,180,80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								loginProfPage.dispose();
+								c.course_inf(profa, a);
+							}
+
+						});
+						loginProfPage.getContentPane().add(btnAddNewCourse);
+						}
+					if(profa.MyCourses.size()>4){
+						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(4).getCourseName());
+						btnAddNewCourse.setBounds(250,360,180,80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								loginProfPage.dispose();
+								c.course_inf(profa, a);
+							}
+
+						});
+						loginProfPage.getContentPane().add(btnAddNewCourse);
+						}
+					if(profa.MyCourses.size()>5){
+						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(5).getCourseName());
+						btnAddNewCourse.setBounds(460,360,180,80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								loginProfPage.dispose();
+								c.course_inf(profa, a);
+							}
+
+						});
+						loginProfPage.getContentPane().add(btnAddNewCourse);
+						}
 					
 					
-					/*JTextField txtStudentSection = new JTextField();
-					txtStudentSection.setText("Student section");
-					txtStudentSection.setOpaque(false);
-					txtStudentSection.setForeground(Color.WHITE);
-					txtStudentSection.setFont(new Font("Tahoma", Font.BOLD, 13));
-					txtStudentSection.setColumns(10);
-					txtStudentSection.setBorder(null);
-					txtStudentSection.setBounds(10, 303, 674, 20);
-					loginProfPage.getContentPane().add(txtStudentSection);
-
-					JTextField txtSearchStudent = new JTextField();
-					txtSearchStudent.setFont(new Font("Tahoma", Font.BOLD, 13));
-					txtSearchStudent.setForeground(Color.WHITE);
-					txtSearchStudent.setText("Search student");
-					txtSearchStudent.setBounds(36, 340, 100, 40);
-					txtSearchStudent.setOpaque(false);
-					txtSearchStudent.setBorder(null);
-					loginProfPage.getContentPane().add(txtSearchStudent);
-					txtSearchStudent.setColumns(10);
-
-					JTextField textField_2 = new JTextField();
-					textField_2.setBounds(155, 340, 442, 40);
-					loginProfPage.getContentPane().add(textField_2);
-					textField_2.setColumns(10);
-
-					JButton btnGo_2 = new JButton("GO");
-					btnGo_2.setBounds(605, 340, 52, 40);
-					loginProfPage.getContentPane().add(btnGo_2);
-*/
 					setLogo(loginProfPage);
-
 					setPowered(loginProfPage);
 					setPozadina(loginProfPage);
 				} else
@@ -976,17 +958,15 @@ public class SIS implements Serializable {
 	}
 
 	private void init_stud(Admin a) {
-		
-		
+
 		JFrame loginStudent = new JFrame();
 		loginStudent.setVisible(true);
 		loginStudent.setBounds(100, 100, 700, 511);
 		loginStudent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginStudent.getContentPane().setLayout(null);
 		setLogo2(loginStudent);
-		homeButton(loginStudent,0);
-		
-		
+		homeButton(loginStudent, 0);
+
 		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -1022,10 +1002,10 @@ public class SIS implements Serializable {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Student xStudent = a.findStudent(textField.getText());
-				
+
 				if (xStudent == null) {
 					JOptionPane.showMessageDialog(null, "Wrong ID");
-					
+
 				} else if (xStudent.getPassword().equals(passwordField.getText())) {
 					loginStudent.dispose();
 					JFrame stdLogIn = new JFrame("Welcome " + xStudent.name);
@@ -1034,17 +1014,17 @@ public class SIS implements Serializable {
 					stdLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					stdLogIn.getContentPane().setLayout(null);
 					setLogo2(stdLogIn);
-					
+
 					JButton btnEdit = new JButton("Edit my profile");
 					btnEdit.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							stdLogIn.dispose();
-							JFrame editProfile=new JFrame();
+							JFrame editProfile = new JFrame();
 							editProfile.setVisible(true);
 							editProfile.setBounds(100, 100, 700, 511);
 							editProfile.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							editProfile.getContentPane().setLayout(null);
-							
+
 							JLabel lblStudentName = new JLabel("Student Name");
 							lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 							lblStudentName.setForeground(Color.WHITE);
@@ -1080,13 +1060,13 @@ public class SIS implements Serializable {
 							lblGender.setForeground(Color.WHITE);
 							lblGender.setBounds(23, 269, 106, 25);
 							editProfile.getContentPane().add(lblGender);
-							
+
 							JLabel lblStudentNationality = new JLabel("Student Nationality");
 							lblStudentNationality.setBounds(23, 318, 106, 25);
 							lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 							lblStudentNationality.setForeground(Color.WHITE);
 							editProfile.getContentPane().add(lblStudentNationality);
-							
+
 							JLabel lblStudentEmail = new JLabel("Student Email");
 							lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 							lblStudentEmail.setForeground(Color.WHITE);
@@ -1098,13 +1078,13 @@ public class SIS implements Serializable {
 							lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 							lblStudentPassword.setForeground(Color.WHITE);
 							editProfile.getContentPane().add(lblStudentPassword);
-							
+
 							JTextField textField = new JTextField();
 							textField.setBounds(139, 25, 117, 25);
 							textField.setColumns(10);
 							textField.setText(xStudent.getName());
 							editProfile.getContentPane().add(textField);
-							
+
 							JTextField textField_1 = new JTextField();
 							textField_1.setColumns(10);
 							textField_1.setBounds(139, 75, 117, 25);
@@ -1140,7 +1120,7 @@ public class SIS implements Serializable {
 							textField_6.setBounds(139, 225, 117, 25);
 							textField_6.setText(xStudent.getYear());
 							editProfile.getContentPane().add(textField_6);
-							
+
 							JTextField textField_7 = new JTextField();
 							textField_7.setColumns(10);
 							textField_7.setBounds(139, 416, 117, 25);
@@ -1158,19 +1138,22 @@ public class SIS implements Serializable {
 							rdbtnFemale.setForeground(Color.BLACK);
 							rdbtnFemale.setBounds(207, 275, 66, 23);
 							editProfile.getContentPane().add(rdbtnFemale);
-							
-							ButtonGroup gender=new ButtonGroup();//so that only one button can be selected
+
+							ButtonGroup gender = new ButtonGroup();// so that
+																	// only one
+																	// button
+																	// can be
+																	// selected
 							gender.add(rdbtnFemale);
 							gender.add(rdbtnMale);
-							
-							if(xStudent.getGender()=="Male"){
+
+							if (xStudent.getGender() == "Male") {
 								rdbtnMale.setSelected(true);
-							}
-							else{
+							} else {
 								rdbtnFemale.setSelected(true);
 							}
-							
-							JButton btnUpdate= new JButton("Update student information");
+
+							JButton btnUpdate = new JButton("Update student information");
 							btnUpdate.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent arg0) {
 									xStudent.setName(textField.getText());
@@ -1181,15 +1164,14 @@ public class SIS implements Serializable {
 									xStudent.setNationality(textField_4.getText());
 									xStudent.setEmail(textField_5.getText());
 									xStudent.setPassword(textField_7.getText());
-								
-									if(rdbtnMale.isSelected()){
+
+									if (rdbtnMale.isSelected()) {
 										xStudent.setGender("Male");
-									}
-									else{
+									} else {
 										xStudent.setGender("Female");
 									}
 									JOptionPane.showMessageDialog(null, "Information updated.");
-									
+
 									textField.setText(null);
 									textField_1.setText(null);
 									textField_2.setText(null);
@@ -1200,31 +1182,30 @@ public class SIS implements Serializable {
 									textField_7.setText(null);
 									rdbtnMale.setSelected(false);
 									rdbtnFemale.setSelected(false);
-									
+
 									a.saveS();
-									
+
 								}
 							});
-							
+
 							editProfile.getContentPane().add(btnUpdate);
 							btnUpdate.setBounds(400, 200, 200, 50);
-							
-							ImageIcon back= new ImageIcon("back.png");
-							JButton btnBack=new JButton(back);
+
+							ImageIcon back = new ImageIcon("back.png");
+							JButton btnBack = new JButton(back);
 							btnBack.addActionListener(new ActionListener() {
-								
+
 								public void actionPerformed(ActionEvent e) {
 									editProfile.dispose();
-									stdLogIn.setVisible(true);	
+									stdLogIn.setVisible(true);
 								}
 							});
-							
+
 							btnBack.setBounds(340, 200, 50, 50);
 							editProfile.getContentPane().add(btnBack);
 							setPozadina(editProfile);
 							setPowered(editProfile);
-							
-							
+
 						}
 					});
 					btnEdit.setForeground(Color.WHITE);
@@ -1248,11 +1229,11 @@ public class SIS implements Serializable {
 					btnLogOut.setFont(new Font("TAHOMA", Font.BOLD, 11));
 					btnLogOut.setBorder(null);
 					stdLogIn.getContentPane().add(btnLogOut);
-					
-					ImageIcon gradesI=new ImageIcon("grades.png");
-					JButton grades = new JButton("Grades",gradesI);
+
+					ImageIcon gradesI = new ImageIcon("grades.png");
+					JButton grades = new JButton("Grades", gradesI);
 					grades.setBackground(SystemColor.inactiveCaptionBorder);
-					grades.setBounds(50, 180,150, 90);
+					grades.setBounds(50, 180, 150, 90);
 					stdLogIn.getContentPane().add(grades);
 					grades.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
@@ -1274,7 +1255,7 @@ public class SIS implements Serializable {
 					JOptionPane.showMessageDialog(null, "Wrong password ");
 					textField.grabFocus();
 				}
-				
+
 				textField.setText("");
 				passwordField.setText("");
 
@@ -1335,7 +1316,7 @@ public class SIS implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				SIS prof = new SIS();
-				prof.init(pr);
+				prof.init(pr, a);
 			}
 		});
 
@@ -1346,7 +1327,5 @@ public class SIS implements Serializable {
 		setPozadina(frame);
 
 	}
-	
-	
 
 }
