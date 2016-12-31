@@ -22,6 +22,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.Graphics;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 import java.io.*;
 
 public class SIS implements Serializable {
@@ -468,14 +471,15 @@ public class SIS implements Serializable {
 		login.getContentPane().setLayout(null);
 
 		JPasswordField pwdEnterYourPassword = new JPasswordField();
-		pwdEnterYourPassword.setBounds(240, 260, 200, 35);
+		pwdEnterYourPassword.setBounds(190, 255, 300, 40);
 		pwdEnterYourPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		login.getContentPane().add(pwdEnterYourPassword);
+		pwdEnterYourPassword.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		pwdEnterYourPassword.grabFocus();
 
-		JLabel lblNewLabel = new JLabel("Welcome to admin panel. Please enter your password bellow");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("TAHOMA", Font.BOLD, 14));
+		JLabel lblNewLabel = new JLabel("Welcome to admin panel. Please enter your password bellow.");
+		lblNewLabel.setForeground(new Color(32, 35, 86));
+		lblNewLabel.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setToolTipText("");
 		lblNewLabel.setBounds(65, 190, 560, 56);
@@ -483,7 +487,7 @@ public class SIS implements Serializable {
 		setLogo2(login);
 		homeButton(login, 0);
 
-		JButton btnLogIn = new JButton("Log In");
+		JButton btnLogIn = new JButton("LOG IN");
 		btnLogIn.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -503,7 +507,11 @@ public class SIS implements Serializable {
 				pwdEnterYourPassword.setText("");
 			}
 		});
-		btnLogIn.setBounds(290, 320, 100, 35);
+		btnLogIn.setBounds(240, 320, 200, 40);
+		btnLogIn.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		btnLogIn.setForeground(new Color(255, 255, 255));
+		btnLogIn.setBackground(new Color(12, 68, 126));
+		btnLogIn.setBorder(null);
 		login.getContentPane().add(btnLogIn);
 		login.getRootPane().setDefaultButton(btnLogIn);
 		setPowered(login);
