@@ -34,8 +34,14 @@ public class SIS implements Serializable {
 	private void setLogo2(JFrame logo2Frame) {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("logo_sis.png"));
-		lblNewLabel_1.setBounds(274, 11, 268, 173);
+		lblNewLabel_1.setBounds(274, 11, 268, 90);
 		logo2Frame.getContentPane().add(lblNewLabel_1);
+
+		JLabel pozadina = new JLabel("");
+		pozadina.setIcon(new ImageIcon("header-back.png"));
+		pozadina.setBounds(0, 0, 684, 120);
+		logo2Frame.getContentPane().add(pozadina);
+
 	}
 
 	private void setLogo(JFrame frejm) {
@@ -47,8 +53,9 @@ public class SIS implements Serializable {
 
 	private void setPozadina(JFrame frejm) {
 		JLabel pozadina = new JLabel("");
+		pozadina.setIcon(new ImageIcon("background.jpg"));
 		pozadina.setBounds(0, 0, 684, 473);
-		pozadina.setIcon(new ImageIcon("burch2.jpg"));
+		pozadina.setBackground(Color.WHITE);
 		frejm.getContentPane().add(pozadina);
 	}
 
@@ -56,8 +63,13 @@ public class SIS implements Serializable {
 		JLabel lblNewLabel_2 = new JLabel("Powered by MOCHA");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(276, 445, 128, 21);
+		lblNewLabel_2.setBounds(276, 440, 128, 21);
 		pFrame.getContentPane().add(lblNewLabel_2);
+
+		JLabel pozadina = new JLabel("");
+		pozadina.setIcon(new ImageIcon("header-back.png"));
+		pozadina.setBounds(0, 430, 684, 50);
+		pFrame.getContentPane().add(pozadina);
 	}
 
 	private void homeButton(JFrame hFrame, int shift) {
@@ -244,11 +256,13 @@ public class SIS implements Serializable {
 			return Id;
 		}
 
-		public String toString(){
-			String output = "Professor name: "+getName()+"\n"+"Professor surname: "+getSurname()+"\nProfessor ID: "+getId()+"\nProfessor email: "+getEmail()+"\nProfessor phone: "+getPhone();
+		public String toString() {
+			String output = "Professor name: " + getName() + "\n" + "Professor surname: " + getSurname()
+					+ "\nProfessor ID: " + getId() + "\nProfessor email: " + getEmail() + "\nProfessor phone: "
+					+ getPhone();
 			return output;
 		}
-		
+
 		public void setId(String id) {
 			Id = id;
 		}
@@ -851,29 +865,29 @@ public class SIS implements Serializable {
 				if (passwordField.getText().equals(profa.getPassword())) {
 					loginProf.dispose();
 
-					ProfessorPanel loginProfPage = new ProfessorPanel(a,profa);
+					ProfessorPanel loginProfPage = new ProfessorPanel(a, profa);
 					loginProfPage.setVisible(true);
 					loginProfPage.setBounds(100, 100, 700, 511);
 					loginProfPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					loginProfPage.getContentPane().setLayout(null);
 					prof_menu(loginProfPage, profa, a);
-					
-					if(profa.MyCourses.size()>0){
-					JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(0).getCourseName());
-					btnAddNewCourse.setBounds(40,250,180,80);
-					btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
-					btnAddNewCourse.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							loginProfPage.dispose();
-							c.course_inf(profa, a);
-						}
 
-					});
-					loginProfPage.getContentPane().add(btnAddNewCourse);
+					if (profa.MyCourses.size() > 0) {
+						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(0).getCourseName());
+						btnAddNewCourse.setBounds(40, 250, 180, 80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								loginProfPage.dispose();
+								c.course_inf(profa, a);
+							}
+
+						});
+						loginProfPage.getContentPane().add(btnAddNewCourse);
 					}
-					if(profa.MyCourses.size()>1){
+					if (profa.MyCourses.size() > 1) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(1).getCourseName());
-						btnAddNewCourse.setBounds(250,250,180,80);
+						btnAddNewCourse.setBounds(250, 250, 180, 80);
 						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -883,10 +897,10 @@ public class SIS implements Serializable {
 
 						});
 						loginProfPage.getContentPane().add(btnAddNewCourse);
-						}
-					if(profa.MyCourses.size()>2){
+					}
+					if (profa.MyCourses.size() > 2) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(2).getCourseName());
-						btnAddNewCourse.setBounds(460,250,180,80);
+						btnAddNewCourse.setBounds(460, 250, 180, 80);
 						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -896,10 +910,10 @@ public class SIS implements Serializable {
 
 						});
 						loginProfPage.getContentPane().add(btnAddNewCourse);
-						}
-					if(profa.MyCourses.size()>3){
+					}
+					if (profa.MyCourses.size() > 3) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(3).getCourseName());
-						btnAddNewCourse.setBounds(40,360,180,80);
+						btnAddNewCourse.setBounds(40, 360, 180, 80);
 						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -909,10 +923,10 @@ public class SIS implements Serializable {
 
 						});
 						loginProfPage.getContentPane().add(btnAddNewCourse);
-						}
-					if(profa.MyCourses.size()>4){
+					}
+					if (profa.MyCourses.size() > 4) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(4).getCourseName());
-						btnAddNewCourse.setBounds(250,360,180,80);
+						btnAddNewCourse.setBounds(250, 360, 180, 80);
 						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -922,10 +936,10 @@ public class SIS implements Serializable {
 
 						});
 						loginProfPage.getContentPane().add(btnAddNewCourse);
-						}
-					if(profa.MyCourses.size()>5){
+					}
+					if (profa.MyCourses.size() > 5) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(5).getCourseName());
-						btnAddNewCourse.setBounds(460,360,180,80);
+						btnAddNewCourse.setBounds(460, 360, 180, 80);
 						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -935,9 +949,8 @@ public class SIS implements Serializable {
 
 						});
 						loginProfPage.getContentPane().add(btnAddNewCourse);
-						}
-					
-					
+					}
+
 					setLogo(loginProfPage);
 					setPowered(loginProfPage);
 					setPozadina(loginProfPage);
@@ -1276,15 +1289,19 @@ public class SIS implements Serializable {
 		frame.setBounds(100, 100, 700, 511);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel lblWelcomeToStudent = new JLabel("Welcome to Student Information System!");
-		lblWelcomeToStudent.setBounds(65, 142, 560, 56);
-		lblWelcomeToStudent.setForeground(new Color(255, 255, 255));
-		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 24));
+		JLabel lblWelcomeToStudent = new JLabel("WELCOME TO MOCHA | SIS");
+		lblWelcomeToStudent.setBounds(60, 142, 560, 56);
+		lblWelcomeToStudent.setForeground(new Color(32, 35, 86));
+		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 26));
 		lblWelcomeToStudent.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JButton button = new JButton("Log in as Student");
+		ImageIcon homeIcon = new ImageIcon("button-student.png");
+		JButton button = new JButton(homeIcon);
+
 		button.setBackground(SystemColor.inactiveCaptionBorder);
-		button.setBounds(32, 274, 185, 99);
+		button.setBounds(32, 230, 185, 140);
+		button.setContentAreaFilled(false);
+		button.setBorder(null);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
@@ -1297,9 +1314,12 @@ public class SIS implements Serializable {
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(lblWelcomeToStudent);
 
-		JButton button_1 = new JButton("Log in as Admin");
+		ImageIcon homeIcon2 = new ImageIcon("button-admin.png");
+		JButton button_1 = new JButton(homeIcon2);
 		button_1.setBackground(SystemColor.inactiveCaptionBorder);
-		button_1.setBounds(466, 274, 185, 99);
+		button_1.setContentAreaFilled(false);
+		button_1.setBorder(null);
+		button_1.setBounds(466, 230, 185, 140);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -1309,9 +1329,12 @@ public class SIS implements Serializable {
 		});
 		frame.getContentPane().add(button_1);
 
-		JButton button_2 = new JButton("Log in as Professor");
-		button_2.setBackground(SystemColor.inactiveCaptionBorder);
-		button_2.setBounds(248, 274, 185, 99);
+		ImageIcon homeIcon3 = new ImageIcon("button-prof.png");
+		JButton button_2 = new JButton(homeIcon3);
+		button_2.setForeground(Color.WHITE);
+		button_2.setContentAreaFilled(false);
+		button_2.setBorder(null);
+		button_2.setBounds(248, 230, 185, 140);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
