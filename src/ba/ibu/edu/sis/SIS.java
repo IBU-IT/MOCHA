@@ -832,20 +832,22 @@ public class SIS implements Serializable {
 
 		loginProf.getContentPane().setLayout(null);
 		JTextField textField = new JTextField();
-		textField.setBounds(240, 220, 200, 35);
+		textField.setBounds(190, 220, 300, 40);
 		loginProf.getContentPane().add(textField);
 		textField.setColumns(10);
+		textField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.grabFocus();
 
 		JPasswordField passwordField = new JPasswordField();
-		passwordField.setBounds(240, 300, 200, 35);
+		passwordField.setBounds(190, 300, 300, 40);
+		passwordField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		loginProf.getContentPane().add(passwordField);
 
-		JLabel lblWelcome = new JLabel("Welcome to professor panel. Please, enter your ID and password below");
-		lblWelcome.setFont(new Font("TAHOMA", Font.BOLD, 14));
-		lblWelcome.setForeground(Color.WHITE);
+		JLabel lblWelcome = new JLabel("Welcome to professor panel. Please, enter your ID and password below.");
+		lblWelcome.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblWelcome.setForeground(new Color(32, 35, 86));
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcome.setBounds(65, 142, 560, 56);
 		loginProf.getContentPane().add(lblWelcome);
@@ -854,18 +856,21 @@ public class SIS implements Serializable {
 
 		JLabel lblId = new JLabel("ID number");
 		lblId.setHorizontalAlignment(SwingConstants.CENTER);
-		lblId.setBounds(220, 195, 100, 25);
-		lblId.setForeground(Color.WHITE);
+		lblId.setBounds(170, 195, 100, 25);
+		lblId.setForeground(new Color(32, 35, 86));
 		loginProf.getContentPane().add(lblId);
 
 		JLabel lblPw = new JLabel("Password");
 		lblPw.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPw.setBounds(220, 275, 100, 25);
-		lblPw.setForeground(Color.WHITE);
+		lblPw.setBounds(170, 275, 100, 25);
+		lblPw.setForeground(new Color(32, 35, 86));
 		loginProf.getContentPane().add(lblPw);
 
-		JButton button = new JButton("Log In");
-
+		JButton button = new JButton("LOG IN");
+		button.setForeground(new Color(255, 255, 255));
+		button.setBackground(new Color(32, 35, 86));
+		button.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		button.setBorder(null);
 		button.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -971,7 +976,7 @@ public class SIS implements Serializable {
 				textField.setText("");
 			}
 		});
-		button.setBounds(290, 350, 100, 35);
+		button.setBounds(240, 360, 200, 40);
 		loginProf.getContentPane().add(button);
 		loginProf.getRootPane().setDefaultButton(button);
 		setPowered(loginProf);
@@ -988,37 +993,40 @@ public class SIS implements Serializable {
 		setLogo2(loginStudent);
 		homeButton(loginStudent, 0);
 
-		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow");
+		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow.");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label.setForeground(Color.white);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label.setForeground(new Color(32, 35, 86));
 		label.setBounds(65, 142, 560, 56);
 		loginStudent.getContentPane().add(label);
 
 		JTextField textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(240, 220, 200, 35);
+		textField.setBounds(190, 220, 300, 40);
+		textField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		loginStudent.getContentPane().add(textField);
 
 		JPasswordField passwordField = new JPasswordField(16);
-		passwordField.setBounds(240, 300, 200, 35);
+		passwordField.setBounds(190, 300, 300, 40);
+		passwordField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		loginStudent.getContentPane().add(passwordField);
 
 		JLabel label_1 = new JLabel("ID number");
 		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_1.setBounds(200, 195, 100, 25);
-		label_1.setForeground(Color.white);
+		label_1.setBounds(150, 195, 100, 25);
+		label_1.setForeground(new Color(32, 35, 86));
 		loginStudent.getContentPane().add(label_1);
 
 		JLabel label_2 = new JLabel("Password");
 		label_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_2.setBounds(200, 275, 100, 25);
-		label_2.setForeground(Color.white);
+		label_2.setBounds(150, 275, 100, 25);
+		label_2.setForeground(new Color(32, 35, 86));
 		loginStudent.getContentPane().add(label_2);
 
-		JButton button = new JButton("Log In");
+		JButton button = new JButton("LOG IN");
+
 		button.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -1223,6 +1231,7 @@ public class SIS implements Serializable {
 							});
 
 							btnBack.setBounds(340, 200, 50, 50);
+
 							editProfile.getContentPane().add(btnBack);
 							setPozadina(editProfile);
 							setPowered(editProfile);
@@ -1230,6 +1239,7 @@ public class SIS implements Serializable {
 						}
 					});
 					btnEdit.setForeground(Color.WHITE);
+
 					btnEdit.setBounds(540, 22, 150, 23);
 					btnEdit.setFont(new Font("TAHOMA", Font.BOLD, 11));
 					btnEdit.setContentAreaFilled(false);
@@ -1283,12 +1293,16 @@ public class SIS implements Serializable {
 			}
 		});
 		textField.grabFocus();
-		button.setBackground(SystemColor.inactiveCaptionBorder);
-		button.setBounds(290, 350, 100, 35);
+		button.setBackground(new Color(32, 35, 86));
+		button.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		button.setForeground(new Color(255, 255, 255));
+		button.setBounds(240, 360, 200, 40);
+		button.setBorder(null);
 		loginStudent.getContentPane().add(button);
 		loginStudent.getRootPane().setDefaultButton(button);
-		setPozadina(loginStudent);
 		setPowered(loginStudent);
+		setPozadina(loginStudent);
+
 	}
 
 	private void initialize(Admin a, Professor pr, List<Course> lista) {
