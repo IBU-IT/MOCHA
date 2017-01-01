@@ -262,12 +262,17 @@ public class AddProfessor extends JFrame {
 		});
 		btnNewButton_1.setBounds(541, 343, 59, 38);
 		contentPane.add(btnNewButton_1);
-		
+
 		JButton btnClear = new JButton("Clear");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DLM1.clear();
 				dodaj.setModel(DLM1);
+				DLM.clear();
+				for (int i = 0; i < lista.size(); i++) {
+					DLM.addElement(lista.get(i).getCourseName());
+				}
+				list.setModel(DLM);
 			}
 		});
 		btnClear.setBounds(563, 316, 89, 23);
