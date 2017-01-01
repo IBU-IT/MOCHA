@@ -4,12 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 import ba.ibu.edu.sis.AdminOptions;
-
 import java.awt.Font;
 import javax.swing.JButton;
-
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -23,6 +20,9 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.io.*;
+import java.awt.Graphics;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 
 public class SIS implements Serializable {
 
@@ -34,8 +34,14 @@ public class SIS implements Serializable {
 	private void setLogo2(JFrame logo2Frame) {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("logo_sis.png"));
-		lblNewLabel_1.setBounds(274, 11, 268, 173);
+		lblNewLabel_1.setBounds(274, 11, 268, 90);
 		logo2Frame.getContentPane().add(lblNewLabel_1);
+
+		JLabel pozadina = new JLabel("");
+		pozadina.setIcon(new ImageIcon("header-back.png"));
+		pozadina.setBounds(0, 0, 684, 120);
+		logo2Frame.getContentPane().add(pozadina);
+
 	}
 
 	private void setLogo(JFrame frejm) {
@@ -47,8 +53,9 @@ public class SIS implements Serializable {
 
 	private void setPozadina(JFrame frejm) {
 		JLabel pozadina = new JLabel("");
+		pozadina.setIcon(new ImageIcon("background.jpg"));
 		pozadina.setBounds(0, 0, 684, 473);
-		pozadina.setIcon(new ImageIcon("burch2.jpg"));
+		pozadina.setBackground(Color.WHITE);
 		frejm.getContentPane().add(pozadina);
 	}
 
@@ -56,8 +63,13 @@ public class SIS implements Serializable {
 		JLabel lblNewLabel_2 = new JLabel("Powered by MOCHA");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(276, 445, 128, 21);
+		lblNewLabel_2.setBounds(276, 440, 128, 21);
 		pFrame.getContentPane().add(lblNewLabel_2);
+
+		JLabel pozadina = new JLabel("");
+		pozadina.setIcon(new ImageIcon("header-back.png"));
+		pozadina.setBounds(0, 430, 684, 50);
+		pFrame.getContentPane().add(pozadina);
 	}
 
 	private void homeButton(JFrame hFrame, int shift) {
@@ -78,7 +90,8 @@ public class SIS implements Serializable {
 		});
 	}
 
-	public void prof_menu(JFrame nFrame, Professor pr, Admin a, JFrame frejm) {
+
+	public void prof_menu(JFrame nFrame, Professor pr, Admin a, JFrame frejm,  List<Course> lista) {
 		SIS sis = new SIS();
 		JButton btnEditMyProfile = new JButton("Edit my profile");
 		btnEditMyProfile.addActionListener(new ActionListener() {
@@ -97,7 +110,7 @@ public class SIS implements Serializable {
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				nFrame.dispose();
-				sis.init(pr, a);
+				sis.init(pr, a,lista);
 
 			}
 		});
@@ -478,6 +491,9 @@ public class SIS implements Serializable {
 	}
 
 	public void initOptions(Admin a, List<Course> lista) {
+		AdminOptions AdminOptions;
+		AdminOptions = new AdminOptions(a, lista);
+		
 		login = new JFrame();
 		login.setVisible(true);
 		login.setBounds(100, 100, 700, 511);
@@ -485,14 +501,15 @@ public class SIS implements Serializable {
 		login.getContentPane().setLayout(null);
 
 		JPasswordField pwdEnterYourPassword = new JPasswordField();
-		pwdEnterYourPassword.setBounds(240, 260, 200, 35);
+		pwdEnterYourPassword.setBounds(190, 255, 300, 40);
+		pwdEnterYourPassword.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		pwdEnterYourPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		login.getContentPane().add(pwdEnterYourPassword);
 		pwdEnterYourPassword.grabFocus();
 
-		JLabel lblNewLabel = new JLabel("Welcome to admin panel. Please enter your password bellow");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("TAHOMA", Font.BOLD, 14));
+		JLabel lblNewLabel = new JLabel("Welcome to admin panel. Please enter your password bellow.");
+		lblNewLabel.setForeground(new Color(32, 35, 86));
+		lblNewLabel.setFont(new Font("TAHOMA", Font.PLAIN, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setToolTipText("");
 		lblNewLabel.setBounds(65, 190, 560, 56);
@@ -500,27 +517,29 @@ public class SIS implements Serializable {
 		setLogo2(login);
 		homeButton(login, 0);
 
-		JButton btnLogIn = new JButton("Log In");
+		JButton btnLogIn = new JButton("LOG IN");
 		btnLogIn.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				if (pwdEnterYourPassword.getText().equals(a.getPassword())) {
 					login.dispose();
-					AdminOptions AdminOptions;
-					AdminOptions = new AdminOptions(a, lista);
+					
 					AdminOptions.setVisible(true);
-					AdminOptions.setPowered(AdminOptions);
-					homeButton(AdminOptions, 0);
-					AdminOptions.setLogo2(AdminOptions);
-					AdminOptions.setPozadina(AdminOptions);
+					
+					AdminOptions.setHowdy(AdminOptions, a, lista);
+					AdminOptions.setPozadina(AdminOptions, a, lista);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "ne moze");
+					JOptionPane.showMessageDialog(null, "Wrong ID or password.");
 				}
 				pwdEnterYourPassword.setText("");
 			}
 		});
-		btnLogIn.setBounds(290, 320, 100, 35);
+		btnLogIn.setBounds(240, 320, 200, 40);
+		btnLogIn.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		btnLogIn.setForeground(new Color(255, 255, 255));
+		btnLogIn.setBackground(new Color(12, 68, 126));
+		btnLogIn.setBorder(null);
 		login.getContentPane().add(btnLogIn);
 		login.getRootPane().setDefaultButton(btnLogIn);
 		setPowered(login);
@@ -531,124 +550,132 @@ public class SIS implements Serializable {
 
 		adminPage = new JFrame();
 		adminPage.setVisible(true);
+		AdminOptions AdminOptions;
+		AdminOptions = new AdminOptions(a, lista);
 		adminPage.setBounds(100, 100, 700, 511);
 		adminPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		adminPage.getContentPane().setLayout(null);
 		homeButton(adminPage, 45);
 
 		JLabel lblStudentName = new JLabel("Student Name");
-		lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblStudentName.setForeground(Color.WHITE);
-		lblStudentName.setBounds(23, 30, 106, 25);
+		lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblStudentName.setForeground(new Color(32, 35, 86));
+		lblStudentName.setBounds(23, 160, 137, 30);
 		adminPage.getContentPane().add(lblStudentName);
 
 		JLabel lblStudentSurname = new JLabel("Student Surname");
-		lblStudentSurname.setBounds(23, 73, 126, 25);
-		lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblStudentSurname.setForeground(Color.WHITE);
+		lblStudentSurname.setBounds(23, 200, 137, 30);
+		lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblStudentSurname.setForeground(new Color(32, 35, 86));
 		adminPage.getContentPane().add(lblStudentSurname);
 
 		JLabel lblStudentId = new JLabel("Student ID");
-		lblStudentId.setBounds(23, 122, 106, 25);
-		lblStudentId.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblStudentId.setForeground(Color.WHITE);
+		lblStudentId.setBounds(23, 240, 137, 30);
+		lblStudentId.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblStudentId.setForeground(new Color(32, 35, 86));
 		adminPage.getContentPane().add(lblStudentId);
 
 		JLabel lblStudentAge = new JLabel("Student Date of Birth");
-		lblStudentAge.setBounds(23, 171, 146, 25);
-		lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblStudentAge.setForeground(Color.WHITE);
+		lblStudentAge.setBounds(23, 280, 137, 30);
+		lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblStudentAge.setForeground(new Color(32, 35, 86));
 		adminPage.getContentPane().add(lblStudentAge);
 
 		JLabel lblStudentYear = new JLabel("Student Year");
-		lblStudentYear.setBounds(23, 220, 106, 25);
-		lblStudentYear.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblStudentYear.setForeground(Color.WHITE);
+		lblStudentYear.setBounds(340, 160, 137, 30);
+		lblStudentYear.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblStudentYear.setForeground(new Color(32, 35, 86));
 		adminPage.getContentPane().add(lblStudentYear);
 
 		JLabel lblStudentNationality = new JLabel("Student Nationality");
-		lblStudentNationality.setBounds(23, 318, 126, 25);
-		lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblStudentNationality.setForeground(Color.WHITE);
+		lblStudentNationality.setBounds(340, 200, 137, 30);
+		lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblStudentNationality.setForeground(new Color(32, 35, 86));
 		adminPage.getContentPane().add(lblStudentNationality);
 
 		JLabel lblStudentPassword = new JLabel("Student Password");
-		lblStudentPassword.setBounds(23, 416, 126, 25);
-		lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblStudentPassword.setForeground(Color.WHITE);
+		lblStudentPassword.setBounds(340, 240, 137, 30);
+		lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblStudentPassword.setForeground(new Color(32, 35, 86));
 		adminPage.getContentPane().add(lblStudentPassword);
 
 		JTextField textField_8 = new JTextField();
 		textField_8.setColumns(10);
-		textField_8.setBounds(155, 416, 137, 25);
+		textField_8.setBounds(470, 240, 160, 30);
+		textField_8.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		adminPage.getContentPane().add(textField_8);
 
 		JTextField textField = new JTextField();
-		textField.setBounds(155, 25, 137, 25);
+		textField.setBounds(155, 160, 160, 30);
+		textField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		adminPage.getContentPane().add(textField);
 		textField.setColumns(10);
 
 		JTextField textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(155, 75, 137, 25);
+		textField_1.setBounds(155, 200, 160, 30);
+		textField_1.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		adminPage.getContentPane().add(textField_1);
 
 		JTextField textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(155, 125, 137, 25);
+		textField_2.setBounds(155, 240, 160, 30);
+		textField_2.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		adminPage.getContentPane().add(textField_2);
 
 		JTextField textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(155, 175, 137, 25);
+		textField_3.setBounds(155, 280, 160, 30);
+		textField_3.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		adminPage.getContentPane().add(textField_3);
 
 		JTextField textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(155, 318, 137, 25);
+		textField_4.setBounds(470, 200, 160, 30);
+		textField_4.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		adminPage.getContentPane().add(textField_4);
 
 		JTextField textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(155, 367, 137, 25);
+		textField_5.setBounds(470, 280, 160, 30);
+		textField_5.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		adminPage.getContentPane().add(textField_5);
 
 		JTextField textField_7 = new JTextField();
 		textField_7.setColumns(10);
-		textField_7.setBounds(155, 225, 137, 25);
+		textField_7.setBounds(470, 160, 160, 30);
+		textField_7.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		adminPage.getContentPane().add(textField_7);
 
 		JRadioButton rdbtnMale = new JRadioButton("Male");
-		rdbtnMale.setFont(new Font("TAHOMA", Font.BOLD, 12));
-		rdbtnMale.setForeground(Color.BLACK);
-		rdbtnMale.setBounds(155, 275, 66, 23);
+		rdbtnMale.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		rdbtnMale.setForeground(new Color(32, 35, 86));
+		rdbtnMale.setBounds(155, 320, 66, 23);
 		adminPage.getContentPane().add(rdbtnMale);
 
 		JRadioButton rdbtnFemale = new JRadioButton("Female");
-		rdbtnFemale.setFont(new Font("TAHOMA", Font.BOLD, 12));
-		rdbtnFemale.setForeground(Color.BLACK);
-		rdbtnFemale.setBounds(223, 275, 66, 23);
+		rdbtnFemale.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		rdbtnFemale.setForeground(new Color(32, 35, 86));
+		rdbtnFemale.setBounds(223, 320, 66, 23);
 		adminPage.getContentPane().add(rdbtnFemale);
 
+		JLabel lblStudentEmail = new JLabel("Student Email");
+		lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblStudentEmail.setForeground(new Color(32, 35, 86));
+		lblStudentEmail.setBounds(340, 280, 106, 25);
+		adminPage.getContentPane().add(lblStudentEmail);
+
+		JLabel lblGender = new JLabel("Gender");
+		lblGender.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		lblGender.setForeground(new Color(32, 35, 86));
+		lblGender.setBounds(23, 320, 106, 25);
+		adminPage.getContentPane().add(lblGender);
+
+		
 		ButtonGroup gender = new ButtonGroup();// so that only one button can be
 												// selected
 		gender.add(rdbtnFemale);
 		gender.add(rdbtnMale);
-
-		JButton btnLogout = new JButton("Logout");
-		btnLogout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				adminPage.dispose();
-				SIS prozor = new SIS();
-				prozor.initOptions(a, lista);
-			}
-		});
-		btnLogout.setForeground(Color.WHITE);
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(590, 102, 110, 23);
-		btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
-		btnLogout.setBorder(null);
-		adminPage.getContentPane().add(btnLogout);
 
 		JButton btnNewButton = new JButton("Add Student");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -717,11 +744,16 @@ public class SIS implements Serializable {
 				}
 			}
 		});
-		btnNewButton.setBounds(319, 330, 140, 40);
+		btnNewButton.setBounds(32, 370, 185, 40);
+		btnNewButton.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(12, 68, 126));
+		btnNewButton.setBorder(null);
 		adminPage.getContentPane().add(btnNewButton);
 
 		JTextField textField_6 = new JTextField();
-		textField_6.setBounds(486, 17, 129, 40);
+		textField_6.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
+		textField_6.setBounds(23, 110, 380, 30);
 		adminPage.getContentPane().add(textField_6);
 		textField_6.setColumns(10);
 
@@ -744,7 +776,11 @@ public class SIS implements Serializable {
 				a.saveS();
 			}
 		});
-		btnDeleteStudent.setBounds(486, 330, 140, 40);
+		btnDeleteStudent.setBounds(248, 370, 185, 40);
+		btnDeleteStudent.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		btnDeleteStudent.setForeground(new Color(255, 255, 255));
+		btnDeleteStudent.setBackground(new Color(12, 68, 126));
+		btnDeleteStudent.setBorder(null);
 		adminPage.getContentPane().add(btnDeleteStudent);
 
 		JButton btnNewButton_1 = new JButton("Update Student Information");
@@ -778,13 +814,17 @@ public class SIS implements Serializable {
 				a.saveS();
 			}
 		});
-		btnNewButton_1.setBounds(370, 381, 207, 65);
+		btnNewButton_1.setBounds(466, 370, 185, 40);
+		btnNewButton_1.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1.setBackground(new Color(12, 68, 126));
+		btnNewButton_1.setBorder(null);
 		adminPage.getContentPane().add(btnNewButton_1);
 
 		JLabel lblNewLabel = new JLabel("Search by Student ID");
-		lblNewLabel.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(344, 22, 159, 31);
+		lblNewLabel.setForeground(new Color(12, 68, 126));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setBounds(23, 80, 186, 40);
 		adminPage.getContentPane().add(lblNewLabel);
 
 		JButton btnNewButton_2 = new JButton("Go");
@@ -812,27 +852,20 @@ public class SIS implements Serializable {
 				}
 			}
 		});
-		btnNewButton_2.setBounds(622, 17, 52, 40);
+		btnNewButton_2.setBounds(420, 110, 52, 30);
+		btnNewButton_2.setFont(new Font("TAHOMA", Font.PLAIN, 13));
+		btnNewButton_2.setForeground(new Color(255, 255, 255));
+		btnNewButton_2.setBackground(new Color(12, 68, 126));
+		btnNewButton_2.setBorder(null);
 		adminPage.getContentPane().add(btnNewButton_2);
-
-		JLabel lblStudentEmail = new JLabel("Student Email");
-		lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblStudentEmail.setForeground(Color.WHITE);
-		lblStudentEmail.setBounds(23, 367, 106, 25);
-		adminPage.getContentPane().add(lblStudentEmail);
-
-		JLabel lblGender = new JLabel("Gender");
-		lblGender.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblGender.setForeground(Color.WHITE);
-		lblGender.setBounds(23, 269, 106, 25);
-		adminPage.getContentPane().add(lblGender);
-		setPowered(adminPage);
-		setPozadina(adminPage);
-
+		
+		AdminOptions.setHowdy(adminPage, a, lista);
+		AdminOptions.setPozadina(adminPage, a, lista);
+		
 		a.saveS();
 	}
 
-	public void init(Professor pr, Admin a) {
+	public void init(Professor pr, Admin a,List<Course> lista) {
 		Course c = new Course();
 		JFrame loginProf = new JFrame();
 		loginProf.setVisible(true);
@@ -841,20 +874,22 @@ public class SIS implements Serializable {
 
 		loginProf.getContentPane().setLayout(null);
 		JTextField textField = new JTextField();
-		textField.setBounds(240, 220, 200, 35);
+		textField.setBounds(190, 220, 300, 40);
 		loginProf.getContentPane().add(textField);
 		textField.setColumns(10);
+		textField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.grabFocus();
 
 		JPasswordField passwordField = new JPasswordField();
-		passwordField.setBounds(240, 300, 200, 35);
+		passwordField.setBounds(190, 300, 300, 40);
+		passwordField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		loginProf.getContentPane().add(passwordField);
 
-		JLabel lblWelcome = new JLabel("Welcome to professor panel. Please, enter your ID and password below");
-		lblWelcome.setFont(new Font("TAHOMA", Font.BOLD, 14));
-		lblWelcome.setForeground(Color.WHITE);
+		JLabel lblWelcome = new JLabel("Welcome to professor panel. Please, enter your ID and password below.");
+		lblWelcome.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		lblWelcome.setForeground(new Color(32, 35, 86));
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcome.setBounds(65, 142, 560, 56);
 		loginProf.getContentPane().add(lblWelcome);
@@ -863,23 +898,30 @@ public class SIS implements Serializable {
 
 		JLabel lblId = new JLabel("ID number");
 		lblId.setHorizontalAlignment(SwingConstants.CENTER);
-		lblId.setBounds(220, 195, 100, 25);
-		lblId.setForeground(Color.WHITE);
+		lblId.setBounds(170, 195, 100, 25);
+		lblId.setForeground(new Color(32, 35, 86));
 		loginProf.getContentPane().add(lblId);
 
 		JLabel lblPw = new JLabel("Password");
 		lblPw.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPw.setBounds(220, 275, 100, 25);
-		lblPw.setForeground(Color.WHITE);
+		lblPw.setBounds(170, 275, 100, 25);
+		lblPw.setForeground(new Color(32, 35, 86));
 		loginProf.getContentPane().add(lblPw);
 
-		JButton button = new JButton("Log In");
+		JButton button = new JButton("LOG IN");
+		button.setBounds(240, 370, 200, 40);
+		button.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		button.setForeground(new Color(255, 255, 255));
+		button.setBackground(new Color(12, 68, 126));
+		button.setBorder(null);
 
 		button.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Professor profa = a.findProfessor(textField.getText());
 				if (passwordField.getText().equals(profa.getPassword())) {
+					AdminOptions AdminOptions;
+					AdminOptions = new AdminOptions(a, lista);
 					loginProf.dispose();
 
 					ProfessorPanel loginProfPage = new ProfessorPanel(a, profa);
@@ -887,17 +929,25 @@ public class SIS implements Serializable {
 					loginProfPage.setBounds(100, 100, 700, 511);
 					loginProfPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					loginProfPage.getContentPane().setLayout(null);
-					prof_menu(loginProfPage, profa, a, loginProfPage);
+					
+					
+					JLabel lblNewLabel_2 = new JLabel("");
+					lblNewLabel_2.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(12, 68, 126)));
+					lblNewLabel_2.setBounds(23, 50, 635, 100);
+					loginProfPage.getContentPane().add(lblNewLabel_2);
 
 					if (profa.MyCourses.size() > 0) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(0).getCourseName());
-						btnAddNewCourse.setBounds(40, 250, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(32, 180, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								loginProfPage.setVisible(false);
 								c.course_inf(profa, a, a.findCourse(profa.getMyCourses().get(0).getCourseName()),
-										loginProfPage);
+										loginProfPage,lista);
 							}
 
 						});
@@ -905,13 +955,16 @@ public class SIS implements Serializable {
 					}
 					if (profa.MyCourses.size() > 1) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(1).getCourseName());
-						btnAddNewCourse.setBounds(250, 250, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(248, 180, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								loginProfPage.setVisible(false);
 								c.course_inf(profa, a, a.findCourse(profa.getMyCourses().get(1).getCourseName()),
-										loginProfPage);
+										loginProfPage,lista);
 							}
 
 						});
@@ -919,13 +972,16 @@ public class SIS implements Serializable {
 					}
 					if (profa.MyCourses.size() > 2) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(2).getCourseName());
-						btnAddNewCourse.setBounds(460, 250, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(466, 180, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								loginProfPage.setVisible(false);
 								c.course_inf(profa, a, a.findCourse(profa.getMyCourses().get(2).getCourseName()),
-										loginProfPage);
+										loginProfPage,lista);
 							}
 
 						});
@@ -933,13 +989,16 @@ public class SIS implements Serializable {
 					}
 					if (profa.MyCourses.size() > 3) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(3).getCourseName());
-						btnAddNewCourse.setBounds(40, 360, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(32, 300, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								loginProfPage.setVisible(false);
 								c.course_inf(profa, a, a.findCourse(profa.getMyCourses().get(3).getCourseName()),
-										loginProfPage);
+										loginProfPage,lista);
 							}
 
 						});
@@ -947,13 +1006,16 @@ public class SIS implements Serializable {
 					}
 					if (profa.MyCourses.size() > 4) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(4).getCourseName());
-						btnAddNewCourse.setBounds(250, 360, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(248, 300, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								loginProfPage.setVisible(false);
 								c.course_inf(profa, a, a.findCourse(profa.getMyCourses().get(4).getCourseName()),
-										loginProfPage);
+										loginProfPage,lista);
 							}
 
 						});
@@ -961,22 +1023,24 @@ public class SIS implements Serializable {
 					}
 					if (profa.MyCourses.size() > 5) {
 						JButton btnAddNewCourse = new JButton(profa.getMyCourses().get(5).getCourseName());
-						btnAddNewCourse.setBounds(460, 360, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(466, 300, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								loginProfPage.setVisible(false);
 								c.course_inf(profa, a, a.findCourse(profa.getMyCourses().get(5).getCourseName()),
-										loginProfPage);
+										loginProfPage,lista);
 							}
 
 						});
 						loginProfPage.getContentPane().add(btnAddNewCourse);
 					}
 
-					setLogo(loginProfPage);
-					setPowered(loginProfPage);
-					setPozadina(loginProfPage);
+					AdminOptions.setHowdyPr(loginProfPage, a, lista);
+					AdminOptions.setPozadina(loginProfPage, a, lista);
 				} else
 
 				{
@@ -986,15 +1050,16 @@ public class SIS implements Serializable {
 				textField.setText("");
 			}
 		});
-		button.setBounds(290, 350, 100, 35);
+		
 		loginProf.getContentPane().add(button);
 		loginProf.getRootPane().setDefaultButton(button);
 		setPowered(loginProf);
 		setPozadina(loginProf);
 	}
 
-	private void init_stud(Admin a) {
-
+	private void init_stud(Admin a, List<Course> lista) {
+		AdminOptions AdminOptions;
+		AdminOptions = new AdminOptions(a, lista);
 		JFrame loginStudent = new JFrame();
 		loginStudent.setVisible(true);
 		loginStudent.setBounds(100, 100, 700, 511);
@@ -1003,38 +1068,40 @@ public class SIS implements Serializable {
 		setLogo2(loginStudent);
 		homeButton(loginStudent, 0);
 
-		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow");
+		JLabel label = new JLabel("Welcome to student panel. Please, enter you ID and password bellow.");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label.setForeground(Color.white);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label.setForeground(new Color(32, 35, 86));
 		label.setBounds(65, 142, 560, 56);
 		loginStudent.getContentPane().add(label);
 
 		JTextField textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(240, 220, 200, 35);
+		textField.setBounds(190, 220, 300, 40);
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		loginStudent.getContentPane().add(textField);
 
 		JPasswordField passwordField = new JPasswordField(16);
-		passwordField.setBounds(240, 300, 200, 35);
+		passwordField.setBounds(190, 300, 300, 40);
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		loginStudent.getContentPane().add(passwordField);
 
 		JLabel label_1 = new JLabel("ID number");
 		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_1.setBounds(200, 195, 100, 25);
-		label_1.setForeground(Color.white);
+		label_1.setBounds(150, 195, 100, 25);
+		label_1.setForeground(new Color(32, 35, 86));
 		loginStudent.getContentPane().add(label_1);
 
 		JLabel label_2 = new JLabel("Password");
 		label_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_2.setBounds(200, 275, 100, 25);
-		label_2.setForeground(Color.white);
+		label_2.setBounds(150, 275, 100, 25);
+		label_2.setForeground(new Color(32, 35, 86));
 		loginStudent.getContentPane().add(label_2);
 
 
-		JButton button = new JButton("Log In");
+		JButton button = new JButton("LOG IN");
 		button.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -1050,9 +1117,9 @@ public class SIS implements Serializable {
 					stdLogIn.setBounds(100, 100, 700, 511);
 					stdLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					stdLogIn.getContentPane().setLayout(null);
-					setLogo2(stdLogIn);
-
-					JButton btnEdit = new JButton("Edit my profile");
+					
+					ImageIcon logoutIcon=new ImageIcon("settings.png");
+					JButton btnEdit = new JButton(logoutIcon);
 					btnEdit.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							stdLogIn.dispose();
@@ -1063,117 +1130,124 @@ public class SIS implements Serializable {
 							editProfile.getContentPane().setLayout(null);
 
 							JLabel lblStudentName = new JLabel("Student Name");
-							lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblStudentName.setForeground(Color.WHITE);
-							lblStudentName.setBounds(23, 30, 106, 25);
+							lblStudentName.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblStudentName.setForeground(new Color(32, 35, 86));
+							lblStudentName.setBounds(23, 110, 137, 30);
 							editProfile.getContentPane().add(lblStudentName);
 
 							JLabel lblStudentSurname = new JLabel("Student Surname");
-							lblStudentSurname.setBounds(23, 73, 106, 25);
-							lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblStudentSurname.setForeground(Color.WHITE);
+							lblStudentSurname.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblStudentSurname.setForeground(new Color(32, 35, 86));
+							lblStudentSurname.setBounds(23, 150, 137, 30);
 							editProfile.getContentPane().add(lblStudentSurname);
 
 							JLabel lblStudentId = new JLabel("Student ID");
-							lblStudentId.setBounds(23, 122, 106, 25);
-							lblStudentId.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblStudentId.setForeground(Color.WHITE);
+							lblStudentId.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblStudentId.setForeground(new Color(32, 35, 86));
+							lblStudentId.setBounds(23, 190, 137, 30);
 							editProfile.getContentPane().add(lblStudentId);
 
 							JLabel lblStudentAge = new JLabel("Student Date of Birth");
-							lblStudentAge.setBounds(23, 171, 106, 25);
-							lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblStudentAge.setForeground(Color.WHITE);
+							lblStudentAge.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblStudentAge.setForeground(new Color(32, 35, 86));
+							lblStudentAge.setBounds(23, 230, 137, 30);
 							editProfile.getContentPane().add(lblStudentAge);
 
 							JLabel lblStudentYear = new JLabel("Student Year");
-							lblStudentYear.setBounds(23, 220, 106, 25);
-							lblStudentYear.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblStudentYear.setForeground(Color.WHITE);
+							lblStudentYear.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblStudentYear.setForeground(new Color(32, 35, 86));
+							lblStudentYear.setBounds(23, 270, 137, 30);
 							editProfile.getContentPane().add(lblStudentYear);
 
 							JLabel lblGender = new JLabel("Gender");
-							lblGender.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblGender.setForeground(Color.WHITE);
-							lblGender.setBounds(23, 269, 106, 25);
+							lblGender.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblGender.setForeground(new Color(32, 35, 86));
+							lblGender.setBounds(23, 310, 137, 30);
 							editProfile.getContentPane().add(lblGender);
 
 							JLabel lblStudentNationality = new JLabel("Student Nationality");
-							lblStudentNationality.setBounds(23, 318, 106, 25);
-							lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblStudentNationality.setForeground(Color.WHITE);
+							lblStudentNationality.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblStudentNationality.setForeground(new Color(32, 35, 86));
+							lblStudentNationality.setBounds(340, 110, 137, 30);
 							editProfile.getContentPane().add(lblStudentNationality);
 
 							JLabel lblStudentEmail = new JLabel("Student Email");
-							lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblStudentEmail.setForeground(Color.WHITE);
-							lblStudentEmail.setBounds(23, 367, 106, 25);
+							lblStudentEmail.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblStudentEmail.setForeground(new Color(32, 35, 86));
+							lblStudentEmail.setBounds(340, 150, 137, 30);
 							editProfile.getContentPane().add(lblStudentEmail);
 
 							JLabel lblStudentPassword = new JLabel("Student Password");
-							lblStudentPassword.setBounds(23, 416, 106, 25);
-							lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							lblStudentPassword.setForeground(Color.WHITE);
+							lblStudentPassword.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							lblStudentPassword.setForeground(new Color(32, 35, 86));
+							lblStudentPassword.setBounds(340, 190, 137, 30);
 							editProfile.getContentPane().add(lblStudentPassword);
 
 							JTextField textField = new JTextField();
-							textField.setBounds(139, 25, 117, 25);
+							textField.setBounds(155, 110, 160, 30);
+							textField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 							textField.setColumns(10);
 							textField.setText(xStudent.getName());
 							editProfile.getContentPane().add(textField);
 
 							JTextField textField_1 = new JTextField();
-							textField_1.setColumns(10);
-							textField_1.setBounds(139, 75, 117, 25);
+							textField_1.setBounds(155, 150, 160, 30);
+							textField_1.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 							textField_1.setText(xStudent.getSurname());
 							editProfile.getContentPane().add(textField_1);
 
 							JTextField textField_2 = new JTextField();
 							textField_2.setColumns(10);
-							textField_2.setBounds(139, 125, 117, 25);
+							textField_2.setBounds(155, 190, 160, 30);
+							textField_2.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 							textField_2.setText(xStudent.getId());
 							editProfile.getContentPane().add(textField_2);
 
 							JTextField textField_3 = new JTextField();
 							textField_3.setColumns(10);
-							textField_3.setBounds(139, 175, 117, 25);
+							textField_3.setBounds(155, 230, 160, 30);
+							textField_3.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 							textField_3.setText(xStudent.getDateOfBirth());
 							editProfile.getContentPane().add(textField_3);
 
 							JTextField textField_4 = new JTextField();
 							textField_4.setColumns(10);
-							textField_4.setBounds(139, 318, 117, 25);
+							textField_4.setBounds(155, 270, 160, 30);
+							textField_4.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 							textField_4.setText(xStudent.getNationality());
 							editProfile.getContentPane().add(textField_4);
 
 							JTextField textField_5 = new JTextField();
 							textField_5.setColumns(10);
-							textField_5.setBounds(139, 367, 117, 25);
+							textField_5.setBounds(470, 110, 160, 30);
+							textField_5.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 							textField_5.setText(xStudent.getEmail());
 							editProfile.getContentPane().add(textField_5);
 
 							JTextField textField_6 = new JTextField();
 							textField_6.setColumns(10);
-							textField_6.setBounds(139, 225, 117, 25);
+							textField_6.setBounds(470, 150, 160, 30);
+							textField_6.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 							textField_6.setText(xStudent.getYear());
 							editProfile.getContentPane().add(textField_6);
 
 							JTextField textField_7 = new JTextField();
 							textField_7.setColumns(10);
-							textField_7.setBounds(139, 416, 117, 25);
+							textField_7.setBounds(470, 190, 160, 30);
+							textField_7.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 							textField_7.setText(xStudent.getPassword());
 							editProfile.getContentPane().add(textField_7);
 
 							JRadioButton rdbtnMale = new JRadioButton("Male");
-							rdbtnMale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							rdbtnMale.setForeground(Color.BLACK);
-							rdbtnMale.setBounds(139, 275, 66, 23);
+							rdbtnMale.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							rdbtnMale.setForeground(new Color(32, 35, 86));
+							rdbtnMale.setBounds(155, 310, 66, 23);
 							editProfile.getContentPane().add(rdbtnMale);
 
 							JRadioButton rdbtnFemale = new JRadioButton("Female");
-							rdbtnFemale.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-							rdbtnFemale.setForeground(Color.BLACK);
-							rdbtnFemale.setBounds(207, 275, 66, 23);
+							rdbtnFemale.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+							rdbtnFemale.setForeground(new Color(32, 35, 86));
+							rdbtnFemale.setBounds(223, 310, 66, 23);
 							editProfile.getContentPane().add(rdbtnFemale);
 
 							ButtonGroup gender = new ButtonGroup();// so that
@@ -1224,48 +1298,45 @@ public class SIS implements Serializable {
 
 								}
 							});
-
+							btnUpdate.setBounds(340, 290, 290, 40);
+							btnUpdate.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+							btnUpdate.setForeground(new Color(255, 255, 255));
+							btnUpdate.setBorder(null);
+							btnUpdate.setBackground(new Color(12, 68, 126));
 							editProfile.getContentPane().add(btnUpdate);
-							btnUpdate.setBounds(400, 200, 200, 50);
+							
 
-							ImageIcon back = new ImageIcon("back.png");
-							JButton btnBack = new JButton(back);
+						
+							ImageIcon backIcon=new ImageIcon("back_icon.png");
+							JButton btnBack = new JButton(backIcon);;
 							btnBack.addActionListener(new ActionListener() {
-
-								public void actionPerformed(ActionEvent e) {
+								public void actionPerformed(ActionEvent arg0) {
 									editProfile.dispose();
 									stdLogIn.setVisible(true);
 								}
 							});
-
-							btnBack.setBounds(340, 200, 50, 50);
+							btnBack.setForeground(Color.WHITE);
+							btnBack.setContentAreaFilled(false);
+							btnBack.setBounds(518, 20, 37, 30);
+							btnBack.setFont(new Font("TAHOMA", Font.BOLD, 11));
+							btnBack.setBorder(null);
 							editProfile.getContentPane().add(btnBack);
-							setPozadina(editProfile);
-							setPowered(editProfile);
+
+							
+						
+							AdminOptions.setHowdyStd(editProfile, a, lista);
+							AdminOptions.setPozadina(editProfile, a, lista);
 
 						}
 					});
 					btnEdit.setForeground(Color.WHITE);
-					btnEdit.setBounds(540, 22, 150, 23);
-					btnEdit.setFont(new Font("TAHOMA", Font.BOLD, 11));
 					btnEdit.setContentAreaFilled(false);
+					btnEdit.setBounds(525, 20, 30, 30);
+					btnEdit.setFont(new Font("TAHOMA", Font.BOLD, 11));
 					btnEdit.setBorder(null);
-
 					stdLogIn.getContentPane().add(btnEdit);
 
-					JButton btnLogOut = new JButton("Logout");
-					btnLogOut.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							stdLogIn.dispose();
-							init_stud(a);
-						}
-					});
-					btnLogOut.setForeground(Color.WHITE);
-					btnLogOut.setContentAreaFilled(false);
-					btnLogOut.setBounds(470, 22, 110, 23);
-					btnLogOut.setFont(new Font("TAHOMA", Font.BOLD, 11));
-					btnLogOut.setBorder(null);
-					stdLogIn.getContentPane().add(btnLogOut);
+					
 					
 					int kanter = 0;
 					for (int i = 0; i < 100; i++) {
@@ -1291,26 +1362,26 @@ public class SIS implements Serializable {
 							gradesF.setBounds(100, 100, 700, 511);
 							gradesF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							gradesF.getContentPane().setLayout(null);
-							setLogo2(gradesF);
-							setPowered(gradesF);
-							setPozadina(gradesF);
+							AdminOptions.setHowdyStd(AdminOptions, a, lista);
+							AdminOptions.setPozadina(gradesF, a, lista);
 							
 							
 
 			
 					if(kanter>0){
 						JButton btnAddNewCourse = new JButton(xStudent.korses[0]);
-						btnAddNewCourse.setBounds(40, 250, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(32, 180, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								stdLogIn.setVisible(false);
 								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[0]),0);
 								gradess.setVisible(true);
-								
-								setLogo2(gradess);
-								setPowered(gradess);
-								setPozadina(gradess);
+								AdminOptions.setHowdyStd(gradess, a, lista);
+								AdminOptions.setPozadina(gradess, a, lista);
 								
 							}
 
@@ -1319,16 +1390,17 @@ public class SIS implements Serializable {
 					}
 					if(kanter>1){
 						JButton btnAddNewCourse = new JButton(xStudent.korses[5]);
-						btnAddNewCourse.setBounds(250, 250, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(248, 180, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[5]),5);
 								gradess.setVisible(true);
-								
-								setLogo2(gradess);
-								setPowered(gradess);
-								setPozadina(gradess);
+								AdminOptions.setHowdyStd(gradess, a, lista);
+								AdminOptions.setPozadina(gradess, a, lista);
 							}
 
 						});
@@ -1336,16 +1408,17 @@ public class SIS implements Serializable {
 					}
 					if(kanter>2){
 						JButton btnAddNewCourse = new JButton(xStudent.korses[10]);
-						btnAddNewCourse.setBounds(460, 250, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(466, 180, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[10]),10);
 								gradess.setVisible(true);
-								
-								setLogo2(gradess);
-								setPowered(gradess);
-								setPozadina(gradess);
+								AdminOptions.setHowdyStd(gradess, a, lista);
+								AdminOptions.setPozadina(gradess, a, lista);
 							}
 
 						});
@@ -1353,16 +1426,17 @@ public class SIS implements Serializable {
 					}
 					if(kanter>3){
 						JButton btnAddNewCourse = new JButton(xStudent.korses[15]);
-						btnAddNewCourse.setBounds(40, 360, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(32, 300, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[15]),15);
 								gradess.setVisible(true);
-								
-								setLogo2(gradess);
-								setPowered(gradess);
-								setPozadina(gradess);
+								AdminOptions.setHowdyStd(gradess, a, lista);
+								AdminOptions.setPozadina(gradess, a, lista);
 							}
 
 						});
@@ -1370,16 +1444,17 @@ public class SIS implements Serializable {
 					}
 					if(kanter>4){
 						JButton btnAddNewCourse = new JButton(xStudent.korses[20]);
-						btnAddNewCourse.setBounds(250, 360, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(248, 300, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[20]),20);
 								gradess.setVisible(true);
-								
-								setLogo2(gradess);
-								setPowered(gradess);
-								setPozadina(gradess);
+								AdminOptions.setHowdyStd(gradess, a, lista);
+								AdminOptions.setPozadina(gradess, a, lista);
 							}
 
 						});
@@ -1387,26 +1462,24 @@ public class SIS implements Serializable {
 					}
 					if(kanter>5){
 						JButton btnAddNewCourse = new JButton(xStudent.korses[25]);
-						btnAddNewCourse.setBounds(460, 360, 180, 80);
-						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.setBounds(466, 300, 185, 90);
+						btnAddNewCourse.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+						btnAddNewCourse.setForeground(new Color(255, 255, 255));
+						btnAddNewCourse.setBackground(new Color(12, 68, 126));
+						btnAddNewCourse.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 						btnAddNewCourse.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[25]),25);
 								gradess.setVisible(true);
-								
-								setLogo2(gradess);
-								setPowered(gradess);
-								setPozadina(gradess);
+								AdminOptions.setHowdyStd(gradess, a, lista);
+								AdminOptions.setPozadina(gradess, a, lista);
 							}
 
 						});
 						stdLogIn.getContentPane().add(btnAddNewCourse);
 					}
-					
-				
-					
-					setPowered(stdLogIn);
-					setPozadina(stdLogIn);
+					AdminOptions.setHowdyStd(stdLogIn, a, lista);
+					AdminOptions.setPozadina(stdLogIn, a, lista);
 				} else {
 					JOptionPane.showMessageDialog(null, "Wrong password ");
 					textField.grabFocus();
@@ -1418,8 +1491,11 @@ public class SIS implements Serializable {
 			}
 		});
 		textField.grabFocus();
-		button.setBackground(SystemColor.inactiveCaptionBorder);
-		button.setBounds(290, 350, 100, 35);
+		button.setBackground(new Color(12, 68, 126));
+		button.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		button.setForeground(new Color(255, 255, 255));
+		button.setBounds(240, 360, 200, 40);
+		button.setBorder(null);
 		loginStudent.getContentPane().add(button);
 		loginStudent.getRootPane().setDefaultButton(button);
 		setPozadina(loginStudent);
@@ -1432,29 +1508,37 @@ public class SIS implements Serializable {
 		frame.setBounds(100, 100, 700, 511);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel lblWelcomeToStudent = new JLabel("Welcome to Student Information System!");
-		lblWelcomeToStudent.setBounds(65, 142, 560, 56);
-		lblWelcomeToStudent.setForeground(new Color(255, 255, 255));
-		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 24));
+		JLabel lblWelcomeToStudent = new JLabel("WELCOME TO MOCHA | SIS");
+		lblWelcomeToStudent.setBounds(60, 142, 560, 56);
+		lblWelcomeToStudent.setForeground(new Color(32, 35, 86));
+		lblWelcomeToStudent.setFont(new Font("Tahoma", Font.BOLD, 26));
 		lblWelcomeToStudent.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JButton button = new JButton("Log in as Student");
-		button.setBackground(SystemColor.inactiveCaptionBorder);
-		button.setBounds(32, 274, 185, 99);
+		ImageIcon homeIcon = new ImageIcon("button-student.png");
+		JButton button = new JButton("Login as student");
+		button.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		button.setForeground(new Color(255, 255, 255));
+		button.setBackground(new Color(12, 68, 126));
+		button.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
+		button.setBounds(32, 230, 185, 100);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 				SIS studentWindow = new SIS();
-				studentWindow.init_stud(a);
+				studentWindow.init_stud(a,lista);
 			}
 		});
 		frame.getContentPane().add(button);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(lblWelcomeToStudent);
 
-		JButton button_1 = new JButton("Log in as Admin");
-		button_1.setBackground(SystemColor.inactiveCaptionBorder);
-		button_1.setBounds(466, 274, 185, 99);
+		ImageIcon homeIcon2 = new ImageIcon("LOGIN AS ADMIN");
+		JButton button_1 = new JButton("Login as admin");
+		button_1.setBounds(466, 230, 185, 100);
+		button_1.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		button_1.setForeground(new Color(255, 255, 255));
+		button_1.setBackground(new Color(12, 68, 126));
+		button_1.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -1464,14 +1548,18 @@ public class SIS implements Serializable {
 		});
 		frame.getContentPane().add(button_1);
 
-		JButton button_2 = new JButton("Log in as Professor");
-		button_2.setBackground(SystemColor.inactiveCaptionBorder);
-		button_2.setBounds(248, 274, 185, 99);
+		ImageIcon homeIcon3 = new ImageIcon("button-prof.png");
+		JButton button_2 = new JButton("Login as professor");
+		button_2.setForeground(new Color(255, 255, 255));
+		button_2.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		button_2.setBackground(new Color(12, 68, 126));
+		button_2.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, new Color(118, 173, 224)));
+		button_2.setBounds(248, 230, 185, 100);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				SIS prof = new SIS();
-				prof.init(pr, a);
+				prof.init(pr, a,lista);
 			}
 		});
 

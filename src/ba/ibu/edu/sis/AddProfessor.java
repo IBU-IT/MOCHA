@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -43,73 +44,80 @@ public class AddProfessor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblProfessorName = new JLabel("Professor Name");
-		lblProfessorName.setForeground(Color.WHITE);
-		lblProfessorName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblProfessorName.setBounds(21, 26, 137, 49);
+		JLabel lblProfessorName = new JLabel("Name");
+		lblProfessorName.setForeground(new Color(32, 35, 86));
+		lblProfessorName.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblProfessorName.setBounds(23, 110, 137, 30);
 		contentPane.add(lblProfessorName);
 
-		JLabel lblProfessorSurname = new JLabel("Professor Surname");
-		lblProfessorSurname.setForeground(Color.WHITE);
-		lblProfessorSurname.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblProfessorSurname.setBounds(21, 100, 137, 49);
+		JLabel lblProfessorSurname = new JLabel("Surname");
+		lblProfessorSurname.setForeground(new Color(32, 35, 86));
+		lblProfessorSurname.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblProfessorSurname.setBounds(23, 150, 137, 30);
 		contentPane.add(lblProfessorSurname);
 
-		JLabel lblProfessorId = new JLabel("Professor ID");
-		lblProfessorId.setForeground(Color.WHITE);
-		lblProfessorId.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblProfessorId.setBounds(21, 174, 137, 49);
+		JLabel lblProfessorId = new JLabel("ID numer");
+		lblProfessorId.setForeground(new Color(32, 35, 86));
+		lblProfessorId.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblProfessorId.setBounds(23, 190, 137, 30);
 		contentPane.add(lblProfessorId);
 
-		JLabel lblProfessorEmail = new JLabel("Professor E-mail");
-		lblProfessorEmail.setForeground(Color.WHITE);
-		lblProfessorEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblProfessorEmail.setBounds(21, 248, 137, 49);
+		JLabel lblProfessorEmail = new JLabel("E-mail");
+		lblProfessorEmail.setForeground(new Color(32, 35, 86));
+		lblProfessorEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblProfessorEmail.setBounds(23, 230, 137, 30);
 		contentPane.add(lblProfessorEmail);
 
-		JLabel lblProfessorPhone = new JLabel("Professor Phone");
-		lblProfessorPhone.setForeground(Color.WHITE);
-		lblProfessorPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblProfessorPhone.setBounds(21, 322, 137, 49);
+		JLabel lblProfessorPhone = new JLabel("Phone");
+		lblProfessorPhone.setForeground(new Color(32, 35, 86));
+		lblProfessorPhone.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblProfessorPhone.setBounds(23, 270, 137, 30);
 		contentPane.add(lblProfessorPhone);
 
-		JLabel lblProfessorPassword = new JLabel("Professor Password");
-		lblProfessorPassword.setForeground(Color.WHITE);
-		lblProfessorPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblProfessorPassword.setBounds(21, 396, 137, 49);
+		JLabel lblProfessorPassword = new JLabel("Password");
+		lblProfessorPassword.setForeground(new Color(32, 35, 86));
+		lblProfessorPassword.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblProfessorPassword.setBounds(23, 310, 137, 30);
 		contentPane.add(lblProfessorPassword);
 
 		profname = new JTextField();
-		profname.setBounds(168, 39, 110, 27);
+		profname.setBounds(110, 110, 160, 30);
+		profname.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
 		contentPane.add(profname);
 		profname.setColumns(10);
 
 		profsurname = new JTextField();
 		profsurname.setColumns(10);
-		profsurname.setBounds(168, 113, 110, 27);
+		profsurname.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
+		profsurname.setBounds(110, 150, 160, 30);
 		contentPane.add(profsurname);
 
 		profid = new JTextField();
 		profid.setColumns(10);
-		profid.setBounds(168, 187, 110, 27);
+		profid.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
+		profid.setBounds(110, 190, 160, 30);
 		contentPane.add(profid);
 
 		profemail = new JTextField();
 		profemail.setColumns(10);
-		profemail.setBounds(168, 261, 110, 27);
+		profemail.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
+		profemail.setBounds(110, 230, 160, 30);
 		contentPane.add(profemail);
 
 		phone = new JTextField();
 		phone.setColumns(10);
-		phone.setBounds(168, 335, 110, 27);
+		phone.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
+		phone.setBounds(110, 270, 160, 30);
 		contentPane.add(phone);
 
 		profpassword = new JTextField();
 		profpassword.setColumns(10);
-		profpassword.setBounds(168, 409, 110, 27);
+		profpassword.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
+		profpassword.setBounds(110, 310, 160, 30);
 		contentPane.add(profpassword);
 
-		JButton btnDeleteProfessor = new JButton("Delete Professor");
+
+		JButton btnDeleteProfessor = new JButton("Delete");
 		btnDeleteProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Professor todelete = a.findProfessor(textField.getText());
@@ -124,32 +132,27 @@ public class AddProfessor extends JFrame {
 
 			}
 		});
-		btnDeleteProfessor.setBounds(502, 396, 150, 49);
+		btnDeleteProfessor.setBounds(150, 370, 120, 40);
+		btnDeleteProfessor.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		btnDeleteProfessor.setForeground(new Color(255, 255, 255));
+		btnDeleteProfessor.setBackground(new Color(12, 68, 126));
 		contentPane.add(btnDeleteProfessor);
 
 		JLabel lblAssignCourses = new JLabel("Assign Courses:");
-		lblAssignCourses.setForeground(Color.WHITE);
-		lblAssignCourses.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAssignCourses.setBounds(417, 26, 137, 49);
+		lblAssignCourses.setForeground(new Color(12, 68, 126));
+		lblAssignCourses.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAssignCourses.setBounds(310, 75, 137, 35);
 		contentPane.add(lblAssignCourses);
-
-		JButton btnLogout = new JButton("Logout");
-		btnLogout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				SIS prozor = new SIS();
-				prozor.initOptions(a, lista);
-			}
-		});
-		btnLogout.setForeground(Color.WHITE);
-		btnLogout.setContentAreaFilled(false);
-		btnLogout.setBounds(590, 62, 110, 23);
-		btnLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
-		btnLogout.setBorder(null);
-		contentPane.add(btnLogout);
+		
+		JLabel lblAddProf = new JLabel("Add new professor:");
+		lblAddProf.setForeground(new Color(12, 68, 126));
+		lblAddProf.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAddProf.setBounds(23, 75, 250, 35);
+		contentPane.add(lblAddProf);
 
 		JList<String> list = new JList<String>();
-		list.setBounds(299, 89, 137, 224);
+		list.setBounds(310, 110, 137, 230);
+		list.setBorder(BorderFactory.createMatteBorder(1, 1, 4, 1, new Color(118, 173, 224)));
 		contentPane.add(list);
 		DefaultListModel<String> DLM = new DefaultListModel<String>();
 		for (int i = 0; i < lista.size(); i++) {
@@ -158,11 +161,12 @@ public class AddProfessor extends JFrame {
 		list.setModel(DLM);
 
 		JList<String> dodaj = new JList<String>();
-		dodaj.setBounds(537, 89, 137, 224);
+		dodaj.setBounds(530, 110, 137, 230);
+		dodaj.setBorder(BorderFactory.createMatteBorder(1, 1, 4, 1, new Color(118, 173, 224)));
 		contentPane.add(dodaj);
 
 		DefaultListModel<String> DLM1 = new DefaultListModel<String>();
-		JButton btnAdd = new JButton("Add >>");
+		JButton btnAdd = new JButton("Add > ");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DLM1.addElement(list.getSelectedValue());
@@ -171,11 +175,15 @@ public class AddProfessor extends JFrame {
 			}
 		});
 
-		btnAdd.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAdd.setBounds(440, 115, 92, 23);
+		btnAdd.setForeground(new Color(255, 255, 255));
+		btnAdd.setBackground(new Color(12, 68, 126));
+		btnAdd.setBounds(457, 120, 65, 40);
+		btnAdd.setBorder(null);
 		contentPane.add(btnAdd);
 
-		JButton btnRemove = new JButton("<<Remove ");
+		JButton btnRemove = new JButton(" < Remove ");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DLM.addElement(dodaj.getSelectedValue());
@@ -183,22 +191,41 @@ public class AddProfessor extends JFrame {
 				list.setModel(DLM);
 			}
 		});
-		btnRemove.setFont(new Font("Tahoma", Font.ITALIC, 10));
-		btnRemove.setBounds(440, 149, 92, 23);
+		btnRemove.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		btnRemove.setForeground(new Color(255, 255, 255));
+		btnRemove.setBackground(new Color(12, 68, 126));
+		btnRemove.setBounds(457, 170, 65, 40);
+		btnRemove.setBorder(null);
 		contentPane.add(btnRemove);
 
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DLM1.clear();
+				dodaj.setModel(DLM1);
+			}
+		});
+		
+		btnClear.setFont(new Font("TAHOMA", Font.PLAIN, 12));
+		btnClear.setForeground(new Color(255, 255, 255));
+		btnClear.setBackground(new Color(12, 68, 126));
+		btnClear.setBounds(457, 240, 65, 40);
+		btnClear.setBorder(null);
+		contentPane.add(btnClear);
+		
 		JLabel lblSearchProfessorBy = new JLabel("Search Professor by ID:");
-		lblSearchProfessorBy.setForeground(Color.WHITE);
-		lblSearchProfessorBy.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSearchProfessorBy.setBounds(295, 335, 186, 49);
+		lblSearchProfessorBy.setForeground(new Color(12, 68, 126));
+		lblSearchProfessorBy.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblSearchProfessorBy.setBounds(310, 340, 186, 40);
 		contentPane.add(lblSearchProfessorBy);
 
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(452, 343, 80, 38);
+		textField.setBorder(BorderFactory.createMatteBorder(1, 3, 1, 1, new Color(118, 173, 224)));
+		textField.setBounds(310, 371, 280, 40);
 		contentPane.add(textField);
 
-		JButton btnNewButton = new JButton("Add Professor");
+		JButton btnNewButton = new JButton("Add");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a.findProfessor(profid.getText()) != null) {
@@ -229,7 +256,11 @@ public class AddProfessor extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(342, 396, 150, 49);
+		btnNewButton.setBounds(23, 370, 120, 40);
+		btnNewButton.setFont(new Font("TAHOMA", Font.PLAIN, 14));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(12, 68, 126));
+		btnNewButton.setBorder(null);
 		contentPane.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Go");
@@ -260,22 +291,12 @@ public class AddProfessor extends JFrame {
 				list.setModel(DLM);
 			}
 		});
-		btnNewButton_1.setBounds(541, 343, 59, 38);
+		btnNewButton_1.setBounds(610, 370, 55, 40);
+		btnNewButton_1.setFont(new Font("TAHOMA", Font.PLAIN, 13));
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1.setBackground(new Color(12, 68, 126));
+		btnNewButton_1.setBorder(null);
 		contentPane.add(btnNewButton_1);
 
-		JButton btnClear = new JButton("Clear");
-		btnClear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DLM1.clear();
-				dodaj.setModel(DLM1);
-				DLM.clear();
-				for (int i = 0; i < lista.size(); i++) {
-					DLM.addElement(lista.get(i).getCourseName());
-				}
-				list.setModel(DLM);
-			}
-		});
-		btnClear.setBounds(563, 316, 89, 23);
-		contentPane.add(btnClear);
 	}
 }

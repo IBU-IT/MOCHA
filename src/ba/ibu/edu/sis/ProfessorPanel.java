@@ -36,34 +36,34 @@ public class ProfessorPanel extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblProfessorName = new JLabel("Professor Name:        " + profa.getName());
-		lblProfessorName.setForeground(Color.WHITE);
-		lblProfessorName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblProfessorName.setBounds(135, 56, 400, 43);
+		JLabel lblProfessorName = new JLabel("Name:        " + profa.getName());
+		lblProfessorName.setForeground(new Color(32, 35, 86));
+		lblProfessorName.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblProfessorName.setBounds(23, 90, 200, 35);
 		contentPane.add(lblProfessorName);
 
-		JLabel label = new JLabel("Professor Surname:    " + profa.getSurname());
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label.setBounds(135, 76, 400, 43);
+		JLabel label = new JLabel("Surname:    " + profa.getSurname());
+		label.setForeground(new Color(32, 35, 86));
+		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label.setBounds(23, 120, 200, 35);
 		contentPane.add(label);
 
-		JLabel label_1 = new JLabel("Professor ID:            " + profa.getId());
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label_1.setBounds(135, 96, 400, 43);
+		JLabel label_1 = new JLabel("ID:            " + profa.getId());
+		label_1.setForeground(new Color(32, 35, 86));
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_1.setBounds(280, 90, 200, 35);
 		contentPane.add(label_1);
 
-		JLabel label_2 = new JLabel("Professor Email:        " + profa.getEmail());
-		label_2.setForeground(Color.WHITE);
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label_2.setBounds(135, 116, 400, 43);
+		JLabel label_2 = new JLabel("Email:        " + profa.getEmail());
+		label_2.setForeground(new Color(32, 35, 86));
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_2.setBounds(280, 120, 200, 35);
 		contentPane.add(label_2);
 
-		JLabel label_3 = new JLabel("Professor Phone:       " + profa.getPhone());
-		label_3.setForeground(Color.WHITE);
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label_3.setBounds(135, 136, 400, 43);
+		JLabel label_3 = new JLabel("Phone:       " + profa.getPhone());
+		label_3.setForeground(new Color(32, 35, 86));
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_3.setBounds(520, 90, 200, 35);
 		contentPane.add(label_3);
 
 	}

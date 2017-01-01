@@ -3,11 +3,12 @@ package ba.ibu.edu.sis;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.BorderFactory;
 import ba.ibu.edu.sis.SIS.Student;
 
 import javax.swing.JLabel;
@@ -30,53 +31,57 @@ public class gradess extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCourseName = new JLabel("Course Name: "+ c.getCourseName());
-		lblCourseName.setBounds(59, 94, 180, 28);
-		lblCourseName.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblCourseName.setForeground(Color.WHITE);
+		JLabel lblCourseName = new JLabel("COURSE NAME: "+ c.getCourseName());
+		lblCourseName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCourseName.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(12, 68, 126)));
+		lblCourseName.setForeground(new Color(12, 68, 126));
+		lblCourseName.setBounds(25, 100, 200, 30);
 		contentPane.add(lblCourseName);
 		
 		JLabel lblQuiz = new JLabel("Quiz: " + s.grades[i]);
-		lblQuiz.setBounds(59, 155, 180, 28);
-		lblQuiz.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblQuiz.setForeground(Color.WHITE);
+		lblQuiz.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblQuiz.setForeground(new Color(12, 68, 126));
+		lblQuiz.setBounds(25, 150, 200, 30);
 		contentPane.add(lblQuiz);
 		
 		JLabel lblOmework = new JLabel("Homework: " + s.grades[i+1]);
-		lblOmework.setBounds(59, 216, 180, 28);
-		lblOmework.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblOmework.setForeground(Color.WHITE);
+		lblOmework.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblOmework.setForeground(new Color(12, 68, 126));
+		lblOmework.setBounds(25, 185, 200, 30);
 		contentPane.add(lblOmework);
 		
 		JLabel lblFinal = new JLabel("Final: "+ s.grades[i+2]);
-		lblFinal.setBounds(59, 277, 180, 28);
-		lblFinal.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblFinal.setForeground(Color.WHITE);
+		lblFinal.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblFinal.setForeground(new Color(12, 68, 126));
+		lblFinal.setBounds(25, 220, 200, 30);
 		contentPane.add(lblFinal);
 		
 		JLabel lblMidtherm = new JLabel("Midtherm: "+ s.grades[i+3]);
-		lblMidtherm.setBounds(59, 338, 180, 28);
-		lblMidtherm.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblMidtherm.setForeground(Color.WHITE);
+		lblMidtherm.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMidtherm.setForeground(new Color(12, 68, 126));
+		lblMidtherm.setBounds(25, 255, 200, 30);
 		contentPane.add(lblMidtherm);
 		
 		JLabel lblAttendance = new JLabel("Attendance: "+ + s.grades[i+4]+ "%");
-		lblAttendance.setBounds(59, 399, 180, 28);
-		lblAttendance.setFont(new Font("TAHOMA", Font.PLAIN, 14));
-		lblAttendance.setForeground(Color.WHITE);
+		lblAttendance.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAttendance.setForeground(new Color(12, 68, 126));
+		lblAttendance.setBounds(25, 290, 200, 30);
 		contentPane.add(lblAttendance);
+	
 		
-		
-		JButton lblLogout = new JButton("Back");
+		ImageIcon backIcon=new ImageIcon("back_icon.png");
+		JButton lblLogout = new JButton(backIcon);;
 		lblLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 				frejm.setVisible(true);
 			}
 		});
-		lblLogout.setForeground(Color.BLACK);
-		lblLogout.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblLogout.setBounds(530, 42, 120, 28);
+		lblLogout.setForeground(Color.WHITE);
+		lblLogout.setContentAreaFilled(false);
+		lblLogout.setBounds(518, 20, 37, 30);
+		lblLogout.setFont(new Font("TAHOMA", Font.BOLD, 11));
+		lblLogout.setBorder(null);
 		contentPane.add(lblLogout);
 	}
 }
