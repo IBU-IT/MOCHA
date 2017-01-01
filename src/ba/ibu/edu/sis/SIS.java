@@ -378,7 +378,26 @@ public class SIS implements Serializable {
 		private String surname;
 		private String year;
 		private String dateOfBirth;
-		private int grades[];
+		public int counter = 0;
+		public double grades[] = new double[1000];
+		public String korses[] = new String[100];
+		private boolean hasCourse[] = new boolean[100];
+
+		public boolean getHasCourse(int i) {
+			return hasCourse[i];
+		}
+
+		public void setHasCourse(int i, boolean h) {
+			hasCourse[i] = h;
+		}
+
+		public String getKorses(int i) {
+			return korses[i];
+		}
+
+		public void setKorses(int i, String s) {
+			korses[i] = s;
+		}
 
 		public String getId() {
 			return id;
@@ -410,14 +429,6 @@ public class SIS implements Serializable {
 
 		public void setYear(String year) {
 			this.year = year;
-		}
-
-		public int[] getGrades() {
-			return grades;
-		}
-
-		public void setGrades(int[] grades) {
-			this.grades = grades;
 		}
 
 		public String getPassword() {
@@ -1022,6 +1033,7 @@ public class SIS implements Serializable {
 		label_2.setForeground(Color.white);
 		loginStudent.getContentPane().add(label_2);
 
+
 		JButton button = new JButton("Log In");
 		button.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
@@ -1254,26 +1266,145 @@ public class SIS implements Serializable {
 					btnLogOut.setFont(new Font("TAHOMA", Font.BOLD, 11));
 					btnLogOut.setBorder(null);
 					stdLogIn.getContentPane().add(btnLogOut);
+					
+					int kanter = 0;
+					for (int i = 0; i < 100; i++) {
+						if (xStudent.getHasCourse(i)==true) {
+							kanter++;
+							}
+						}
+					//JOptionPane.showMessageDialog(null, kanter);
+					
+							/*for (int i = 0; i < 100; i++) {
+								if (xStudent.getHasCourse(i)==true) {
+									for(int j=0;j<5;j++){
+										JOptionPane.showMessageDialog(null, xStudent.grades[j]);
+									}
+									JOptionPane.showMessageDialog(null,xStudent.korses[i]);
+								}
+							}*/
 
-					ImageIcon gradesI = new ImageIcon("grades.png");
-					JButton grades = new JButton("Grades", gradesI);
-					grades.setBackground(SystemColor.inactiveCaptionBorder);
-					grades.setBounds(50, 180, 150, 90);
-					stdLogIn.getContentPane().add(grades);
-					grades.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							stdLogIn.dispose();
+							//stdLogIn.dispose();
+					
 							JFrame gradesF = new JFrame("Welcome " + xStudent.name);
-							gradesF.setVisible(true);
+							gradesF.setVisible(false);
 							gradesF.setBounds(100, 100, 700, 511);
 							gradesF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							gradesF.getContentPane().setLayout(null);
 							setLogo2(gradesF);
 							setPowered(gradesF);
 							setPozadina(gradesF);
+							
+							
 
-						}
-					});
+			
+					if(kanter>0){
+						JButton btnAddNewCourse = new JButton(xStudent.korses[0]);
+						btnAddNewCourse.setBounds(40, 250, 180, 80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								stdLogIn.setVisible(false);
+								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[0]),0);
+								gradess.setVisible(true);
+								
+								setLogo2(gradess);
+								setPowered(gradess);
+								setPozadina(gradess);
+								
+							}
+
+						});
+						stdLogIn.getContentPane().add(btnAddNewCourse);
+					}
+					if(kanter>1){
+						JButton btnAddNewCourse = new JButton(xStudent.korses[5]);
+						btnAddNewCourse.setBounds(250, 250, 180, 80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[5]),5);
+								gradess.setVisible(true);
+								
+								setLogo2(gradess);
+								setPowered(gradess);
+								setPozadina(gradess);
+							}
+
+						});
+						stdLogIn.getContentPane().add(btnAddNewCourse);
+					}
+					if(kanter>2){
+						JButton btnAddNewCourse = new JButton(xStudent.korses[10]);
+						btnAddNewCourse.setBounds(460, 250, 180, 80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[10]),10);
+								gradess.setVisible(true);
+								
+								setLogo2(gradess);
+								setPowered(gradess);
+								setPozadina(gradess);
+							}
+
+						});
+						stdLogIn.getContentPane().add(btnAddNewCourse);
+					}
+					if(kanter>3){
+						JButton btnAddNewCourse = new JButton(xStudent.korses[15]);
+						btnAddNewCourse.setBounds(40, 360, 180, 80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[15]),15);
+								gradess.setVisible(true);
+								
+								setLogo2(gradess);
+								setPowered(gradess);
+								setPozadina(gradess);
+							}
+
+						});
+						stdLogIn.getContentPane().add(btnAddNewCourse);
+					}
+					if(kanter>4){
+						JButton btnAddNewCourse = new JButton(xStudent.korses[20]);
+						btnAddNewCourse.setBounds(250, 360, 180, 80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[20]),20);
+								gradess.setVisible(true);
+								
+								setLogo2(gradess);
+								setPowered(gradess);
+								setPozadina(gradess);
+							}
+
+						});
+						stdLogIn.getContentPane().add(btnAddNewCourse);
+					}
+					if(kanter>5){
+						JButton btnAddNewCourse = new JButton(xStudent.korses[25]);
+						btnAddNewCourse.setBounds(460, 360, 180, 80);
+						btnAddNewCourse.setBackground(SystemColor.inactiveCaptionBorder);
+						btnAddNewCourse.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								gradess gradess = new gradess(stdLogIn, xStudent, a.findCourse(xStudent.korses[25]),25);
+								gradess.setVisible(true);
+								
+								setLogo2(gradess);
+								setPowered(gradess);
+								setPozadina(gradess);
+							}
+
+						});
+						stdLogIn.getContentPane().add(btnAddNewCourse);
+					}
+					
+				
+					
 					setPowered(stdLogIn);
 					setPozadina(stdLogIn);
 				} else {

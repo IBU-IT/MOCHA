@@ -9,8 +9,6 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.StringTokenizer;
-
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -638,6 +636,7 @@ public class Course implements Serializable {
 				public void actionPerformed(ActionEvent arg0) {
 					std_coPanel.setVisible(false);
 					updateStd(pr, a, std_coPanel, id, c);
+					
 				}
 			});
 			std_coPanel.getContentPane().add(btnUpdateStd[i]);
@@ -746,15 +745,27 @@ public class Course implements Serializable {
 		textField_5.setBounds(160, 360, 150, 25);
 		std_updPanel.getContentPane().add(textField_5);
 
+		
 		JButton btnUpdateStd = new JButton("UPDATE");
 		btnUpdateStd.setFont(new Font("TAHOMA", Font.BOLD, 11));
 		btnUpdateStd.setBounds(25, 400, 100, 35);
 		btnUpdateStd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, Integer.parseInt(id));
-				c.setQuizResult(Integer.parseInt(id), Double.parseDouble(textField_1.getText()));
-
-				a.saveC();
+			public void actionPerformed(ActionEvent e) { 
+				a.findStudent(id).korses[a.findStudent(id).counter]= c.getCourseName();
+				a.findStudent(id).setHasCourse(a.findStudent(id).counter, true);
+				a.findStudent(id).grades[a.findStudent(id).counter]= Double.parseDouble(textField_1.getText());
+				a.findStudent(id).counter++;
+				a.findStudent(id).grades[a.findStudent(id).counter]= Double.parseDouble(textField_2.getText());
+				a.findStudent(id).counter++;
+				a.findStudent(id).grades[a.findStudent(id).counter]= Double.parseDouble(textField_3.getText());
+				a.findStudent(id).counter++;
+				a.findStudent(id).grades[a.findStudent(id).counter]= Double.parseDouble(textField_4.getText());
+				a.findStudent(id).counter++;
+				a.findStudent(id).grades[a.findStudent(id).counter]= Double.parseDouble(textField_5.getText());
+				a.findStudent(id).counter++;
+				
+				a.saveS();
+				JOptionPane.showMessageDialog(null, "Information updated.");
 			}
 		});
 		std_updPanel.getContentPane().add(btnUpdateStd);
