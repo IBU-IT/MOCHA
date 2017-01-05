@@ -56,7 +56,7 @@ public class gradess extends JFrame {
 		lblFinal.setBounds(25, 220, 200, 30);
 		contentPane.add(lblFinal);
 		
-		JLabel lblMidtherm = new JLabel("Midtherm: "+ s.grades[i+3]);
+		JLabel lblMidtherm = new JLabel("Midterm: "+ s.grades[i+3]);
 		lblMidtherm.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblMidtherm.setForeground(new Color(12, 68, 126));
 		lblMidtherm.setBounds(25, 255, 200, 30);

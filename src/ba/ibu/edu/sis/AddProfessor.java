@@ -56,7 +56,7 @@ public class AddProfessor extends JFrame {
 		lblProfessorSurname.setBounds(23, 150, 137, 30);
 		contentPane.add(lblProfessorSurname);
 
-		JLabel lblProfessorId = new JLabel("ID numer");
+		JLabel lblProfessorId = new JLabel("ID number");
 		lblProfessorId.setForeground(new Color(32, 35, 86));
 		lblProfessorId.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblProfessorId.setBounds(23, 190, 137, 30);
